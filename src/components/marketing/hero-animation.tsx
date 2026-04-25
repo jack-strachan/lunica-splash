@@ -81,7 +81,7 @@ export function HeroAnimation() {
 
   return (
     <div className="relative flex items-center justify-center w-full h-full p-8 select-none pointer-events-none" role="img" aria-label="Animated demonstration of Lunica platform features">
-      <div className="relative w-full max-w-[520px] scale-[0.8] md:scale-100 -translate-x-3 md:translate-x-0 origin-center">
+      <div className="relative w-full max-w-[520px] scale-[0.65] md:scale-100 -translate-x-3 md:translate-x-0 origin-center">
         <AnimatePresence mode="wait">
           {/* ── Dropzone phases (idle / dragging / processing) ── */}
           {isDropzonePhase && (
