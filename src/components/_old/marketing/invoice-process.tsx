@@ -334,24 +334,6 @@ export function InvoiceProcessSection() {
                 <div className="relative w-full max-w-[520px]">
                   {/* Main Dropzone UI */}
                   <div className="bg-white ring-1 ring-black/[0.08] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] rounded-2xl overflow-hidden relative z-10 w-full flex flex-col h-[380px]">
-                    {/* Header */}
-                    <div className="px-5 py-4 border-b border-black/[0.04] flex items-center justify-between bg-[#FAFAFA]/80 backdrop-blur-sm">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-white border border-black/[0.08] shadow-sm rounded-lg flex items-center justify-center">
-                          <UploadCloud className="w-4 h-4 text-[#171717]" />
-                        </div>
-                        <div>
-                          <div className="text-[14px] font-medium text-[#171717] tracking-tight leading-none mb-1">Upload Invoices</div>
-                          <div className="text-[11px] text-black/50 font-mono uppercase tracking-widest leading-none">Manual Processing</div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <div className="h-8 px-3 rounded-lg border border-black/[0.08] bg-white flex items-center justify-center text-[12px] font-medium text-black/70 shadow-sm gap-1.5">
-                          <Database className="w-3.5 h-3.5" />
-                          ERP Sync
-                        </div>
-                      </div>
-                    </div>
                     
                     {/* Dashboard Body */}
                     <div className="flex-1 bg-[#FAFAFA]/50 p-6 flex flex-col items-center justify-center relative overflow-hidden">
@@ -386,28 +368,6 @@ export function InvoiceProcessSection() {
                           />
                           <MousePointer2 className="absolute -bottom-2 right-4 w-6 h-6 text-black fill-black" />
                         </motion.div>
-                      </div>
-
-                      {/* Recent Uploads Preview */}
-                      <div className="w-full max-w-sm mt-6">
-                        <div className="text-[10px] font-mono text-black/40 uppercase tracking-widest mb-2">Recent Uploads</div>
-                        <div className="flex flex-col gap-2">
-                          <div className="bg-white border border-black/[0.04] p-2.5 rounded-lg flex items-center justify-between shadow-sm">
-                            <div className="flex items-center gap-2.5">
-                              <div className="w-6 h-6 bg-red-50 text-red-600 rounded flex items-center justify-center">
-                                <span className="text-[8px] font-bold">PDF</span>
-                              </div>
-                              <div>
-                                <div className="text-[12px] font-medium text-[#171717] leading-tight">INV-09942.pdf</div>
-                                <div className="text-[10px] text-black/40">1.2 MB</div>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-1.5">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-[#002B31]" />
-                              <span className="text-[10px] font-medium text-[#002B31]">Processed</span>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>

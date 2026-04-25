@@ -41,12 +41,6 @@ export function HomeHeroSection() {
               <HeroAnimation />
             </div>
           </div>
-          <span
-            className="absolute bottom-8 left-8 hidden md:block text-xs font-semibold uppercase text-white"
-            style={{ animation: `hero-fade-up 0.7s ${ease} 0.8s both` }}
-          >
-            Get receivables paid faster
-          </span>
         </div>
 
         {/* Left — Copy */}

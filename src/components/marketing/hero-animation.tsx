@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
-import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown } from "lucide-react"
+import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown, AlertTriangle, DollarSign, Building2, MessageSquare } from "lucide-react"
 
-type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert"
+type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert" | "dispute"
 
 const PHASE_DURATIONS: Record<Phase, number> = {
   idle: 1200,
@@ -13,6 +13,7 @@ const PHASE_DURATIONS: Record<Phase, number> = {
   processing: 2400,
   complete: 4800,
   "risk-alert": 5200,
+  dispute: 5200,
 }
 
 const riskMetrics = [
@@ -22,6 +23,21 @@ const riskMetrics = [
 ]
 
 const triggeredFactors = ["Days to pay increase", "Credit limit exceeded"]
+
+const disputeDetails = [
+  { icon: DollarSign, label: "$185,832.00", color: "bg-amber-100 text-amber-600" },
+  { icon: Building2, label: "Harlow Industrial", color: "bg-blue-50 text-blue-500" },
+  { icon: MessageSquare, label: "2 Messages", color: "bg-purple-50 text-purple-500" },
+]
+
+const phaseLabels: Record<Phase, string> = {
+  idle: "Upload invoices instantly",
+  dragging: "Upload invoices instantly",
+  processing: "AI extracts every line item",
+  complete: "Your data, ready to act on",
+  "risk-alert": "Real-time credit monitoring",
+  dispute: "Automated dispute resolution",
+}
 
 const nextSteps = [
   "Aging distribution",
@@ -37,7 +53,7 @@ export function HeroAnimation() {
   useEffect(() => {
     const next = () => {
       setPhase((prev) => {
-        const order: Phase[] = ["idle", "dragging", "processing", "complete", "risk-alert"]
+        const order: Phase[] = ["idle", "dragging", "processing", "complete", "risk-alert", "dispute"]
         const idx = order.indexOf(prev)
         if (idx === order.length - 1) setActiveStep(0)
         return order[(idx + 1) % order.length]
@@ -60,10 +76,11 @@ export function HeroAnimation() {
   const isProcessing = phase === "processing"
   const isComplete = phase === "complete"
   const isRiskAlert = phase === "risk-alert"
-  const isDropzonePhase = !isComplete && !isRiskAlert
+  const isDispute = phase === "dispute"
+  const isDropzonePhase = !isComplete && !isRiskAlert && !isDispute
 
   return (
-    <div className="relative flex items-center justify-center w-full h-full p-8">
+    <div className="relative flex items-center justify-center w-full h-full p-8 select-none pointer-events-none" role="img" aria-label="Animated demonstration of Lunica platform features">
       <div className="relative w-full max-w-[520px] scale-[0.8] md:scale-100 -translate-x-3 md:translate-x-0 origin-center">
         <AnimatePresence mode="wait">
           {/* ── Dropzone phases (idle / dragging / processing) ── */}
@@ -217,6 +234,88 @@ export function HeroAnimation() {
             </motion.div>
           )}
 
+          {/* ── Dispute phase ── */}
+          {isDispute && (
+            <motion.div
+              key="dispute"
+              className="relative z-10 w-full"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-xl overflow-hidden w-full max-w-sm mx-auto p-5">
+                {/* Alert header */}
+                <motion.div
+                  className="flex items-center gap-2.5 mb-4"
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                >
+                  <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center">
+                    <AlertTriangle className="w-3 h-3 text-amber-600" />
+                  </div>
+                  <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-black/40">Dispute Alert</span>
+                </motion.div>
+
+                {/* Title + badge */}
+                <motion.div
+                  className="flex items-center justify-between mb-1.5"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  <h4 className="text-[17px] font-semibold text-[#171717]">Short payment</h4>
+                  <span className="text-[11px] font-semibold text-[#F87171] bg-[#F87171]/10 px-2.5 py-1 rounded-full flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F87171]" />
+                    High
+                  </span>
+                </motion.div>
+
+                <motion.p
+                  className="text-[13px] text-black/40 mb-5"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                >
+                  Invoice #38816
+                </motion.p>
+
+                {/* Details + automation status */}
+                <div className="flex gap-3">
+                  {/* Left — stacked detail rows */}
+                  <div className="flex-1 flex flex-col gap-1.5">
+                    {disputeDetails.map((detail, i) => (
+                      <motion.div
+                        key={detail.label}
+                        className="bg-white ring-1 ring-black/[0.06] rounded-lg px-3 py-2"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.35, delay: 0.5 + i * 0.1 }}
+                      >
+                        <span className="text-[11px] font-medium text-[#171717]">{detail.label}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Right — automation status */}
+                  <motion.div
+                    className="flex-1 bg-[#002B31]/[0.04] ring-1 ring-[#002B31]/10 rounded-lg p-3 flex flex-col items-center justify-center text-center"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.8 }}
+                  >
+                    <div className="w-6 h-6 rounded-full bg-[#002B31]/10 flex items-center justify-center mb-2">
+                      <Check className="w-3.5 h-3.5 text-[#002B31]" />
+                    </div>
+                    <p className="text-[11px] font-semibold text-[#002B31] leading-tight">Automation triggered</p>
+                    <p className="text-[10px] text-black/40 mt-0.5">Customer contacted</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* ── Risk Alert phase ── */}
           {isRiskAlert && (
             <motion.div
@@ -228,17 +327,27 @@ export function HeroAnimation() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-xl overflow-hidden w-full max-w-sm mx-auto p-5">
-                {/* Header */}
+                {/* Header row */}
                 <motion.div
-                  className="flex items-center gap-2.5 mb-4"
+                  className="flex items-center justify-between mb-4"
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.15 }}
                 >
-                  <div className="w-6 h-6 rounded-full bg-[#F87171]/10 flex items-center justify-center">
-                    <Bell className="w-3 h-3 text-[#F87171]" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-[#F87171]/10 flex items-center justify-center">
+                      <Bell className="w-3 h-3 text-[#F87171]" />
+                    </div>
+                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-black/40">Credit Review Alert</span>
                   </div>
-                  <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-black/40">Credit Review Alert</span>
+                  <motion.span
+                    className="text-[10px] font-semibold text-[#F87171] bg-[#F87171]/[0.07] px-2 py-0.5 rounded-full"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.8 }}
+                  >
+                    2 factors triggered
+                  </motion.span>
                 </motion.div>
 
                 {/* Company title */}
@@ -276,30 +385,36 @@ export function HeroAnimation() {
                   })}
                 </div>
 
-                {/* Triggered factors */}
+                {/* Review button — bottom right */}
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  className="flex justify-end"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.9 }}
                 >
-                  <p className="text-[9px] font-semibold tracking-[0.1em] uppercase text-black/30 mb-2">Triggered Factors</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {triggeredFactors.map((factor, i) => (
-                      <motion.span
-                        key={factor}
-                        className="text-[11px] font-medium text-[#F87171] bg-[#F87171]/[0.07] px-2.5 py-1 rounded-full"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.25, delay: 1.0 + i * 0.1 }}
-                      >
-                        {factor}
-                      </motion.span>
-                    ))}
-                  </div>
+                  <span className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg">
+                    Review generated plan
+                  </span>
                 </motion.div>
               </div>
             </motion.div>
           )}
+        </AnimatePresence>
+      </div>
+
+      {/* Phase label — bottom left */}
+      <div className="absolute bottom-8 left-8 hidden md:block">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={phase}
+            className="text-base font-medium text-white block"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.3 }}
+          >
+            {phaseLabels[phase]}
+          </motion.span>
         </AnimatePresence>
       </div>
     </div>
