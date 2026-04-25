@@ -35,7 +35,7 @@ export function SubpageHero({
       )}
     >
       <div
-        className="animate-subpage-gradient relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:-top-20 md:h-[38dvh] md:w-2/3 md:rounded-none md:rounded-bl-md"
+        className="animate-subpage-gradient relative ml-auto mt-4 h-[25svh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:-top-20 md:h-[38dvh] md:w-2/3 md:rounded-none md:rounded-bl-md"
       >
         <NoiseGradient colors={gradientColors} />
       </div>

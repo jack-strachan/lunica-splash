@@ -29,7 +29,7 @@ export default function ContactPage() {
             <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.35s both` }}>
               <SectionDescription className="text-balance">
                 Whether you&rsquo;re looking for a demo, have a question about the
-                platform, or want to explore how Lunica fits your workflow &mdash;
+                platform, or want to explore how Lunica fits your workflow,
                 we&rsquo;d love to hear from you.
               </SectionDescription>
             </div>

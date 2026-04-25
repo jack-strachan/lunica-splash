@@ -68,7 +68,7 @@ export default function AboutPage() {
             <SectionLabel>Our mission</SectionLabel>
 
             <SectionHeading size="md">
-              Get receivables under control &mdash; for&nbsp;good
+              Get receivables under control for&nbsp;good
             </SectionHeading>
           </div>
 
@@ -76,8 +76,8 @@ export default function AboutPage() {
             <p className="text-lg !leading-tight text-foreground">
               We believe credit and collections should be a strategic advantage,
               not a back-office headache. Lunica brings together everything your
-              team needs &mdash; from credit applications to payment collection
-              &mdash; in one platform that actually works together.
+              team needs, from credit applications to payment collection,
+              in one platform that actually works together.
             </p>
 
             <p className="mt-4 text-lg !leading-tight text-foreground">
@@ -136,7 +136,7 @@ export default function AboutPage() {
             </SectionHeading>
 
             <SectionDescription>
-              Lunica was born inside Scope Labs &mdash; a product incubator
+              Lunica was born inside Scope Labs, a product incubator
               focused on building tools for underserved industries. After
               spending time with credit and AR teams across companies of all
               sizes, the pattern was clear: everyone was fighting the same
@@ -144,7 +144,7 @@ export default function AboutPage() {
             </SectionDescription>
 
             <p className="mt-4 text-lg !leading-tight text-foreground">
-              So we built Lunica &mdash; a platform designed from the ground up
+              So we built Lunica, a platform designed from the ground up
               for the people who actually do the work. Not a retooled ERP
               plugin. Not a generic workflow app. A purpose-built system for
               credit and&nbsp;collections.

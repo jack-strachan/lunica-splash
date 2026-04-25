@@ -135,16 +135,24 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
           )}
         </div>
 
-        {/* Description */}
-        <div className="px-6 pb-6">
-          <p
-            className={`text-lg !leading-tight text-foreground text-balance transition-all duration-250 ease-out ${
-              fading ? "opacity-0 translate-y-1" : "opacity-100 translate-y-0"
-            }`}
-          >
-            <span className="font-medium">{tabs[displayIndex].title}.</span>{" "}
-            {tabs[displayIndex].description}
-          </p>
+        {/* Description — all tabs stacked in same grid cell to prevent layout shift */}
+        <div className="relative px-6 pb-6">
+          <div className="grid">
+            {tabs.map((tab, i) => (
+              <p
+                key={tab.title}
+                className={`col-start-1 row-start-1 text-lg !leading-tight text-foreground text-balance transition-all duration-250 ease-out ${
+                  i === displayIndex && !fading
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-1 pointer-events-none"
+                }`}
+                aria-hidden={i !== displayIndex}
+              >
+                <span className="font-medium">{tab.title}.</span>{" "}
+                {tab.description}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </div>

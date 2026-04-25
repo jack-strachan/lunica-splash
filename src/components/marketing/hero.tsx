@@ -16,7 +16,7 @@ export function HomeHeroSection() {
           className="relative order-first md:order-last -mr-5 md:mx-0"
           style={{ animation: `hero-slide-in 1s ${ease} both` }}
         >
-          <div className="relative h-[35dvh] md:h-[88dvh] md:max-h-none w-[calc(100%+1.25rem)] md:w-[calc(100%+50vw-50%+2rem)] overflow-hidden rounded-l-md md:rounded-r-none">
+          <div className="relative h-[35svh] md:h-[88dvh] md:max-h-none w-[calc(100%+1.25rem)] md:w-[calc(100%+50vw-50%+2rem)] overflow-hidden rounded-l-md md:rounded-r-none">
             <NoiseGradient
               colors={["#88b4a0", "#4a7a5c", "#3a6248"]}
             />

@@ -11,7 +11,7 @@ const collectionsTabs: TabItem[] = [
   {
     title: "Invoice\nconfirmation",
     description:
-      "Verify that every invoice is received, accurate, and acknowledged — before the due date arrives.",
+      "Verify that every invoice is received, accurate, and acknowledged before the due date arrives.",
   },
   {
     title: "Smart\nescalation",

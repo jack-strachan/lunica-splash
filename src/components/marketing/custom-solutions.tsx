@@ -8,7 +8,7 @@ const capabilities = [
   {
     title: "Custom integrations",
     description:
-      "Connect Lunica to your ERP, accounting system, or internal tools — we'll build the bridge.",
+      "Connect Lunica to your ERP, accounting system, or internal tools. We'll build the bridge.",
   },
   {
     title: "Tailored workflows",
@@ -18,7 +18,7 @@ const capabilities = [
   {
     title: "Flexible deployment",
     description:
-      "Cloud, on-prem, or hybrid — we meet you where you are and scale with you as you grow.",
+      "Cloud, on-prem, or hybrid. We meet you where you are and scale with you as you grow.",
   },
 ]
 

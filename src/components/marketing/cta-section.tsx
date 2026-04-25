@@ -39,13 +39,8 @@ export function CtaSection({
           {description}
         </p>
 
-        <div className="mt-10 flex items-center gap-4">
+        <div className="mt-10">
           <FlipButtonLink href="/contact" text="Book a demo" />
-          <FlipButtonLink
-            href="/contact"
-            text="Contact us"
-            variant="secondary"
-          />
         </div>
       </PageContainer>
     </section>
