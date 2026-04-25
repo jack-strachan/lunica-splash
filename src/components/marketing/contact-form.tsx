@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { FlipText } from "@/components/ui/flip-text"
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -100,7 +101,7 @@ export function ContactForm() {
         type="submit"
         className="mt-2 self-start rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
       >
-        Send message
+        <FlipText text="Send message" />
       </button>
     </form>
   )

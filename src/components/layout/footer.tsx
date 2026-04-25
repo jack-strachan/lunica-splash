@@ -1,14 +1,16 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const footerLinks = {
   Product: [
-    { label: "Collections", href: "#collections" },
-    { label: "Credit", href: "#credit" },
-    { label: "Online Payments", href: "#online-payments" },
-    { label: "Payments Portal", href: "#payments-portal" },
-    { label: "Customer Portal", href: "#customer-portal" },
+    { label: "Collections", href: "/#collections" },
+    { label: "Credit", href: "/#credit" },
+    { label: "Online Payments", href: "/#online-payments" },
+    { label: "Payments Portal", href: "/#payments-portal" },
+    { label: "Customer Portal", href: "/#customer-portal" },
   ],
   Company: [
     { label: "About", href: "/about" },
@@ -21,6 +23,8 @@ const footerLinks = {
 }
 
 export function Footer() {
+  const pathname = usePathname()
+
   return (
     <footer className="w-full bg-background">
       <div className="mx-auto max-w-[1400px] px-5 py-16 lg:px-20 lg:py-20">
@@ -47,20 +51,22 @@ export function Footer() {
               <ul className="mt-4 flex flex-col gap-3">
                 {links.map((link) => (
                   <li key={link.href}>
-                    <a
+                    <Link
                       href={link.href}
                       onClick={(e) => {
-                        const id = link.href.replace("#", "")
-                        const el = document.getElementById(id)
-                        if (el) {
-                          e.preventDefault()
-                          el.scrollIntoView({ behavior: "smooth" })
+                        if (link.href.startsWith("/#") && pathname === "/") {
+                          const id = link.href.replace("/#", "")
+                          const el = document.getElementById(id)
+                          if (el) {
+                            e.preventDefault()
+                            el.scrollIntoView({ behavior: "smooth" })
+                          }
                         }
                       }}
                       className="text-sm text-foreground/60 transition-colors hover:text-foreground"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

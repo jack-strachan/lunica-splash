@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { NoiseGradient } from "@/components/marketing/noise-gradient"
 import { Footer } from "@/components/layout/footer"
+import { FlipText } from "@/components/ui/flip-text"
 
 const values = [
   {
@@ -234,13 +235,13 @@ export default function AboutPage() {
               href="/contact"
               className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
             >
-              Book a demo
+              <FlipText text="Book a demo" />
             </Link>
             <Link
               href="/contact"
               className="inline-flex rounded-md border border-foreground/15 bg-background px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
             >
-              Contact us
+              <FlipText text="Contact us" />
             </Link>
           </div>
         </div>

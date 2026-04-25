@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "motion/react"
 import { cn } from "@/lib/utils"
+import { FlipText } from "@/components/ui/flip-text"
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -82,7 +83,7 @@ export function Navbar() {
                   href={link.href}
                   className="text-sm text-foreground/70 transition-colors hover:text-foreground"
                 >
-                  {link.label}
+                  <FlipText text={link.label} />
                 </Link>
               </li>
             ))}
@@ -94,7 +95,7 @@ export function Navbar() {
               href="/contact"
               className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
             >
-              Book a demo
+              <FlipText text="Book a demo" />
             </Link>
           </div>
 
@@ -124,12 +125,12 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[999] flex flex-col bg-background md:hidden"
             role="dialog"
             aria-label="Mobile navigation"
           >
-            {/* Top bar — mirrors desktop nav */}
+            {/* Top bar */}
             <div
               className={cn(
                 "flex h-16 shrink-0 items-center justify-between px-5 transition-all duration-300",
@@ -152,31 +153,31 @@ export function Navbar() {
               </Link>
               <button
                 type="button"
-                className="rounded-md p-2 text-foreground/60 transition-colors hover:bg-foreground/5"
+                className="rounded-md p-2 text-foreground/40 transition-colors hover:text-foreground"
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close menu"
               >
-                <X className="h-6 w-6" aria-hidden="true" />
+                <X className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
 
             {/* Nav links */}
             <nav className="flex flex-1 flex-col justify-center px-5">
-              <ul className="space-y-2" role="list">
+              <ul className="space-y-1" role="list">
                 {navLinks.map((link, i) => (
                   <motion.li
                     key={link.href}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.08 * i, duration: 0.35, ease: "easeOut" }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.06 * i, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
                       href={link.href}
                       className={cn(
-                        "block rounded-xl px-5 py-4 text-3xl font-semibold tracking-tight transition-colors",
+                        "block py-3 text-[2rem] !font-normal leading-[1.1] tracking-tight transition-colors",
                         pathname === link.href
-                          ? "bg-foreground/5 text-foreground"
-                          : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
+                          ? "text-foreground"
+                          : "text-foreground/35 hover:text-foreground"
                       )}
                       onClick={() => setMobileOpen(false)}
                     >
@@ -184,36 +185,33 @@ export function Navbar() {
                     </Link>
                   </motion.li>
                 ))}
-
-                {/* CTA in mobile menu */}
-                <motion.li
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 * navLinks.length, duration: 0.35, ease: "easeOut" }}
-                  className="px-5 pt-4"
-                >
-                  <Link
-                    href="/contact"
-                    className="block w-full rounded-md bg-primary px-6 py-3 text-center text-lg font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    Book a demo
-                  </Link>
-                </motion.li>
               </ul>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.06 * (navLinks.length + 0.5), duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-8"
+              >
+                <Link
+                  href="/contact"
+                  className="inline-flex rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <FlipText text="Book a demo" />
+                </Link>
+              </motion.div>
             </nav>
 
-            {/* Footer area */}
+            {/* Footer */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-              className="shrink-0 border-t border-foreground/10 px-5 py-6"
+              transition={{ delay: 0.35, duration: 0.5 }}
+              className="shrink-0 px-5 pb-8"
             >
-              <p className="text-sm leading-relaxed text-foreground/50">
-                The ultimate toolkit for exceptional credit and collections&nbsp;teams.
-              </p>
-              <p className="mt-3 text-xs text-foreground/40">
+              <p className="text-xs text-foreground/30">
                 &copy; {new Date().getFullYear()} Lunica. All rights reserved.
               </p>
             </motion.div>

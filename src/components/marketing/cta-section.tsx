@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { NoiseGradient } from "@/components/marketing/noise-gradient"
+import { FlipText } from "@/components/ui/flip-text"
 
 export function CtaSection() {
   return (
@@ -33,13 +34,13 @@ export function CtaSection() {
             href="/contact"
             className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
           >
-            Book a demo
+            <FlipText text="Book a demo" />
           </Link>
           <Link
             href="/contact"
             className="inline-flex rounded-md border border-foreground/15 bg-background px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
           >
-            Contact us
+            <FlipText text="Contact us" />
           </Link>
         </div>
       </div>

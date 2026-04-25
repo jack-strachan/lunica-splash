@@ -4,6 +4,7 @@ export const products: ProductSectionData[] = [
   {
     name: "Collections",
     subtitle: "that gets cash in faster",
+    href: "/collections",
     tabs: [
       {
         title: "Always-on\nmonitoring",
