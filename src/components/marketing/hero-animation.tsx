@@ -27,7 +27,7 @@ const triggeredFactors = ["Days to pay increase", "Credit limit exceeded"]
 const disputeDetails = [
   { icon: DollarSign, label: "$185,832.00", color: "bg-amber-100 text-amber-600" },
   { icon: Building2, label: "Harlow Industrial", color: "bg-blue-50 text-blue-500" },
-  { icon: MessageSquare, label: "2 Messages", color: "bg-purple-50 text-purple-500" },
+  { icon: MessageSquare, label: "Review 2 conversations", color: "bg-purple-50 text-purple-500" },
 ]
 
 const phaseLabels: Record<Phase, string> = {
@@ -288,7 +288,7 @@ export function HeroAnimation() {
                     {disputeDetails.map((detail, i) => (
                       <motion.div
                         key={detail.label}
-                        className="bg-white ring-1 ring-black/[0.06] rounded-lg px-3 py-2"
+                        className="bg-white ring-1 ring-black/[0.06] rounded-lg px-3 py-2 flex items-center"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.35, delay: 0.5 + i * 0.1 }}
@@ -305,7 +305,7 @@ export function HeroAnimation() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.8 }}
                   >
-                    <div className="w-6 h-6 rounded-full bg-[#002B31]/10 flex items-center justify-center mb-2">
+                    <div className="w-6 h-6 rounded-full bg-[#EBE7E3] flex items-center justify-center mb-2">
                       <Check className="w-3.5 h-3.5 text-[#002B31]" />
                     </div>
                     <p className="text-[11px] font-semibold text-[#002B31] leading-tight">Automation triggered</p>
