@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { LunicaLogo } from "@/components/ui/lunica-logo"
 import { usePathname } from "next/navigation"
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "motion/react"
@@ -167,14 +168,7 @@ export function Navbar() {
           {/* Logo */}
           <div className="w-32">
             <Link href="/" className="flex items-center">
-              <Image
-                src="/lunica-logo.svg"
-                alt="Lunica"
-                width={120}
-                height={32}
-                priority
-                className="transition-all duration-300"
-              />
+              <LunicaLogo hoverEnabled={pathname !== "/"} />
             </Link>
           </div>
 
@@ -379,13 +373,7 @@ export function Navbar() {
                 aria-label="Lunica home"
                 onClick={() => setMobileOpen(false)}
               >
-                <Image
-                  src="/lunica-logo.svg"
-                  alt="Lunica"
-                  width={120}
-                  height={32}
-                  priority
-                />
+                <LunicaLogo hoverEnabled={pathname !== "/"} />
               </Link>
               <button
                 type="button"
