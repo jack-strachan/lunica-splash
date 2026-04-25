@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { PageContainer } from "@/components/ui/page-container"
 
 const footerLinks = {
   Product: [
@@ -27,7 +28,7 @@ export function Footer() {
 
   return (
     <footer className="w-full bg-background">
-      <div className="mx-auto max-w-[1400px] px-5 py-16 lg:px-20 lg:py-20">
+      <PageContainer className="py-16 lg:py-20">
         <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div className="flex flex-col items-start">
@@ -91,7 +92,7 @@ export function Footer() {
             </a>
           </p>
         </div>
-      </div>
+      </PageContainer>
     </footer>
   )
 }

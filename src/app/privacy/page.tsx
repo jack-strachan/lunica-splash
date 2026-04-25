@@ -1,5 +1,5 @@
-import { Footer } from "@/components/layout/footer"
 import type { Metadata } from "next"
+import { LegalPageLayout, LegalLink } from "@/components/ui/legal-page-layout"
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Lunica Technologies",
@@ -9,22 +9,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main>
-      <section className="w-full bg-background pt-20">
-        <div className="mx-auto max-w-[1400px] px-5 py-20 lg:px-20 lg:py-32">
-          <span className="mb-5 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-            Legal
-          </span>
-
-          <h1 className="text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]">
-            Privacy Policy
-          </h1>
-
-          <p className="mt-4 text-sm text-foreground/60">
-            Last Updated: May 1, 2024
-          </p>
-
-          <div className="prose-policy mt-12 space-y-10 text-[0.9375rem] leading-relaxed text-foreground/80">
+    <LegalPageLayout
+      title="Privacy Policy"
+      dateLine="Last Updated: May 1, 2024"
+    >
             {/* Intro */}
             <p>
               Lunica Technologies, LLC (the &ldquo;Company&rdquo;) is committed
@@ -38,12 +26,9 @@ export default function PrivacyPolicyPage() {
             <p>
               For purposes of this Agreement, &ldquo;Site&rdquo; refers to the
               Company&rsquo;s website, which can be accessed at{" "}
-              <a
-                href="https://www.lunica.com"
-                className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-              >
+              <LegalLink href="https://www.lunica.com">
                 https://www.lunica.com
-              </a>{" "}
+              </LegalLink>{" "}
               or through our mobile application, Ranch.
               &ldquo;Service&rdquo; refers to the Company&rsquo;s services
               accessed via the Site, in which users can buy everyday essentials
@@ -51,12 +36,9 @@ export default function PrivacyPolicyPage() {
               and &ldquo;our&rdquo; refer to the Company. &ldquo;You&rdquo;
               refers to you, as a user of our Site or our Service. By accessing
               our Site or our Service, you accept our Privacy Policy and{" "}
-              <a
-                href="/terms"
-                className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-              >
+              <LegalLink href="/terms">
                 Terms of Use
-              </a>
+              </LegalLink>
               , and you consent to our collection, storage, use and disclosure of
               your Personal Information as described in this Privacy Policy.
             </p>
@@ -146,12 +128,9 @@ export default function PrivacyPolicyPage() {
                 13 without the consent of a parent or guardian, we will delete
                 that information as soon as possible. If you believe we have
                 collected such information, please contact us at{" "}
-                <a
-                  href="mailto:support@lunica.com"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="mailto:support@lunica.com">
                   support@lunica.com
-                </a>
+                </LegalLink>
                 .
               </p>
             </div>
@@ -297,12 +276,9 @@ export default function PrivacyPolicyPage() {
                 communications by following the unsubscribe instructions provided
                 in each promotional e-mail. You can also indicate that you do not
                 wish to receive marketing communications from us in the{" "}
-                <a
-                  href="/contact"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="/contact">
                   contact section
-                </a>{" "}
+                </LegalLink>{" "}
                 of the Site. Please note that notwithstanding the promotional
                 preferences you indicate by either unsubscribing or opting out
                 in the contact section of the Site, we may continue to send you
@@ -358,19 +334,12 @@ export default function PrivacyPolicyPage() {
               <p className="mt-4">
                 If you have any questions regarding this Privacy Policy or the
                 practices of this Site, please contact us by sending an email to{" "}
-                <a
-                  href="mailto:support@lunica.com"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="mailto:support@lunica.com">
                   support@lunica.com
-                </a>
+                </LegalLink>
                 .
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-      <Footer />
-    </main>
+    </LegalPageLayout>
   )
 }

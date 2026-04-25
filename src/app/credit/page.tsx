@@ -12,74 +12,74 @@ import { FlipButtonLink } from "@/components/ui/button-link"
 import { TintedSection } from "@/components/ui/tinted-section"
 
 export const metadata: Metadata = constructMetadata({
-  title: "Collections",
+  title: "Credit",
   description:
-    "Automate follow-ups, confirm invoices, escalate risk, and get cash in faster with Lunica Collections.",
+    "Streamline credit applications, automate risk assessment, and approve customers faster with Lunica Credit.",
 })
 
 const features = [
   {
-    label: "Always-on monitoring",
-    title: "Know where every dollar stands — in\u00a0real\u00a0time",
+    label: "Digital credit applications",
+    title: "Replace PDFs and email chains with a modern\u00a0experience",
     description:
-      "Lunica continuously tracks open receivables across your entire book. As invoices age, payments land, or behavior shifts, the system flags what matters and triggers the right next action so nothing slips through the cracks.",
+      "Your customers shouldn't have to download a form, fill it out by hand, and email it back. Lunica gives them a clean, structured application they can complete in minutes.",
     details: [
-      "Live receivables dashboard with aging, risk, and status views",
-      "Automatic alerts when invoices become at-risk or overdue",
-      "Behavior-based signals that surface problems before they escalate",
+      "Branded, mobile-friendly application forms",
+      "Configurable fields by customer type or credit tier",
+      "Automatic data validation to reduce back-and-forth",
     ],
   },
   {
-    label: "Proactive follow-up",
-    title: "Reach out before invoices go\u00a0overdue",
+    label: "Faster underwriting",
+    title: "Get from application to decision in\u00a0hours",
     description:
-      "Most teams only chase payments after they're late. Lunica flips that by automatically sending reminders, confirmations, and nudges before the due date, based on each customer's history and preferences.",
+      "Lunica collects the right information upfront and organizes it for your team so credit analysts spend less time chasing documents and more time making decisions.",
     details: [
-      "Scheduled outreach sequences triggered by invoice age and terms",
-      "Multi-channel delivery: email, SMS, and portal notifications",
-      "Dynamic timing based on customer payment behavior",
+      "Structured data collection with required fields and attachments",
+      "Centralized application dashboard with status tracking",
+      "Automatic routing to the right reviewer based on amount or segment",
     ],
   },
   {
-    label: "Invoice confirmation",
-    title: "Eliminate surprises at the due\u00a0date",
+    label: "Automated risk assessment",
+    title: "Assess risk clearly before every\u00a0decision",
     description:
-      "Late payments often start with a simple problem: the customer never received the invoice, or the amount was wrong. Lunica confirms receipt and accuracy early, so you're not fighting avoidable delays weeks later.",
+      "Lunica combines internal data, third-party signals, and configurable rules to surface a clear risk picture for every applicant so your team can approve with confidence and flag concerns early.",
     details: [
-      "Automated delivery confirmation with read receipts",
-      "Discrepancy detection that flags mismatches before they become disputes",
-      "Clear audit trail for every invoice touchpoint",
+      "Rule-based scoring with configurable risk thresholds",
+      "Integration with credit bureaus and third-party data sources",
+      "AI-powered signals that flag anomalies and patterns",
     ],
   },
   {
-    label: "Smart escalation",
-    title: "Route the right accounts to the right\u00a0people",
+    label: "Clear approval workflows",
+    title: "Standardize how your team reviews and\u00a0approves",
     description:
-      "Not every overdue invoice needs the same response. Lunica evaluates risk, amount, and customer history to determine the right escalation path, whether that's an automated reminder, a team assignment, or an executive escalation.",
+      "No more ad-hoc approvals over email or Slack. Lunica provides a structured workflow for every credit decision with full audit trails, approval chains, and configurable authority levels.",
     details: [
-      "Rule-based routing by amount, days past due, and customer segment",
-      "Automatic ownership assignment with full context handoff",
-      "Escalation timelines that adapt to your internal SLAs",
+      "Multi-step approval workflows with role-based permissions",
+      "Full decision history and audit trail for compliance",
+      "Configurable credit limits and terms by customer segment",
     ],
   },
 ]
 
 const stats = [
-  { value: "40%", label: "Faster collection cycles" },
-  { value: "3x", label: "More accounts managed per rep" },
-  { value: "60%", label: "Reduction in manual follow-ups" },
-  { value: "90%", label: "Invoice confirmation rate" },
+  { value: "80%", label: "Faster application processing" },
+  { value: "5x", label: "More applications reviewed per analyst" },
+  { value: "50%", label: "Reduction in manual data entry" },
+  { value: "95%", label: "Application completion rate" },
 ]
 
-export default function CollectionsPage() {
+export default function CreditPage() {
   return (
     <main>
       {/* Hero */}
       <SubpageHero
-        label="Collections"
-        heading={<>Get cash in faster with less&nbsp;effort</>}
-        description={<>Lunica Collections automates the entire receivables workflow, from proactive outreach to smart escalation, so your team spends less time chasing and more time&nbsp;collecting.</>}
-        gradientColors={["#88b4a0", "#4a7a5c", "#3a6248"]}
+        label="Credit"
+        heading={<>Approve customers faster with less&nbsp;risk</>}
+        description={<>Lunica Credit streamlines the entire credit workflow, from digital applications to automated risk assessment, so your team spends less time on paperwork and more time making smart&nbsp;decisions.</>}
+        gradientColors={["#A0937D", "#7D6E5C", "#5C5040"]}
       >
         <FlipButtonLink
           href="/contact"
@@ -153,7 +153,7 @@ export default function CollectionsPage() {
             {i === 0 && (
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
-                  <NoiseGradient colors={["#88b4a0", "#4a7a5c", "#3a6248"]} />
+                  <NoiseGradient colors={["#A0937D", "#7D6E5C", "#5C5040"]} />
                   <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
                     <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
                       {/* Window chrome */}
@@ -192,7 +192,7 @@ export default function CollectionsPage() {
               <SectionLabel className="block">How it works</SectionLabel>
 
               <SectionHeading size="lg">
-                Three steps to faster&nbsp;collections
+                Three steps to smarter&nbsp;credit
               </SectionHeading>
             </div>
 
@@ -208,21 +208,21 @@ export default function CollectionsPage() {
             {[
               {
                 step: "01",
-                title: "Connect your data",
+                title: "Set up your application",
                 description:
-                  "Link your ERP, accounting system, and customer records. Lunica syncs invoices, terms, and payment history automatically.",
+                  "Configure your credit application fields, required documents, and approval thresholds. Lunica adapts to your existing credit policy.",
               },
               {
                 step: "02",
-                title: "Set your rules",
+                title: "Define your rules",
                 description:
-                  "Define when to follow up, how to escalate, and what triggers action. Customize by customer segment, invoice size, or risk level.",
+                  "Set scoring criteria, risk thresholds, and routing rules. Customize by customer type, credit amount, or industry segment.",
               },
               {
                 step: "03",
-                title: "Collect on autopilot",
+                title: "Approve on autopilot",
                 description:
-                  "Lunica runs your collections process 24/7, sending reminders, confirming invoices, and routing exceptions to the right people.",
+                  "Lunica processes applications, scores risk, and routes decisions so your team focuses on exceptions, not paperwork.",
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col bg-[#E3D7CD] px-6 py-10">
@@ -243,8 +243,8 @@ export default function CollectionsPage() {
       {/* CTA */}
       <CtaSection
         label="Get started"
-        heading={<>Stop chasing payments. Start&nbsp;collecting.</>}
-        description={<>See how Lunica Collections can help your team recover cash faster, reduce risk, and eliminate the manual work holding you&nbsp;back.</>}
+        heading={<>Stop losing time on manual credit&nbsp;reviews.</>}
+        description={<>See how Lunica Credit can help your team approve faster, reduce risk, and eliminate the paperwork slowing you&nbsp;down.</>}
       />
 
       <Footer />

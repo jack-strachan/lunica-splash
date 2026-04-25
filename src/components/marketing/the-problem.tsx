@@ -1,6 +1,9 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
+import { SectionLabel } from "@/components/ui/section-label"
+import { SectionHeading } from "@/components/ui/section-heading"
+import { PageContainer } from "@/components/ui/page-container"
 
 const problems = [
   {
@@ -102,16 +105,14 @@ export function TheProblemSection() {
 
   return (
     <section className="w-full bg-background">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
+      <PageContainer className="grid gap-12 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:py-40">
         {/* Left — Copy */}
         <div className="flex flex-col items-start justify-center">
-          <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-            The problem
-          </span>
+          <SectionLabel>The problem</SectionLabel>
 
-          <h2 className="text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3rem]">
+          <SectionHeading size="md">
             You&rsquo;re working harder where you don&rsquo;t need&nbsp;to.
-          </h2>
+          </SectionHeading>
 
           <p className="mt-6 text-lg !leading-tight text-foreground">
             There&rsquo;s no system that knows your customers&rsquo; payment
@@ -163,7 +164,7 @@ export function TheProblemSection() {
 
         {/* Mobile — Swipable carousel */}
         <MobileCarousel problems={problems} />
-      </div>
+      </PageContainer>
     </section>
   )
 }

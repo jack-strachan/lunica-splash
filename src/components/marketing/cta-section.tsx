@@ -1,8 +1,21 @@
-import Link from "next/link"
+import type { ReactNode } from "react"
 import { NoiseGradient } from "@/components/marketing/noise-gradient"
-import { FlipText } from "@/components/ui/flip-text"
+import { SectionLabel } from "@/components/ui/section-label"
+import { SectionHeading } from "@/components/ui/section-heading"
+import { PageContainer } from "@/components/ui/page-container"
+import { FlipButtonLink } from "@/components/ui/button-link"
 
-export function CtaSection() {
+interface CtaSectionProps {
+  label?: string
+  heading?: ReactNode
+  description?: ReactNode
+}
+
+export function CtaSection({
+  label = "Get started",
+  heading = <>Stop chasing payments. Start&nbsp;collecting.</>,
+  description = "See how Lunica can help your team collect faster, reduce risk, and eliminate the manual work holding you back.",
+}: CtaSectionProps) {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Noise gradient background */}
@@ -15,35 +28,26 @@ export function CtaSection() {
         <div className="h-[80%] w-[60%] rounded-full bg-[#F5F2EB]/60 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-28 text-center lg:px-20 lg:py-36">
-        <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-          Get started
-        </span>
+      <PageContainer className="relative flex flex-col items-center py-28 text-center lg:py-36">
+        <SectionLabel>{label}</SectionLabel>
 
-        <h2 className="max-w-2xl text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]">
-          Stop chasing payments. Start&nbsp;collecting.
-        </h2>
+        <SectionHeading size="lg" className="max-w-2xl">
+          {heading}
+        </SectionHeading>
 
         <p className="mt-6 max-w-lg text-lg !leading-tight text-foreground/70">
-          See how Lunica can help your team collect faster, reduce risk, and
-          eliminate the manual work holding you back.
+          {description}
         </p>
 
         <div className="mt-10 flex items-center gap-4">
-          <Link
+          <FlipButtonLink href="/contact" text="Book a demo" />
+          <FlipButtonLink
             href="/contact"
-            className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
-          >
-            <FlipText text="Book a demo" />
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex rounded-md border border-foreground/15 bg-background px-6 py-3 text-sm font-medium text-foreground transition-colors hover:bg-foreground/5"
-          >
-            <FlipText text="Contact us" />
-          </Link>
+            text="Contact us"
+            variant="secondary"
+          />
         </div>
-      </div>
+      </PageContainer>
     </section>
   )
 }

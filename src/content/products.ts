@@ -32,6 +32,7 @@ export const products: ProductSectionData[] = [
   {
     name: "Credit",
     subtitle: "that helps you approve with confidence",
+    href: "/credit",
     tabs: [
       {
         title: "Digital credit\napplications",

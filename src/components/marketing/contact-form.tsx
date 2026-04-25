@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { FlipText } from "@/components/ui/flip-text"
+import { FormInput, FormTextarea } from "@/components/ui/form-field"
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -28,74 +29,49 @@ export function ContactForm() {
       className="flex flex-col gap-5 rounded-lg bg-[#EDE7DF] p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="firstName" className="text-xs font-medium uppercase tracking-[0.15em] text-foreground/50">
-            First name
-          </label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            required
-            className="rounded-md border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground/30"
-            placeholder="Jane"
-          />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="lastName" className="text-xs font-medium uppercase tracking-[0.15em] text-foreground/50">
-            Last name
-          </label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            required
-            className="rounded-md border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground/30"
-            placeholder="Smith"
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="email" className="text-xs font-medium uppercase tracking-[0.15em] text-foreground/50">
-          Work email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          className="rounded-md border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground/30"
-          placeholder="jane@company.com"
-        />
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="company" className="text-xs font-medium uppercase tracking-[0.15em] text-foreground/50">
-          Company
-        </label>
-        <input
-          id="company"
-          name="company"
+        <FormInput
+          label="First name"
+          id="firstName"
+          name="firstName"
           type="text"
-          className="rounded-md border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground/30"
-          placeholder="Acme Inc."
+          required
+          placeholder="Jane"
+        />
+        <FormInput
+          label="Last name"
+          id="lastName"
+          name="lastName"
+          type="text"
+          required
+          placeholder="Smith"
         />
       </div>
 
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="message" className="text-xs font-medium uppercase tracking-[0.15em] text-foreground/50">
-          Message
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          required
-          className="resize-none rounded-md border border-foreground/10 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-foreground/30 focus:border-foreground/30"
-          placeholder="Tell us what you're looking for..."
-        />
-      </div>
+      <FormInput
+        label="Work email"
+        id="email"
+        name="email"
+        type="email"
+        required
+        placeholder="jane@company.com"
+      />
+
+      <FormInput
+        label="Company"
+        id="company"
+        name="company"
+        type="text"
+        placeholder="Acme Inc."
+      />
+
+      <FormTextarea
+        label="Message"
+        id="message"
+        name="message"
+        rows={4}
+        required
+        placeholder="Tell us what you're looking for..."
+      />
 
       <button
         type="submit"

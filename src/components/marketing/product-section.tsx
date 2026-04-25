@@ -1,6 +1,7 @@
 import { TabbedShowcase } from "@/components/marketing/tabbed-showcase"
 import type { TabItem } from "@/components/marketing/tabbed-showcase"
 import { LearnMoreLink } from "@/components/marketing/learn-more-link"
+import { PageContainer } from "@/components/ui/page-container"
 
 export interface ProductSectionData {
   name: string
@@ -12,7 +13,7 @@ export interface ProductSectionData {
 export function ProductSection({ name, subtitle, tabs, href }: ProductSectionData) {
   return (
     <section id={name.toLowerCase().replace(/\s+/g, "-")} className="w-full bg-background scroll-mt-20">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[2fr_1fr] md:items-start md:gap-16 lg:px-20 lg:py-28">
+      <PageContainer className="grid gap-12 py-20 md:grid-cols-[2fr_1fr] md:items-start md:gap-16 lg:py-28">
 
         {/* Right — Tabbed showcase */}
         <TabbedShowcase tabs={tabs} />
@@ -25,7 +26,7 @@ export function ProductSection({ name, subtitle, tabs, href }: ProductSectionDat
           </h2>
           {href && <LearnMoreLink href={href} />}
         </div>
-      </div>
+      </PageContainer>
     </section>
   )
 }

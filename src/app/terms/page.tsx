@@ -1,5 +1,5 @@
-import { Footer } from "@/components/layout/footer"
 import type { Metadata } from "next"
+import { LegalPageLayout, LegalLink } from "@/components/ui/legal-page-layout"
 
 export const metadata: Metadata = {
   title: "Terms of Use — Lunica Technologies",
@@ -9,31 +9,16 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main>
-      <section className="w-full bg-background pt-20">
-        <div className="mx-auto max-w-[1400px] px-5 py-20 lg:px-20 lg:py-32">
-          <span className="mb-5 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-            Legal
-          </span>
-
-          <h1 className="text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]">
-            Website Terms of Use
-          </h1>
-
-          <p className="mt-4 text-sm text-foreground/60">
-            Version 1.0 &mdash; Last revised on May 1, 2024
-          </p>
-
-          <div className="prose-policy mt-12 space-y-10 text-[0.9375rem] leading-relaxed text-foreground/80">
+    <LegalPageLayout
+      title="Website Terms of Use"
+      dateLine={<>Version 1.0 &mdash; Last revised on May 1, 2024</>}
+    >
             {/* Intro */}
             <p>
               The website located at{" "}
-              <a
-                href="https://www.lunica.com"
-                className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-              >
+              <LegalLink href="https://www.lunica.com">
                 https://www.lunica.com
-              </a>{" "}
+              </LegalLink>{" "}
               (the &ldquo;Site&rdquo;) is a copyrighted work belonging to
               Lunica Technologies, LLC (&ldquo;Company&rdquo;, &ldquo;us&rdquo;,
               &ldquo;our&rdquo;, and &ldquo;we&rdquo;). Certain features of the
@@ -456,12 +441,9 @@ export default function TermsPage() {
                 mutually agreed upon by the parties. Notice to Company that you
                 intend to initiate an Informal Dispute Resolution Conference
                 should be sent by email to:{" "}
-                <a
-                  href="mailto:support@lunica.com"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="mailto:support@lunica.com">
                   support@lunica.com
-                </a>
+                </LegalLink>
                 , or by regular mail to 169 Madison Avenue, STE 11202, New York,
                 New York 10016. The Notice must include: (1) your name, telephone
                 number, mailing address, e-mail address associated with your
@@ -507,34 +489,19 @@ export default function TermsPage() {
                 inclusive of attorneys&rsquo; fees and interest, shall be subject
                 to JAMS&rsquo; most current version of the Streamlined
                 Arbitration Rules and procedures available at{" "}
-                <a
-                  href="http://www.jamsadr.com/rules-streamlined-arbitration/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="http://www.jamsadr.com/rules-streamlined-arbitration/" external>
                   jamsadr.com/rules-streamlined-arbitration
-                </a>
+                </LegalLink>
                 ; all other claims shall be subject to JAMS&rsquo;s most current
                 version of the Comprehensive Arbitration Rules and Procedures,
                 available at{" "}
-                <a
-                  href="http://www.jamsadr.com/rules-comprehensive-arbitration/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="http://www.jamsadr.com/rules-comprehensive-arbitration/" external>
                   jamsadr.com/rules-comprehensive-arbitration
-                </a>
+                </LegalLink>
                 . JAMS&rsquo;s rules are also available at{" "}
-                <a
-                  href="http://www.jamsadr.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="http://www.jamsadr.com" external>
                   www.jamsadr.com
-                </a>{" "}
+                </LegalLink>{" "}
                 or by calling JAMS at 800-352-5267. A party who wishes to
                 initiate arbitration must provide the other party with a request
                 for arbitration (the &ldquo;Request&rdquo;). The Request must
@@ -760,12 +727,9 @@ export default function TermsPage() {
                 Arbitration Agreement by sending a timely written notice of your
                 decision to opt out to the following address: 169 Madison Avenue,
                 STE 11202, New York, New York 10016, or email to{" "}
-                <a
-                  href="mailto:support@lunica.com"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="mailto:support@lunica.com">
                   support@lunica.com
-                </a>
+                </LegalLink>
                 , within 30 days after first becoming subject to this Arbitration
                 Agreement. Your notice must include your name and address and a
                 clear statement that you want to opt out of this Arbitration
@@ -806,12 +770,9 @@ export default function TermsPage() {
                 of such change becoming effective by writing Company at the
                 following address: 169 Madison Avenue, STE 11202, New York, New
                 York 10016, or email to{" "}
-                <a
-                  href="mailto:support@lunica.com"
-                  className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                >
+                <LegalLink href="mailto:support@lunica.com">
                   support@lunica.com
-                </a>
+                </LegalLink>
                 . Unless you reject the change within 30 days of such change
                 becoming effective by writing to Company in accordance with the
                 foregoing, your continued use of the Site and/or Services,
@@ -921,28 +882,18 @@ export default function TermsPage() {
                 <p>New York, New York 10016</p>
                 <p className="mt-2">
                   Telephone:{" "}
-                  <a
-                    href="tel:+18482690650"
-                    className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                  >
+                  <LegalLink href="tel:+18482690650">
                     +1 (848) 269-0650
-                  </a>
+                  </LegalLink>
                 </p>
                 <p>
                   Email:{" "}
-                  <a
-                    href="mailto:support@lunica.com"
-                    className="text-foreground underline underline-offset-2 transition-colors hover:text-foreground/60"
-                  >
+                  <LegalLink href="mailto:support@lunica.com">
                     support@lunica.com
-                  </a>
+                  </LegalLink>
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <Footer />
-    </main>
+    </LegalPageLayout>
   )
 }

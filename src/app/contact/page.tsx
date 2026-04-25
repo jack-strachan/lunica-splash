@@ -1,27 +1,29 @@
 import { Footer } from "@/components/layout/footer"
 import { ContactForm } from "@/components/marketing/contact-form"
+import { SectionLabel } from "@/components/ui/section-label"
+import { SectionHeading } from "@/components/ui/section-heading"
+import { SectionDescription } from "@/components/ui/section-description"
+import { PageContainer } from "@/components/ui/page-container"
 
 export default function ContactPage() {
   return (
     <main>
       <section className="w-full bg-background pt-20">
-        <div className="mx-auto grid max-w-[1400px] gap-16 px-5 py-20 md:grid-cols-[5fr_6fr] md:items-start md:gap-20 lg:px-20 lg:py-32">
+        <PageContainer className="grid gap-16 py-20 md:grid-cols-[5fr_6fr] md:items-start md:gap-20 lg:py-32">
           {/* Left — Copy */}
           <div className="flex flex-col items-start">
-            <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-              Contact us
-            </span>
+            <SectionLabel>Contact us</SectionLabel>
 
-            <h1 className="text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]">
+            <SectionHeading as="h1" size="lg">
               Let&rsquo;s talk about your{" "}
               <span className="text-foreground/40">process</span>
-            </h1>
+            </SectionHeading>
 
-            <p className="mt-6 text-lg !leading-tight text-foreground text-balance">
+            <SectionDescription className="text-balance">
               Whether you&rsquo;re looking for a demo, have a question about the
               platform, or want to explore how Lunica fits your workflow &mdash;
               we&rsquo;d love to hear from you.
-            </p>
+            </SectionDescription>
 
             <div className="mt-10 relative z-2 flex flex-col gap-6">
               <div>
@@ -49,7 +51,7 @@ export default function ContactPage() {
 
           {/* Right — Form */}
           <ContactForm />
-        </div>
+        </PageContainer>
       </section>
       <Footer />
     </main>
