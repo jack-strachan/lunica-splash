@@ -78,7 +78,7 @@ export default function CollectionsPage() {
       <SubpageHero
         label="Collections"
         heading={<>Get cash in faster with less&nbsp;effort</>}
-        description={<>Lunica Collections automates the entire receivables workflow, from proactive outreach to smart escalation, so your team spends less time chasing and more time&nbsp;collecting.</>}
+        description={<>A modern collections platform that&rsquo;s simpler to run, more effective, and costs less than what you&rsquo;re using&nbsp;today.</>}
         gradientColors={["#88b4a0", "#4a7a5c", "#3a6248"]}
       >
         <FlipButtonLink

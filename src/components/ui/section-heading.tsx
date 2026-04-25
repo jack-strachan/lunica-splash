@@ -26,7 +26,7 @@ export function SectionHeading({
   return (
     <Tag
       className={cn(
-        "text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl",
+        "text-[2.5rem] text-balance !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl",
         sizeClasses[size],
         className
       )}

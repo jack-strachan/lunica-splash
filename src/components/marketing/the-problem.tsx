@@ -24,7 +24,7 @@ const problems = [
   {
     title: "Hidden collection risk",
     description:
-      "No early warnings — you find out about problems after they escalate.",
+      "No early warnings. You find out about problems after they escalate.",
   },
   {
     title: "Payment term confusion",
@@ -117,13 +117,13 @@ export function TheProblemSection() {
           <p className="mt-6 text-lg !leading-tight text-foreground">
             There&rsquo;s no system that knows your customers&rsquo; payment
             terms and acts on them automatically. Every mistake costs you
-            days&nbsp;&mdash; sometimes weeks.
+            days.
           </p>
 
           <p className="mt-4 text-lg !leading-tight text-foreground">
             Credit applications in one tool. Invoices in another. Disputes
             handled over email. Payments tracked in a spreadsheet. Nothing talks
-            to each other&nbsp;&mdash; and nothing works together.
+            to each other.
           </p>
         </div>
 

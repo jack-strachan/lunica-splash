@@ -12,74 +12,74 @@ import { FlipButtonLink } from "@/components/ui/button-link"
 import { TintedSection } from "@/components/ui/tinted-section"
 
 export const metadata: Metadata = constructMetadata({
-  title: "Credit",
+  title: "Online Payments",
   description:
-    "Streamline credit applications, automate risk assessment, and approve customers faster with Lunica Credit.",
+    "Send payment links, accept payments online, and give customers a frictionless way to pay with Lunica Online Payments.",
 })
 
 const features = [
   {
-    label: "Digital credit applications",
-    title: "Replace PDFs and email chains with a modern\u00a0experience",
+    label: "Automatic payment links",
+    title: "Payment links generated and sent without lifting a\u00a0finger",
     description:
-      "Your customers shouldn't have to download a form, fill it out by hand, and email it back. Lunica gives them a clean, structured application in your brand they can complete in minutes.",
+      "Lunica automatically generates a unique payment link for every invoice. With your approval, links are sent directly to customers via email or SMS. Fully hands-free, or one click to review before they go out.",
     details: [
-      "Branded, mobile-friendly application forms",
-      "Configurable fields by customer type or credit tier",
-      "Automatic data validation to reduce back-and-forth",
+      "Automatic link generation for every new invoice",
+      "Hands-free delivery via email, SMS, or both",
+      "Optional review step if your team wants control before sending",
     ],
   },
   {
-    label: "Faster underwriting",
-    title: "Get from application to decision in\u00a0hours",
+    label: "Mobile-friendly checkout",
+    title: "A payment experience that works on any\u00a0device",
     description:
-      "Lunica collects the right information upfront and organizes it for your team so credit analysts spend less time chasing documents and more time making decisions.",
+      "Your customers pay from their phone, tablet, or desktop. Lunica provides a clean, responsive checkout that works everywhere without downloads or account creation.",
     details: [
-      "Structured data collection with required fields and attachments",
-      "Centralized application dashboard with status tracking",
-      "Automatic routing to the right reviewer based on amount or segment",
+      "Responsive design optimized for mobile and desktop",
+      "No account creation required for customers",
+      "Support for credit card, ACH, and wire payments",
     ],
   },
   {
-    label: "Automated risk assessment",
-    title: "Assess risk clearly before every\u00a0decision",
+    label: "Branded payment experience",
+    title: "Your brand, not\u00a0ours",
     description:
-      "Lunica combines internal data, third-party signals, and configurable rules to surface a clear risk picture for every applicant so your team can approve with confidence and flag concerns early.",
+      "Every payment page carries your logo, colors, and domain. Customers see a professional experience that feels like an extension of your business, not a third-party tool.",
     details: [
-      "Rule-based scoring with configurable risk thresholds",
-      "Integration with credit bureaus and third-party data sources",
-      "AI-powered signals that flag anomalies and patterns",
+      "Custom branding with your logo and color palette",
+      "White-label payment pages on your domain",
+      "Consistent experience across every customer touchpoint",
     ],
   },
   {
-    label: "Clear approval workflows",
-    title: "Standardize how your team reviews and\u00a0approves",
+    label: "Automatic reconciliation",
+    title: "Payments land and your books\u00a0update",
     description:
-      "No more ad-hoc approvals over email or Slack. Lunica provides a structured workflow for every credit decision with full audit trails, approval chains, and configurable authority levels.",
+      "When a customer pays, Lunica matches the payment to the invoice, updates the balance, and syncs with your accounting system. No manual entry, no mismatches.",
     details: [
-      "Multi-step approval workflows with role-based permissions",
-      "Full decision history and audit trail for compliance",
-      "Configurable credit limits and terms by customer segment",
+      "Automatic payment-to-invoice matching",
+      "Real-time sync with your ERP or accounting system",
+      "Full audit trail for every transaction",
     ],
   },
 ]
 
 const stats = [
-  { value: "80%", label: "Faster application processing" },
-  { value: "5x", label: "More applications reviewed per analyst" },
-  { value: "50%", label: "Reduction in manual data entry" },
-  { value: "95%", label: "Application completion rate" },
+  { value: "70%", label: "Faster time to payment" },
+  { value: "3x", label: "More invoices paid on time" },
+  { value: "85%", label: "Reduction in payment follow-ups" },
+  { value: "99%", label: "Successful transaction rate" },
 ]
 
-export default function CreditPage() {
+export default function OnlinePaymentsPage() {
   return (
     <main>
       {/* Hero */}
       <SubpageHero
-        label="Credit"
-        heading={<>Approve customers faster with less&nbsp;risk</>}
-        description={<>Digital credit applications, automated decisioning, and full visibility into your pipeline. Simpler and more affordable than legacy&nbsp;tools.</>}
-        gradientColors={["#A0937D", "#7D6E5C", "#5C5040"]}
+        label="Online Payments"
+        heading={<>Make it easy for customers to&nbsp;pay</>}
+        description={<>Payment links that send themselves, a checkout your customers will actually use, and books that update on their&nbsp;own.</>}
+        gradientColors={["#7B8FA1", "#4A5E73", "#2C3E50"]}
       >
         <FlipButtonLink
           href="/contact"
@@ -153,7 +153,7 @@ export default function CreditPage() {
             {i === 0 && (
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
-                  <NoiseGradient colors={["#A0937D", "#7D6E5C", "#5C5040"]} />
+                  <NoiseGradient colors={["#7B8FA1", "#4A5E73", "#2C3E50"]} />
                   <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
                     <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
                       {/* Window chrome */}
@@ -192,14 +192,14 @@ export default function CreditPage() {
               <SectionLabel className="block">How it works</SectionLabel>
 
               <SectionHeading size="lg">
-                Three steps to smarter&nbsp;credit
+                Three steps to getting paid&nbsp;faster
               </SectionHeading>
             </div>
 
             <div className="flex flex-col justify-end">
               <p className="text-lg !leading-tight text-foreground">
-                Lunica plugs into your existing systems and starts working immediately.
-                No months-long implementation. No ripping out what you&nbsp;have.
+                Lunica connects to your existing invoicing flow and starts accepting payments immediately.
+                No migration. No new&nbsp;processes.
               </p>
             </div>
           </div>
@@ -208,21 +208,21 @@ export default function CreditPage() {
             {[
               {
                 step: "01",
-                title: "Set up your application",
+                title: "Connect your invoices",
                 description:
-                  "Configure your credit application fields, required documents, and approval thresholds. Lunica adapts to your existing credit policy.",
+                  "Sync your open invoices from your ERP or accounting system. Lunica pulls in balances, terms, and customer details automatically.",
               },
               {
                 step: "02",
-                title: "Define your rules",
+                title: "Brand your checkout",
                 description:
-                  "Set scoring criteria, risk thresholds, and routing rules. Customize by customer type, credit amount, or industry segment.",
+                  "Add your logo, colors, and domain. Every payment page looks like it belongs to your business, because it does.",
               },
               {
                 step: "03",
-                title: "Approve on autopilot",
+                title: "Share and collect",
                 description:
-                  "Lunica processes applications, scores risk, and routes decisions so your team focuses on exceptions, not paperwork.",
+                  "Send payment links to customers. They pay in minutes. Lunica reconciles the payment and updates your records in real time.",
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col bg-[#E3D7CD] px-6 py-10">
@@ -243,8 +243,8 @@ export default function CreditPage() {
       {/* CTA */}
       <CtaSection
         label="Get started"
-        heading={<>Stop losing time on manual credit&nbsp;reviews.</>}
-        description={<>See how Lunica Credit can help your team approve faster, reduce risk, and eliminate the paperwork slowing you&nbsp;down.</>}
+        heading={<>Accept payments without the&nbsp;complexity.</>}
+        description={<>See how Lunica Online Payments can help your team get paid faster with less manual&nbsp;work.</>}
       />
 
       <Footer />

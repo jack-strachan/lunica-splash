@@ -3,7 +3,6 @@ import { CtaSection } from "@/components/marketing/cta-section"
 import { Footer } from "@/components/layout/footer"
 import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
-import { SectionDescription } from "@/components/ui/section-description"
 import { PageContainer } from "@/components/ui/page-container"
 import { TintedSection } from "@/components/ui/tinted-section"
 
@@ -32,20 +31,17 @@ const values = [
 
 const milestones = [
   {
-    label: "Founded",
-    value: "2024",
+    label: "Background",
+    value: "MIT, Y Combinator, Google, Palantir, Meta, Scale, Bain, and more",
+    tall: true,
   },
   {
     label: "Headquarters",
     value: "New York, NY",
   },
   {
-    label: "Focus",
-    value: "Credit & Collections",
-  },
-  {
-    label: "Backed by",
-    value: "Scope",
+    label: "Incubated at",
+    value: <a href="https://scopelabs.com" target="_blank" rel="noopener noreferrer" className="underline decoration-foreground/30 underline-offset-4 hover:decoration-foreground transition-colors">Scope</a>,
   },
 ]
 
@@ -55,36 +51,38 @@ export default function AboutPage() {
       {/* Hero */}
       <SubpageHero
         label="About Lunica"
-        heading={<>We&rsquo;re building the tools credit teams actually need</>}
-        description={<>Lunica started with a simple observation: credit and collections teams are stuck using fragmented tools that weren&rsquo;t built for them. We&rsquo;re here to change&nbsp;that.</>}
+        heading={<>Better tools for credit teams, long&nbsp;overdue</>}
+        description={<>The tools credit teams rely on are outdated, overpriced, and harder than they need to be. Lunica is the&nbsp;alternative.</>}
         gradientColors={["#A89888", "#8B7D6E", "#6E6356"]}
         heightClass="md:h-[85dvh] md:min-h-[600px]"
       />
 
-      {/* Mission */}
+      {/* Our Story */}
       <section className="w-full bg-background">
         <PageContainer className="grid gap-12 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:py-40">
           <div className="flex flex-col items-start justify-center">
-            <SectionLabel>Our mission</SectionLabel>
+            <SectionLabel>Our team</SectionLabel>
 
             <SectionHeading size="md">
-              Get receivables under control for&nbsp;good
+              Built by engineers alongside the teams in the trenches
             </SectionHeading>
           </div>
 
-          <div className="flex flex-col justify-center">
-            <p className="text-lg !leading-tight text-foreground">
-              We believe credit and collections should be a strategic advantage,
-              not a back-office headache. Lunica brings together everything your
-              team needs, from credit applications to payment collection,
-              in one platform that actually works together.
-            </p>
-
-            <p className="mt-4 text-lg !leading-tight text-foreground">
-              Our goal is to eliminate the manual work, scattered spreadsheets,
-              and disjointed tools that slow teams down, so they can focus on
-              what matters: getting paid faster and managing risk smarter.
-            </p>
+          {/* Milestone stats */}
+          <div className="grid grid-cols-2 gap-0.5 self-center overflow-hidden rounded-lg">
+            {milestones.map((milestone) => (
+              <div
+                key={milestone.label}
+                className={`flex flex-col justify-center bg-[#EBE7E3] px-6 py-10${milestone.tall ? " row-span-2" : ""}`}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
+                  {milestone.label}
+                </p>
+                <p className="mt-2 text-2xl font-medium tracking-tight text-foreground">
+                  {milestone.value}
+                </p>
+              </div>
+            ))}
           </div>
         </PageContainer>
       </section>
@@ -102,10 +100,9 @@ export default function AboutPage() {
 
             <div className="flex flex-col justify-end">
               <p className="text-lg !leading-tight text-foreground">
-                We&rsquo;re a technical team that loves solving hard problems.
-                Everything we build is driven by one goal.{" "}
-                <span className="font-semibold">Help people unlock
-                productivity and stay on the cutting&nbsp;edge.</span>
+                We obsess over the technology so you don&rsquo;t have to.{" "}
+                <span className="font-semibold">Every update we ship is designed
+                to keep your team ahead of the curve</span>
               </p>
             </div>
           </div>
@@ -124,51 +121,6 @@ export default function AboutPage() {
             ))}
           </div>
       </TintedSection>
-
-      {/* Story / Background */}
-      <section className="w-full bg-background">
-        <PageContainer className="grid gap-12 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:py-40">
-          <div className="flex flex-col items-start justify-center">
-            <SectionLabel>Our story</SectionLabel>
-
-            <SectionHeading size="md">
-              From the teams who know the&nbsp;pain
-            </SectionHeading>
-
-            <SectionDescription>
-              Lunica was born inside Scope Labs, a product incubator
-              focused on building tools for underserved industries. After
-              spending time with credit and AR teams across companies of all
-              sizes, the pattern was clear: everyone was fighting the same
-              problems with the wrong&nbsp;tools.
-            </SectionDescription>
-
-            <p className="mt-4 text-lg !leading-tight text-foreground">
-              So we built Lunica, a platform designed from the ground up
-              for the people who actually do the work. Not a retooled ERP
-              plugin. Not a generic workflow app. A purpose-built system for
-              credit and&nbsp;collections.
-            </p>
-          </div>
-
-          {/* Milestone stats */}
-          <div className="grid grid-cols-2 gap-0.5 self-center overflow-hidden rounded-lg">
-            {milestones.map((milestone) => (
-              <div
-                key={milestone.label}
-                className="flex flex-col justify-center bg-[#EBE7E3] px-6 py-10"
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
-                  {milestone.label}
-                </p>
-                <p className="mt-2 text-2xl font-medium tracking-tight text-foreground">
-                  {milestone.value}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageContainer>
-      </section>
 
       {/* CTA */}
       <CtaSection

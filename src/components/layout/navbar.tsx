@@ -32,7 +32,7 @@ const productLinks = [
     name: "Online Payments",
     description: "Send payment links and give customers a frictionless way to pay.",
     href: "/online-payments",
-    enabled: false,
+    enabled: true,
   },
   {
     name: "Payments Portal",
@@ -103,7 +103,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit"
+  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/online-payments"
   const lightNav = heroOverlap && !scrolled
 
   // Close menus on route change

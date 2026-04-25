@@ -60,6 +60,7 @@ export const products: ProductSectionData[] = [
   {
     name: "Online Payments",
     subtitle: "that makes paying easy",
+    href: "/online-payments",
     tabs: [
       {
         title: "Shareable\npayment links",
