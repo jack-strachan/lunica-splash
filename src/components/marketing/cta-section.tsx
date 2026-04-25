@@ -14,7 +14,7 @@ export function CtaSection() {
         <div className="h-[80%] w-[60%] rounded-full bg-[#F5F2EB]/60 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-8 py-28 text-center lg:px-20 lg:py-36">
+      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-28 text-center lg:px-20 lg:py-36">
         <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
           Get started
         </span>

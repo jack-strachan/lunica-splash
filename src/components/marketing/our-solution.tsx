@@ -37,7 +37,7 @@ export function OurSolutionSection() {
         <path d="M9.07325 21.4312H30.6232L20.5338 31.3891H9.07325C4.98019 31.3891 2.42203 27.9957 5.08252 25.3699L9.07325 21.4312Z" fill="none" stroke="#F5F2EB" strokeWidth="0.19" />
       </svg>
 
-      <div className="relative mx-auto max-w-[1400px] px-8 py-20 lg:px-20 lg:py-28">
+      <div className="relative mx-auto max-w-[1400px] px-5 py-20 lg:px-20 lg:py-28">
         {/* Top — Heading + description row */}
         <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:gap-20">
           <div>

@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
   return (
     <main>
       <section className="w-full bg-background pt-20">
-        <div className="mx-auto max-w-[1400px] px-8 py-20 lg:px-20 lg:py-32">
+        <div className="mx-auto max-w-[1400px] px-5 py-20 lg:px-20 lg:py-32">
           <span className="mb-5 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
             Legal
           </span>

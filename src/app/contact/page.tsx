@@ -5,7 +5,7 @@ export default function ContactPage() {
   return (
     <main>
       <section className="w-full bg-background pt-20">
-        <div className="mx-auto grid max-w-[1400px] gap-16 px-8 py-20 md:grid-cols-[5fr_6fr] md:items-start md:gap-20 lg:px-20 lg:py-32">
+        <div className="mx-auto grid max-w-[1400px] gap-16 px-5 py-20 md:grid-cols-[5fr_6fr] md:items-start md:gap-20 lg:px-20 lg:py-32">
           {/* Left — Copy */}
           <div className="flex flex-col items-start">
             <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">

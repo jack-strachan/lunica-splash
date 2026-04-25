@@ -10,7 +10,7 @@ export interface ProductSectionData {
 export function ProductSection({ name, subtitle, tabs }: ProductSectionData) {
   return (
     <section id={name.toLowerCase().replace(/\s+/g, "-")} className="w-full bg-background scroll-mt-20">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-8 py-20 md:grid-cols-[2fr_1fr] md:items-start md:gap-16 lg:px-20 lg:py-28">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[2fr_1fr] md:items-start md:gap-16 lg:px-20 lg:py-28">
 
         {/* Right — Tabbed showcase */}
         <TabbedShowcase tabs={tabs} />

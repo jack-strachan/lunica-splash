@@ -56,7 +56,7 @@ export function Navbar() {
 
         <nav
           className={cn(
-            "relative z-10 mx-auto flex h-16 max-w-[1400px] items-center justify-between px-8 transition-all duration-300 lg:px-20",
+            "relative z-10 mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 transition-all duration-300 lg:px-20",
             scrolled ? "mt-0" : "mt-2"
           )}
           aria-label="Primary navigation"
@@ -132,7 +132,7 @@ export function Navbar() {
             {/* Top bar — mirrors desktop nav */}
             <div
               className={cn(
-                "flex h-16 shrink-0 items-center justify-between px-8 transition-all duration-300",
+                "flex h-16 shrink-0 items-center justify-between px-5 transition-all duration-300",
                 scrolled ? "mt-0" : "mt-2"
               )}
             >
@@ -161,7 +161,7 @@ export function Navbar() {
             </div>
 
             {/* Nav links */}
-            <nav className="flex flex-1 flex-col justify-center px-8">
+            <nav className="flex flex-1 flex-col justify-center px-5">
               <ul className="space-y-2" role="list">
                 {navLinks.map((link, i) => (
                   <motion.li
@@ -208,7 +208,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.4 }}
-              className="shrink-0 border-t border-foreground/10 px-8 py-6"
+              className="shrink-0 border-t border-foreground/10 px-5 py-6"
             >
               <p className="text-sm leading-relaxed text-foreground/50">
                 The ultimate toolkit for exceptional credit and collections&nbsp;teams.

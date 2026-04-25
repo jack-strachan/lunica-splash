@@ -23,7 +23,7 @@ const footerLinks = {
 export function Footer() {
   return (
     <footer className="w-full bg-background">
-      <div className="mx-auto max-w-[1400px] px-8 py-16 lg:px-20 lg:py-20">
+      <div className="mx-auto max-w-[1400px] px-5 py-16 lg:px-20 lg:py-20">
         <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div className="flex flex-col items-start">

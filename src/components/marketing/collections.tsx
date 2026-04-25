@@ -27,7 +27,7 @@ const collectionsTabs: TabItem[] = [
 export function CollectionsSection() {
   return (
     <section className="w-full bg-background">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-8 py-20 md:grid-cols-[1fr_2fr] md:items-start md:gap-16 lg:px-20 lg:py-28">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[1fr_2fr] md:items-start md:gap-16 lg:px-20 lg:py-28">
         {/* Left — Heading */}
         <div className="flex flex-col items-start pt-4">
           <h2 className="text-[2.75rem] !font-normal leading-[1.08] tracking-tight lg:text-[3.5rem]">

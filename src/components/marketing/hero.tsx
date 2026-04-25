@@ -5,10 +5,10 @@ import { NoiseGradient } from "@/components/marketing/noise-gradient"
 export function HomeHeroSection() {
   return (
     <section className="relative w-full overflow-hidden pt-20">
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-8 pt-4 pb-24 md:grid-cols-[5fr_6fr] md:items-center md:gap-20 md:py-32 lg:px-20 lg:py-2">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pt-4 pb-24 md:grid-cols-[5fr_6fr] md:items-center md:gap-20 md:py-32 lg:px-20 lg:py-2">
         {/* Right — Noise gradient block (bleeds off right edge) — shown first on mobile */}
-        <div className="relative order-first md:order-last -mr-8 md:mx-0">
-          <div className="relative h-[35dvh] md:h-[88dvh] md:max-h-none w-[calc(100%+2rem)] md:w-[calc(100%+50vw-50%+2rem)] overflow-hidden rounded-l-md md:rounded-r-none">
+        <div className="relative order-first md:order-last -mr-5 md:mx-0">
+          <div className="relative h-[35dvh] md:h-[88dvh] md:max-h-none w-[calc(100%+1.25rem)] md:w-[calc(100%+50vw-50%+2rem)] overflow-hidden rounded-l-md md:rounded-r-none">
             <NoiseGradient
               colors={["#88b4a0", "#4a7a5c", "#3a6248"]}
             />

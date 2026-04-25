@@ -65,11 +65,11 @@ function MobileCarousel({ problems }: { problems: { title: string; description: 
   return (
     <div
       ref={scrollRef}
-      className="md:hidden -mx-8 overflow-x-auto"
+      className="md:hidden -mx-5 overflow-x-auto"
       style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
     >
       <style>{`.mobile-carousel::-webkit-scrollbar { display: none; }`}</style>
-      <div className="mobile-carousel flex gap-0.5 w-max overflow-hidden rounded-lg pl-8 pr-8">
+      <div className="mobile-carousel flex gap-0.5 w-max overflow-hidden rounded-lg pl-5 pr-5">
         {problems.map((problem, i) => {
           const isFirst = i === 0
           const isLast = i === problems.length - 1
@@ -102,7 +102,7 @@ export function TheProblemSection() {
 
   return (
     <section className="w-full bg-background">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-8 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
         {/* Left — Copy */}
         <div className="flex flex-col items-start justify-center">
           <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">

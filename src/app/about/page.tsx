@@ -58,7 +58,7 @@ export default function AboutPage() {
         </div>
 
         {/* Copy — anchored near bottom on large screens */}
-        <div className="mx-auto max-w-[1400px] px-8 pt-10 pb-24 md:absolute md:inset-x-0 md:bottom-0 md:pb-16 lg:px-20 lg:pb-20">
+        <div className="mx-auto max-w-[1400px] px-5 pt-10 pb-24 md:absolute md:inset-x-0 md:bottom-0 md:pb-16 lg:px-20 lg:pb-20">
           <span className="mb-5 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
             About Lunica
           </span>
@@ -77,7 +77,7 @@ export default function AboutPage() {
 
       {/* Mission */}
       <section className="w-full bg-background">
-        <div className="mx-auto grid max-w-[1400px] gap-12 px-8 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
           <div className="flex flex-col items-start justify-center">
             <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
               Our mission
@@ -120,7 +120,7 @@ export default function AboutPage() {
           <path d="M9.07325 21.4312H30.6232L20.5338 31.3891H9.07325C4.98019 31.3891 2.42203 27.9957 5.08252 25.3699L9.07325 21.4312Z" fill="none" stroke="#F5F2EB" strokeWidth="0.19" />
         </svg>
 
-        <div className="relative mx-auto max-w-[1400px] px-8 py-20 lg:px-20 lg:py-28">
+        <div className="relative mx-auto max-w-[1400px] px-5 py-20 lg:px-20 lg:py-28">
           <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:gap-20">
             <div>
               <span className="mb-5 block text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
@@ -160,7 +160,7 @@ export default function AboutPage() {
 
       {/* Story / Background */}
       <section className="w-full bg-background">
-        <div className="mx-auto grid max-w-[1400px] gap-12 px-8 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 lg:py-40">
           <div className="flex flex-col items-start justify-center">
             <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
               Our story
@@ -215,7 +215,7 @@ export default function AboutPage() {
           <div className="h-[80%] w-[60%] rounded-full bg-[#F5F2EB]/60 blur-3xl" />
         </div>
 
-        <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-8 py-28 text-center lg:px-20 lg:py-36">
+        <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-28 text-center lg:px-20 lg:py-36">
           <span className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
             Join us
           </span>
