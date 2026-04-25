@@ -305,22 +305,22 @@ export function HeroAnimation() {
               exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-xl overflow-hidden w-full max-w-sm mx-auto p-5">
+              <div className="w-full max-w-sm mx-auto flex flex-col gap-2.5">
                 {/* Header row */}
                 <motion.div
-                  className="flex items-center justify-between mb-4"
+                  className="flex items-center justify-between"
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.15 }}
                 >
                   <div className="flex items-center gap-2.5">
-                    <div className="w-6 h-6 rounded-full bg-[#F87171]/10 flex items-center justify-center">
-                      <Bell className="w-3 h-3 text-[#F87171]" />
+                    <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+                      <Bell className="w-3 h-3 text-[#FCA5A5]" />
                     </div>
-                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-black/40">Credit Review Alert</span>
+                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-white/60">Credit Review Alert</span>
                   </div>
                   <motion.span
-                    className="text-[10px] font-semibold text-[#F87171] bg-[#F87171]/[0.07] px-2 py-0.5 rounded-full"
+                    className="text-[10px] font-semibold text-[#FCA5A5] bg-white/10 px-2 py-0.5 rounded-full"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: 0.8 }}
@@ -331,21 +331,21 @@ export function HeroAnimation() {
 
                 {/* Company title */}
                 <motion.h4
-                  className="text-[17px] font-semibold text-[#171717] mb-4"
+                  className="text-[17px] font-semibold text-white mb-1"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.3 }}
                 >
-                  Riverview Supplies Co. now <span className="text-[#F87171]">high risk</span>
+                  Riverview Supplies Co. now <span className="text-[#FCA5A5]">high risk</span>
                 </motion.h4>
 
                 {/* Metric cards */}
-                <div className="grid grid-cols-3 gap-2 mb-4">
+                <div className="grid grid-cols-3 gap-2">
                   {riskMetrics.map((metric, i) => {
                     return (
                       <motion.div
                         key={metric.label}
-                        className="bg-white ring-1 ring-black/[0.06] rounded-lg p-3"
+                        className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg p-3"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.5 + i * 0.12 }}
@@ -371,7 +371,7 @@ export function HeroAnimation() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.9 }}
                 >
-                  <span className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg">
+                  <span className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg shadow-sm">
                     Review generated plan
                   </span>
                 </motion.div>
