@@ -493,7 +493,7 @@ export function InvoiceProcessSection() {
                             <div className="pt-0.5 flex-1">
                               <div className="flex items-center justify-between mb-1">
                                 <div className="text-[13px] font-medium text-[#171717]">Reconciling Balances</div>
-                                <div className="text-[11px] font-mono text-blue-600">Processing...</div>
+                                <div className="text-[11px] font-mono text-blue-600">Executing plan...</div>
                               </div>
                               <div className="h-1.5 w-full bg-black/5 rounded-full overflow-hidden">
                                 <motion.div 

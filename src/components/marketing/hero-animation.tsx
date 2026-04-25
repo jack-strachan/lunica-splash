@@ -3,17 +3,18 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
-import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown } from "lucide-react"
+import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown, CreditCard } from "lucide-react"
 
-type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert" | "dispute"
+type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert" | "dispute" | "portal"
 
 const PHASE_DURATIONS: Record<Phase, number> = {
   idle: 1200,
   dragging: 1800,
   processing: 2400,
   complete: 4800,
-  "risk-alert": 5200,
-  dispute: 5200,
+  "risk-alert": 6800,
+  dispute: 6400,
+  portal: 5200,
 }
 
 const riskMetrics = [
@@ -24,11 +25,18 @@ const riskMetrics = [
 
 const triggeredFactors = ["Days to pay increase", "Credit limit exceeded"]
 
+const portalInvoices = [
+  { id: "#38666", amount: "$1,004.37" },
+  { id: "#36757", amount: "$52,172.90" },
+  { id: "#39307", amount: "$964.00" },
+  { id: "#38618", amount: "$3,705.37" },
+]
+
 const disputeSteps = [
-  { label: "Short payment detected", detail: "Invoice #38816 · $185,832", time: "2m ago" },
-  { label: "Customer notified", detail: "Harlow Industrial contacted", time: "1m ago" },
-  { label: "Proof of delivery sent", detail: "Auto-attached from records", time: "1m ago" },
-  { label: "Follow-up scheduled", detail: "Reminder in 3 business days", time: "Just now" },
+  "Short payment detected",
+  "Customer notified",
+  "Proof of delivery sent",
+  "Follow-up scheduled",
 ]
 
 const phaseLabels: Record<Phase, string> = {
@@ -38,6 +46,7 @@ const phaseLabels: Record<Phase, string> = {
   complete: "Your data, ready to act on",
   "risk-alert": "Real-time credit monitoring",
   dispute: "Automated dispute resolution",
+  portal: "Self-serve customer portal",
 }
 
 const nextSteps = [
@@ -50,11 +59,13 @@ const nextSteps = [
 export function HeroAnimation() {
   const [phase, setPhase] = useState<Phase>("idle")
   const [activeStep, setActiveStep] = useState(0)
+  const [reviewClicked, setReviewClicked] = useState(false)
+  const [lastStepResolved, setLastStepResolved] = useState(false)
 
   useEffect(() => {
     const next = () => {
       setPhase((prev) => {
-        const order: Phase[] = ["idle", "dragging", "processing", "complete", "risk-alert", "dispute"]
+        const order: Phase[] = ["idle", "dragging", "processing", "complete", "risk-alert", "dispute", "portal"]
         const idx = order.indexOf(prev)
         if (idx === order.length - 1) setActiveStep(0)
         return order[(idx + 1) % order.length]
@@ -62,6 +73,27 @@ export function HeroAnimation() {
     }
     const timeout = setTimeout(next, PHASE_DURATIONS[phase])
     return () => clearTimeout(timeout)
+  }, [phase])
+
+  // Resolve last dispute step after it animates in
+  useEffect(() => {
+    if (phase !== "dispute") {
+      setLastStepResolved(false)
+      return
+    }
+    // Last card appears at delay 0.4 + 3*0.15 = 0.85s, give it ~1.4s to show loader then resolve
+    const resolveTimeout = setTimeout(() => setLastStepResolved(true), 2400)
+    return () => clearTimeout(resolveTimeout)
+  }, [phase])
+
+  // Simulate clicking the review button during risk-alert phase
+  useEffect(() => {
+    if (phase !== "risk-alert") {
+      setReviewClicked(false)
+      return
+    }
+    const clickTimeout = setTimeout(() => setReviewClicked(true), 3800)
+    return () => clearTimeout(clickTimeout)
   }, [phase])
 
   // Cycle through active grid items during complete phase
@@ -78,7 +110,8 @@ export function HeroAnimation() {
   const isComplete = phase === "complete"
   const isRiskAlert = phase === "risk-alert"
   const isDispute = phase === "dispute"
-  const isDropzonePhase = !isComplete && !isRiskAlert && !isDispute
+  const isPortal = phase === "portal"
+  const isDropzonePhase = !isComplete && !isRiskAlert && !isDispute && !isPortal
 
   return (
     <div className="relative flex items-center justify-center w-full h-full p-8 select-none pointer-events-none" role="img" aria-label="Animated demonstration of Lunica platform features">
@@ -273,24 +306,100 @@ export function HeroAnimation() {
                 </motion.h4>
 
                 {/* Step cards */}
-                {disputeSteps.map((step, i) => (
+                {disputeSteps.map((step, i) => {
+                  const isLast = i === disputeSteps.length - 1
+                  const showLoader = isLast && !lastStepResolved
+                  return (
+                    <motion.div
+                      key={step}
+                      className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center gap-2.5"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: 0.4 + i * 0.15 }}
+                    >
+                      <div className="w-4 h-4 flex items-center justify-center shrink-0">
+                        {showLoader ? (
+                          <Loader2 className="w-3 h-3 text-[#002B31]/40 animate-spin" />
+                        ) : (
+                          <div className="w-4 h-4 rounded-full bg-[#002B31]/10 flex items-center justify-center">
+                            <Check className="w-2.5 h-2.5 text-[#002B31]" />
+                          </div>
+                        )}
+                      </div>
+                      <p className={`text-[11px] font-semibold leading-tight ${
+                        showLoader ? "text-black/40" : "text-[#171717]"
+                      }`}>
+                        {showLoader ? "Scheduling follow-up…" : step}
+                      </p>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </motion.div>
+          )}
+
+          {/* ── Portal phase ── */}
+          {isPortal && (
+            <motion.div
+              key="portal"
+              className="relative z-10 w-full"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className="w-full max-w-sm mx-auto flex flex-col gap-2.5">
+                {/* Header */}
+                <motion.div
+                  className="flex items-center justify-between"
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+                      <CreditCard className="w-3 h-3 text-white/80" />
+                    </div>
+                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-white/60">Your Company Here</span>
+                  </div>
+                  <span className="text-[10px] font-medium text-white/40">144 invoices</span>
+                </motion.div>
+
+                {/* Title */}
+                <motion.h4
+                  className="text-[17px] font-semibold text-white mb-1"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  Outstanding: <span className="text-white/70">$673,691.34</span>
+                </motion.h4>
+
+                {/* Invoice rows */}
+                {portalInvoices.map((inv, i) => (
                   <motion.div
-                    key={step.label}
-                    className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center gap-2.5"
+                    key={inv.id}
+                    className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center justify-between"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: 0.4 + i * 0.15 }}
+                    transition={{ duration: 0.35, delay: 0.4 + i * 0.12 }}
                   >
-                    <div className="w-4 h-4 rounded-full bg-[#002B31]/10 flex items-center justify-center shrink-0">
-                      <Check className="w-2.5 h-2.5 text-[#002B31]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-semibold text-[#171717] leading-tight">{step.label}</p>
-                      <p className="text-[10px] text-black/35 leading-tight">{step.detail}</p>
-                    </div>
-                    <span className="text-[9px] text-black/30 shrink-0">{step.time}</span>
+                    <span className="text-[11px] font-medium text-[#171717]">{inv.id}</span>
+                    <span className="text-[11px] font-semibold text-[#171717]">{inv.amount}</span>
                   </motion.div>
                 ))}
+
+                {/* Pay button */}
+                <motion.div
+                  className="flex justify-end mt-0.5"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.9 }}
+                >
+                  <span className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg shadow-sm">
+                    Pay now
+                  </span>
+                </motion.div>
               </div>
             </motion.div>
           )}
@@ -371,9 +480,23 @@ export function HeroAnimation() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.9 }}
                 >
-                  <span className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg shadow-sm">
-                    Review generated plan
-                  </span>
+                  <motion.span
+                    className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg shadow-sm inline-flex items-center gap-1.5"
+                    animate={
+                      reviewClicked
+                        ? { scale: [1, 0.93, 1], transition: { duration: 0.2 } }
+                        : {}
+                    }
+                  >
+                    {reviewClicked ? (
+                      <>
+                        <Loader2 className="w-3 h-3 animate-spin" />
+                        Executing plan…
+                      </>
+                    ) : (
+                      "Review generated plan"
+                    )}
+                  </motion.span>
                 </motion.div>
               </div>
             </motion.div>
