@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
-import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown, AlertTriangle, DollarSign, Building2, MessageSquare } from "lucide-react"
+import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown } from "lucide-react"
 
 type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert" | "dispute"
 
@@ -24,10 +24,11 @@ const riskMetrics = [
 
 const triggeredFactors = ["Days to pay increase", "Credit limit exceeded"]
 
-const disputeDetails = [
-  { icon: DollarSign, label: "$185,832.00", color: "bg-amber-100 text-amber-600" },
-  { icon: Building2, label: "Harlow Industrial", color: "bg-blue-50 text-blue-500" },
-  { icon: MessageSquare, label: "Review 2 conversations", color: "bg-purple-50 text-purple-500" },
+const disputeSteps = [
+  { label: "Short payment detected", detail: "Invoice #38816 · $185,832", time: "2m ago" },
+  { label: "Customer notified", detail: "Harlow Industrial contacted", time: "1m ago" },
+  { label: "Proof of delivery sent", detail: "Auto-attached from records", time: "1m ago" },
+  { label: "Follow-up scheduled", detail: "Reminder in 3 business days", time: "Just now" },
 ]
 
 const phaseLabels: Record<Phase, string> = {
@@ -244,74 +245,52 @@ export function HeroAnimation() {
               exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-xl overflow-hidden w-full max-w-sm mx-auto p-5">
-                {/* Alert header */}
+              <div className="w-full max-w-sm mx-auto flex flex-col gap-2.5">
+                {/* Header */}
                 <motion.div
-                  className="flex items-center gap-2.5 mb-4"
+                  className="flex items-center justify-between"
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.15 }}
                 >
-                  <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center">
-                    <AlertTriangle className="w-3 h-3 text-amber-600" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-white/80 flex items-center justify-center">
+                      <Check className="w-3 h-3 text-[#002B31]" />
+                    </div>
+                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-white/60">Dispute Resolved</span>
                   </div>
-                  <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-black/40">Dispute Alert</span>
+                  <span className="text-[10px] font-medium text-white/40">4 steps completed</span>
                 </motion.div>
 
-                {/* Title + badge */}
-                <motion.div
-                  className="flex items-center justify-between mb-1.5"
+                {/* Title */}
+                <motion.h4
+                  className="text-[17px] font-semibold text-white mb-1"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.3 }}
                 >
-                  <h4 className="text-[17px] font-semibold text-[#171717]">Short payment</h4>
-                  <span className="text-[11px] font-semibold text-[#F87171] bg-[#F87171]/10 px-2.5 py-1 rounded-full flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#F87171]" />
-                    High
-                  </span>
-                </motion.div>
+                  Harlow Industrial — <span className="text-white/70">handled</span>
+                </motion.h4>
 
-                <motion.p
-                  className="text-[13px] text-black/40 mb-5"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.4 }}
-                >
-                  Invoice #38816
-                </motion.p>
-
-                {/* Details + automation status */}
-                <div className="flex gap-3">
-                  {/* Left — stacked detail rows */}
-                  <div className="flex-1 flex flex-col gap-1.5">
-                    {disputeDetails.map((detail, i) => (
-                      <motion.div
-                        key={detail.label}
-                        className="bg-white ring-1 ring-black/[0.06] rounded-lg px-3 py-2 flex items-center"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.35, delay: 0.5 + i * 0.1 }}
-                      >
-                        <span className="text-[11px] font-medium text-[#171717]">{detail.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Right — automation status */}
+                {/* Step cards */}
+                {disputeSteps.map((step, i) => (
                   <motion.div
-                    className="flex-1 bg-[#002B31]/[0.04] ring-1 ring-[#002B31]/10 rounded-lg p-3 flex flex-col items-center justify-center text-center"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.8 }}
+                    key={step.label}
+                    className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center gap-2.5"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: 0.4 + i * 0.15 }}
                   >
-                    <div className="w-6 h-6 rounded-full bg-[#EBE7E3] flex items-center justify-center mb-2">
-                      <Check className="w-3.5 h-3.5 text-[#002B31]" />
+                    <div className="w-4 h-4 rounded-full bg-[#002B31]/10 flex items-center justify-center shrink-0">
+                      <Check className="w-2.5 h-2.5 text-[#002B31]" />
                     </div>
-                    <p className="text-[11px] font-semibold text-[#002B31] leading-tight">Automation triggered</p>
-                    <p className="text-[10px] text-black/40 mt-0.5">Customer contacted</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[11px] font-semibold text-[#171717] leading-tight">{step.label}</p>
+                      <p className="text-[10px] text-black/35 leading-tight">{step.detail}</p>
+                    </div>
+                    <span className="text-[9px] text-black/30 shrink-0">{step.time}</span>
                   </motion.div>
-                </div>
+                ))}
               </div>
             </motion.div>
           )}
