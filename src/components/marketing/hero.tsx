@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { NoiseGradient } from "@/components/marketing/noise-gradient"
+import { HeroAnimation } from "@/components/marketing/hero-animation"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { SectionDescription } from "@/components/ui/section-description"
 import { PageContainer } from "@/components/ui/page-container"
@@ -26,7 +27,7 @@ export function HomeHeroSection() {
               className="absolute inset-0 flex items-center md:[width:calc(100%-(50vw-50%+2rem))]"
               style={{ animation: `hero-image-up 1s ${ease} 0.35s both` }}
             >
-              <div className="mx-auto w-[65%] md:w-[50%]">
+              {/* <div className="mx-auto w-[65%] md:w-[50%]">
                 <Image
                   src="/images/home/hero.png"
                   alt="Lunica platform dashboard"
@@ -36,7 +37,8 @@ export function HomeHeroSection() {
                   className="h-auto w-full drop-shadow-2xl"
                   priority
                 />
-              </div>
+              </div> */}
+              <HeroAnimation />
             </div>
           </div>
           <span
