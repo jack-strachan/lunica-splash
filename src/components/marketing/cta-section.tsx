@@ -20,7 +20,7 @@ export function CtaSection() {
         </span>
 
         <h2 className="max-w-2xl text-[2.5rem] !font-normal leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.5rem]">
-          Ready to get your receivables under control?
+          Stop chasing payments. Start&nbsp;collecting.
         </h2>
 
         <p className="mt-6 max-w-lg text-lg !leading-tight text-foreground/70">

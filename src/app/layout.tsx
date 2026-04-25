@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Sans } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { constructMetadata } from "@/lib/metadata";
 import { Navbar } from "@/components/layout/navbar";
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
+});
 
 export const metadata = constructMetadata();
 
@@ -13,24 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
-        className={`${GeistMono.variable} min-h-screen bg-background text-foreground antialiased`}
-        style={{ fontFamily: "'Archivo', ui-sans-serif, system-ui, sans-serif" }}
+        className={`${ibmPlexSans.variable} ${GeistMono.variable} font-sans min-h-screen bg-background text-foreground antialiased`}
       >
         <Navbar />
         {children}

@@ -92,7 +92,7 @@ export function Navbar() {
           <div className="hidden w-32 justify-end md:flex">
             <Link
               href="/contact"
-              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
             >
               Book a demo
             </Link>
@@ -101,7 +101,7 @@ export function Navbar() {
           {/* Hamburger — mobile */}
           <button
             type="button"
-            className="rounded-lg p-2 text-foreground/60 transition-colors hover:bg-foreground/5 md:hidden"
+            className="rounded-md p-2 text-foreground/60 transition-colors hover:bg-foreground/5 md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -152,7 +152,7 @@ export function Navbar() {
               </Link>
               <button
                 type="button"
-                className="rounded-lg p-2 text-foreground/60 transition-colors hover:bg-foreground/5"
+                className="rounded-md p-2 text-foreground/60 transition-colors hover:bg-foreground/5"
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close menu"
               >
@@ -194,7 +194,7 @@ export function Navbar() {
                 >
                   <Link
                     href="/contact"
-                    className="block w-full rounded-lg bg-primary px-6 py-3 text-center text-lg font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+                    className="block w-full rounded-md bg-primary px-6 py-3 text-center text-lg font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
                     onClick={() => setMobileOpen(false)}
                   >
                     Book a demo

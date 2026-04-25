@@ -25,7 +25,7 @@
 
   --brand: #01544F;
   
-  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 .dark {
@@ -73,7 +73,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-brand: var(--brand);
 
-  --font-family-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
   --font-family-mono: var(--font-geist-mono);
 
   --animate-fade-in: fade-in 0.4s ease-out;
@@ -93,7 +93,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.011em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
