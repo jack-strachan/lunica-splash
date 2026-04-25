@@ -94,7 +94,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.011em;
+  letter-spacing: 0.002em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
