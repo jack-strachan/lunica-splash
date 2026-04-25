@@ -6,6 +6,8 @@ import { SectionDescription } from "@/components/ui/section-description"
 import { PageContainer } from "@/components/ui/page-container"
 import { cn } from "@/lib/utils"
 
+const ease = "cubic-bezier(0.16, 1, 0.3, 1)"
+
 interface SubpageHeroProps {
   label: string
   heading: ReactNode
@@ -32,22 +34,35 @@ export function SubpageHero({
         heightClass
       )}
     >
-      <div className="relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:-top-20 md:h-[38dvh] md:w-2/3 md:rounded-none md:rounded-bl-md">
+      <div
+        className="relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:-top-20 md:h-[38dvh] md:w-2/3 md:rounded-none md:rounded-bl-md"
+        style={{ animation: `hero-slide-in 1s ${ease} both` }}
+      >
         <NoiseGradient colors={gradientColors} />
       </div>
 
       <PageContainer className="pt-10 pb-24 md:absolute md:inset-x-0 md:bottom-0 md:pb-16 lg:pb-20">
-        <SectionLabel>{label}</SectionLabel>
+        <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.1s both` }}>
+          <SectionLabel>{label}</SectionLabel>
+        </div>
 
-        <SectionHeading as="h1" size="xl" className="max-w-3xl">
-          {heading}
-        </SectionHeading>
+        <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.2s both` }}>
+          <SectionHeading as="h1" size="xl" className="max-w-3xl text-balance">
+            {heading}
+          </SectionHeading>
+        </div>
 
-        <SectionDescription className="max-w-2xl text-balance">
-          {description}
-        </SectionDescription>
+        <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.35s both` }}>
+          <SectionDescription className="max-w-2xl text-balance">
+            {description}
+          </SectionDescription>
+        </div>
 
-        {children}
+        {children && (
+          <div style={{ animation: `hero-fade-up 0.7s ${ease} 0.5s both` }}>
+            {children}
+          </div>
+        )}
       </PageContainer>
     </section>
   )

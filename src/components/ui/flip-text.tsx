@@ -7,6 +7,8 @@ interface FlipTextProps {
   className?: string
   letterDelay?: number
   duration?: number
+  /** When true, the component ignores its own hover listeners and uses this value instead. */
+  isHovered?: boolean
 }
 
 export function FlipText({
@@ -14,14 +16,16 @@ export function FlipText({
   className = "",
   letterDelay = 30,
   duration = 300,
+  isHovered,
 }: FlipTextProps) {
   const [hovering, setHovering] = useState(false)
+  const active = isHovered !== undefined ? isHovered : hovering
 
   return (
     <span
       className={`inline-flex items-center ${className}`}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
+      onMouseEnter={isHovered === undefined ? () => setHovering(true) : undefined}
+      onMouseLeave={isHovered === undefined ? () => setHovering(false) : undefined}
     >
       {text.split("").map((char, i) => (
         <span
@@ -33,9 +37,9 @@ export function FlipText({
             className="inline-block"
             style={{
               transition: `transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${duration}ms ease`,
-              transitionDelay: hovering ? `${i * letterDelay}ms` : "0ms",
-              transform: hovering ? "translateY(-100%)" : "translateY(0)",
-              opacity: hovering ? 0 : 1,
+              transitionDelay: active ? `${i * letterDelay}ms` : "0ms",
+              transform: active ? "translateY(-100%)" : "translateY(0)",
+              opacity: active ? 0 : 1,
             }}
           >
             {char === " " ? "\u00A0" : char}
@@ -45,9 +49,9 @@ export function FlipText({
             aria-hidden="true"
             style={{
               transition: `transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${duration}ms ease`,
-              transitionDelay: hovering ? `${i * letterDelay}ms` : "0ms",
-              transform: hovering ? "translateY(0)" : "translateY(100%)",
-              opacity: hovering ? 1 : 0,
+              transitionDelay: active ? `${i * letterDelay}ms` : "0ms",
+              transform: active ? "translateY(0)" : "translateY(100%)",
+              opacity: active ? 1 : 0,
             }}
           >
             {char === " " ? "\u00A0" : char}

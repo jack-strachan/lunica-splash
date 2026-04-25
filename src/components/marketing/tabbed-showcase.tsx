@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
+import Image from "next/image"
 
 export interface TabItem {
   title: string
@@ -122,9 +123,11 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
         {/* Image placeholder */}
         <div className="flex h-72 items-center justify-center lg:h-96">
           {active.image ? (
-            <img
+            <Image
               src={active.image}
               alt={active.alt ?? active.title}
+              width={800}
+              height={500}
               className="h-full w-full object-contain p-8"
             />
           ) : (

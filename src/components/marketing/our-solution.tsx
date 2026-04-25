@@ -59,6 +59,7 @@ export function OurSolutionSection() {
                   alt={step.title}
                   width={600}
                   height={400}
+                  sizes="(min-width: 768px) 33vw, 100vw"
                   className="h-full w-full object-contain opacity-80"
                 />
               </div>

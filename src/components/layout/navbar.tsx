@@ -47,6 +47,45 @@ const productLinks = [
   },
 ]
 
+function ProductDropdownLink({
+  product,
+  isActive,
+  onNavigate,
+}: {
+  product: (typeof productLinks)[number]
+  isActive: boolean
+  onNavigate: () => void
+}) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <Link
+      href={product.href}
+      className={cn(
+        "group flex flex-col rounded-lg px-4 py-4 transition-colors hover:bg-foreground/[0.04]",
+        isActive && "bg-foreground/[0.04]"
+      )}
+      role="menuitem"
+      onClick={onNavigate}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-medium text-foreground">
+          <FlipText text={product.name} isHovered={hovered} />
+        </span>
+        <ArrowRight
+          className="h-3.5 w-3.5 shrink-0 text-foreground/20 transition-all group-hover:translate-x-0.5 group-hover:text-foreground/40"
+          aria-hidden="true"
+        />
+      </div>
+      <p className="mt-1 text-[13px] leading-snug text-foreground/50">
+        {product.description}
+      </p>
+    </Link>
+  )
+}
+
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -184,10 +223,23 @@ export function Navbar() {
                 <AnimatePresence>
                   {productsOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      variants={{
+                        open: {
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
+                        },
+                        closed: {
+                          opacity: 0,
+                          y: 4,
+                          scale: 0.98,
+                          transition: { duration: 0.15, ease: [0.4, 0, 1, 1] },
+                        },
+                      }}
                       className="absolute left-1/2 top-full mt-4 w-[680px] -translate-x-1/2 rounded-xl border border-foreground/[0.08] bg-background p-2 shadow-lg shadow-black/[0.04]"
                       role="menu"
                     >
@@ -219,29 +271,12 @@ export function Navbar() {
                           }
 
                           return (
-                            <Link
+                            <ProductDropdownLink
                               key={product.name}
-                              href={product.href}
-                              className={cn(
-                                "group flex flex-col rounded-lg px-4 py-4 transition-colors hover:bg-foreground/[0.04]",
-                                isActive && "bg-foreground/[0.04]"
-                              )}
-                              role="menuitem"
-                              onClick={() => setProductsOpen(false)}
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-foreground">
-                                  <FlipText text={product.name} />
-                                </span>
-                                <ArrowRight
-                                  className="h-3.5 w-3.5 shrink-0 text-foreground/20 transition-all group-hover:translate-x-0.5 group-hover:text-foreground/40"
-                                  aria-hidden="true"
-                                />
-                              </div>
-                              <p className="mt-1 text-[13px] leading-snug text-foreground/50">
-                                {product.description}
-                              </p>
-                            </Link>
+                              product={product}
+                              isActive={isActive}
+                              onNavigate={() => setProductsOpen(false)}
+                            />
                           )
                         })}
 
@@ -443,9 +478,6 @@ export function Navbar() {
                                 <span className="text-lg font-medium leading-tight">
                                   {product.name}
                                 </span>
-                                <p className="mt-0.5 text-sm leading-snug text-foreground/40">
-                                  {product.description}
-                                </p>
                               </Link>
                             ) : (
                               <div className="block rounded-lg py-3 opacity-35">
@@ -455,9 +487,6 @@ export function Navbar() {
                                     Soon
                                   </span>
                                 </span>
-                                <p className="mt-0.5 text-sm leading-snug text-foreground/40">
-                                  {product.description}
-                                </p>
                               </div>
                             )}
                           </motion.li>

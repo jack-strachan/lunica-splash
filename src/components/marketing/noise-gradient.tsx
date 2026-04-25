@@ -72,6 +72,7 @@ interface NoiseGradientProps {
 export function NoiseGradient({ colors, className = "" }: NoiseGradientProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const rafRef = useRef<number>(0)
+  const isVisibleRef = useRef(true)
   const colorKey = colors.join(",")
 
   useEffect(() => {
@@ -114,27 +115,42 @@ export function NoiseGradient({ colors, className = "" }: NoiseGradientProps) {
     gl.uniform3fv(color2Loc, c2)
     gl.uniform3fv(color3Loc, c3)
 
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+
     const resize = () => {
       const rect = canvas.getBoundingClientRect()
-      canvas.width = rect.width * 2
-      canvas.height = rect.height * 2
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
       gl.viewport(0, 0, canvas.width, canvas.height)
     }
 
     resize()
     window.addEventListener("resize", resize)
 
+    // Pause RAF when off-screen
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting },
+      { threshold: 0 }
+    )
+    observer.observe(canvas)
+
     const startTime = Date.now()
-    const render = () => {
+    let lastFrame = 0
+    const render = (now: number) => {
+      rafRef.current = requestAnimationFrame(render)
+      if (!isVisibleRef.current) return
+      // Throttle to ~30fps
+      if (now - lastFrame < 33) return
+      lastFrame = now
       const time = (Date.now() - startTime) / 1000
       gl.uniform1f(timeLocation, time)
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-      rafRef.current = requestAnimationFrame(render)
     }
-    render()
+    rafRef.current = requestAnimationFrame(render)
 
     return () => {
       window.removeEventListener("resize", resize)
+      observer.disconnect()
       cancelAnimationFrame(rafRef.current)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
