@@ -27,6 +27,9 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const heroOverlap = pathname === "/about" || pathname === "/collections"
+  const lightNav = heroOverlap && !scrolled
+
   // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false)
@@ -71,6 +74,7 @@ export function Navbar() {
                 width={120}
                 height={32}
                 priority
+                className="transition-all duration-300"
               />
             </Link>
           </div>
@@ -81,7 +85,12 @@ export function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-foreground/70 transition-colors hover:text-foreground"
+                  className={cn(
+                    "text-sm transition-colors duration-300",
+                    lightNav
+                      ? "md:text-white/80 md:hover:text-white"
+                      : "text-foreground/70 hover:text-foreground"
+                  )}
                 >
                   <FlipText text={link.label} />
                 </Link>
@@ -93,7 +102,12 @@ export function Navbar() {
           <div className="hidden w-32 justify-end md:flex">
             <Link
               href="/contact"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+              className={cn(
+                "rounded-md px-4 py-2 text-sm font-medium transition-all duration-300",
+                lightNav
+                  ? "md:bg-white md:text-foreground md:hover:bg-white/90"
+                  : "bg-primary text-primary-foreground hover:bg-primary-hover"
+              )}
             >
               <FlipText text="Book a demo" />
             </Link>

@@ -69,8 +69,8 @@ export default function CollectionsPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative w-full overflow-hidden pt-20 md:h-[85dvh] md:min-h-[600px]">
-        <div className="relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:top-20 md:h-[28dvh] md:w-2/3 md:rounded-bl-md md:rounded-l-md">
+      <section className="relative w-full overflow-hidden pt-20 md:h-[92dvh] md:min-h-[650px]">
+        <div className="relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:-top-20 md:h-[38dvh] md:w-2/3 md:rounded-none md:rounded-bl-md">
           <NoiseGradient colors={["#88b4a0", "#4a7a5c", "#3a6248"]} />
         </div>
 

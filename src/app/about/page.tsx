@@ -52,7 +52,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative w-full overflow-hidden pt-20 md:h-[85dvh] md:min-h-[600px]">
         {/* Noise gradient block — pinned right, extends off-screen */}
-        <div className="relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:top-20 md:h-[35dvh] md:w-2/3 md:rounded-bl-md md:rounded-l-md ">
+        <div className="relative ml-auto mt-4 h-[25dvh] w-[75%] overflow-hidden rounded-l-md md:absolute md:right-0 md:-top-20 md:h-[38dvh] md:w-2/3 md:rounded-none md:rounded-bl-md">
           <NoiseGradient
             colors={["#A89888", "#8B7D6E", "#6E6356"]}
           />
