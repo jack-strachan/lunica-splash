@@ -47,7 +47,7 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <main style={{ '--primary': '#8B7D6E', '--primary-hover': '#9B8D7E' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
         label="About Lunica"

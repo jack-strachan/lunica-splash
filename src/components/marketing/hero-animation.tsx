@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
 import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown, CreditCard } from "lucide-react"
 
 type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert" | "dispute" | "portal"
+
+const PHASE_ORDER: Phase[] = ["idle", "dragging", "processing", "complete", "risk-alert", "dispute", "portal"]
 
 const PHASE_DURATIONS: Record<Phase, number> = {
   idle: 1200,
@@ -61,14 +63,28 @@ export function HeroAnimation() {
   const [activeStep, setActiveStep] = useState(0)
   const [reviewClicked, setReviewClicked] = useState(false)
   const [lastStepResolved, setLastStepResolved] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isVisibleRef = useRef(true)
+
+  // Pause all timers when hero scrolls out of viewport
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
+    if (!isVisibleRef.current) return
     const next = () => {
       setPhase((prev) => {
-        const order: Phase[] = ["idle", "dragging", "processing", "complete", "risk-alert", "dispute", "portal"]
-        const idx = order.indexOf(prev)
-        if (idx === order.length - 1) setActiveStep(0)
-        return order[(idx + 1) % order.length]
+        const idx = PHASE_ORDER.indexOf(prev)
+        if (idx === PHASE_ORDER.length - 1) setActiveStep(0)
+        return PHASE_ORDER[(idx + 1) % PHASE_ORDER.length]
       })
     }
     const timeout = setTimeout(next, PHASE_DURATIONS[phase])
@@ -81,7 +97,6 @@ export function HeroAnimation() {
       setLastStepResolved(false)
       return
     }
-    // Last card appears at delay 0.4 + 3*0.15 = 0.85s, give it ~1.4s to show loader then resolve
     const resolveTimeout = setTimeout(() => setLastStepResolved(true), 2400)
     return () => clearTimeout(resolveTimeout)
   }, [phase])
@@ -114,7 +129,7 @@ export function HeroAnimation() {
   const isDropzonePhase = !isComplete && !isRiskAlert && !isDispute && !isPortal
 
   return (
-    <div className="relative flex items-center justify-center w-full h-full p-8 select-none pointer-events-none" role="img" aria-label="Animated demonstration of Lunica platform features">
+    <div ref={containerRef} className="relative flex items-center justify-center w-full h-full p-8 select-none pointer-events-none" role="img" aria-label="Animated demonstration of Lunica platform features">
       <div className="relative w-full max-w-[520px] scale-[0.65] md:scale-100 -translate-x-3 md:translate-x-0 origin-center">
         <AnimatePresence mode="wait">
           {/* ── Dropzone phases (idle / dragging / processing) ── */}
@@ -128,7 +143,7 @@ export function HeroAnimation() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
             >
               <div
-                className={`w-full max-w-sm aspect-[4/3] border-2 border-dashed rounded-xl flex flex-col items-center justify-center relative z-10 shadow-sm transition-all duration-500 ${
+                className={`w-full max-w-sm aspect-[4/3] border-2 border-dashed rounded-xl flex flex-col items-center justify-center relative z-10 shadow-sm transition-[border-color,background-color] duration-500 ${
                   isDragging || isProcessing
                     ? "border-[#002B31]/60 bg-[#f0f5f3]"
                     : "border-[#002B31]/30 bg-[#FAF8F6]"

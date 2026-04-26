@@ -73,7 +73,7 @@ const stats = [
 
 export default function CollectionsPage() {
   return (
-    <main>
+    <main style={{ '--primary': '#4a7a5c', '--primary-hover': '#5a8a6c' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
         label="Collections"
@@ -245,6 +245,7 @@ export default function CollectionsPage() {
         label="Get started"
         heading={<>Stop chasing payments. Start&nbsp;collecting.</>}
         description={<>See how Lunica Collections can help your team recover cash faster, reduce risk, and eliminate the manual work holding you&nbsp;back.</>}
+        gradientColors={["#b8d4c6", "#88b4a0", "#6a9a84"]}
       />
 
       <Footer />

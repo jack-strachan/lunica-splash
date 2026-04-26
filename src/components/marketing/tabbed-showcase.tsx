@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
+import { TabGraphic } from "@/components/marketing/tab-graphics"
 
 export interface TabItem {
   title: string
   description: string
   image?: string
   alt?: string
+  graphicId?: string
 }
 
 interface TabbedShowcaseProps {
@@ -57,6 +59,7 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
         const wasVisible = isVisibleRef.current
         isVisibleRef.current = entry.isIntersecting
         if (entry.isIntersecting && !wasVisible) {
+          // Reset timer so the current tab gets a full duration when scrolled back
           setProgress(0)
           startRef.current = 0
         }
@@ -69,11 +72,12 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   }, [])
 
   useEffect(() => {
+    // Don't spin RAF at all when off-screen
+    if (!isVisibleRef.current) return
+
     const tick = (timestamp: number) => {
-      if (!isVisibleRef.current) {
-        rafRef.current = requestAnimationFrame(tick)
-        return
-      }
+      // If we went off-screen mid-loop, bail and let cleanup handle it
+      if (!isVisibleRef.current) return
 
       if (startRef.current === 0) startRef.current = timestamp
       const elapsed = timestamp - startRef.current
@@ -120,9 +124,11 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
       <div className={`bg-[#E3D7CD] rounded-lg border-[#EBE7E3] ${
         activeIndex === 0 ? "!rounded-tl-none" : ""
       } ${activeIndex === tabs.length - 1 ? "!rounded-tr-none" : ""}`}>
-        {/* Image placeholder */}
-        <div className="flex h-72 items-center justify-center lg:h-96">
-          {active.image ? (
+        {/* Visual — graphic component → static image → placeholder */}
+        <div className={`flex h-72 items-center justify-center lg:h-96 transition-opacity duration-250 ${fading ? "opacity-0" : "opacity-100"}`}>
+          {active.graphicId ? (
+            <TabGraphic key={activeIndex} id={active.graphicId} />
+          ) : active.image ? (
             <Image
               src={active.image}
               alt={active.alt ?? active.title}

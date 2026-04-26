@@ -1,26 +1,26 @@
-import Image from "next/image"
 import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { TintedSection } from "@/components/ui/tinted-section"
+import { SolutionGraphic } from "@/components/marketing/solution-graphics"
 
 const steps = [
   {
     title: "Connect your systems.",
     description:
       "Link your ERP, accounting tools, customer data, and existing workflows.",
-    image: "/images/home/problem-1.png",
+    graphicId: "solution-connect",
   },
   {
     title: "Configure your rules.",
     description:
       "Set payment terms, approval logic, escalation paths, and customer preferences.",
-    image: "/images/home/problem-2.png",
+    graphicId: "solution-configure",
   },
   {
     title: "Start collecting smarter.",
     description:
       "Lunica monitors invoices, flags risk, and automates the right next action.",
-    image: "/images/home/problem-3.png",
+    graphicId: "solution-collect",
   },
 ]
 
@@ -52,16 +52,9 @@ export function OurSolutionSection() {
         <div className="mt-16 grid gap-0.5 overflow-hidden rounded-lg bg-background md:grid-cols-3">
           {steps.map((step) => (
             <div key={step.title} className="flex flex-col bg-[#E3D7CD]">
-              {/* Step image */}
+              {/* Step graphic */}
               <div className="flex h-64 items-center justify-center bg-[#DDD0C4] lg:h-80">
-                <Image
-                  src={step.image}
-                  alt={step.title}
-                  width={600}
-                  height={400}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="h-full w-full object-contain opacity-80"
-                />
+                <SolutionGraphic id={step.graphicId} />
               </div>
 
               {/* Caption */}

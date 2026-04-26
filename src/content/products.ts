@@ -11,21 +11,25 @@ export const products: ProductSectionData[] = [
         description:
           "Track open receivables continuously and trigger the next best action based on invoice status and behavior.",
         image: "/images/features/always-on-monitoring.png",
+        graphicId: "collections-monitoring",
       },
       {
         title: "Proactive\nfollow-up",
         description:
           "Automatically reach out before invoices go overdue, so your team stays ahead instead of reacting late.",
+        graphicId: "collections-followup",
       },
       {
         title: "Invoice\nconfirmation",
         description:
           "Verify receipt and correctness early to reduce avoidable delays, confusion, and last-minute disputes.",
+        graphicId: "collections-confirmation",
       },
       {
         title: "Smart\nescalation",
         description:
           "Route high-risk accounts, exceptions, and stalled invoices to the right owner at the right time.",
+        graphicId: "collections-escalation",
       },
     ],
   },

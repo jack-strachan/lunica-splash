@@ -73,7 +73,7 @@ const stats = [
 
 export default function CreditPage() {
   return (
-    <main>
+    <main style={{ '--primary': '#7D6E5C', '--primary-hover': '#8D7E6C' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
         label="Credit"
@@ -245,6 +245,7 @@ export default function CreditPage() {
         label="Get started"
         heading={<>Stop losing time on manual credit&nbsp;reviews.</>}
         description={<>See how Lunica Credit can help your team approve faster, reduce risk, and eliminate the paperwork slowing you&nbsp;down.</>}
+        gradientColors={["#c4b5a3", "#A0937D", "#8a7d6a"]}
       />
 
       <Footer />

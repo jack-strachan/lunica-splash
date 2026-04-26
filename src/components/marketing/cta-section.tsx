@@ -9,18 +9,22 @@ interface CtaSectionProps {
   label?: string
   heading?: ReactNode
   description?: ReactNode
+  gradientColors?: [string, string, string]
 }
+
+const defaultGradient: [string, string, string] = ["#D6CBBD", "#C4B5A3", "#B8A894"]
 
 export function CtaSection({
   label = "Get started",
   heading = <>Stop chasing payments. Start&nbsp;collecting.</>,
   description = "See how Lunica can help your team collect faster, reduce risk, and eliminate the manual work holding you back.",
+  gradientColors = defaultGradient,
 }: CtaSectionProps) {
   return (
     <section className="relative mx-3 overflow-hidden rounded-md">
       {/* Noise gradient background */}
       <div className="absolute inset-0">
-        <NoiseGradient colors={["#D6CBBD", "#C4B5A3", "#B8A894"]} />
+        <NoiseGradient colors={gradientColors} />
       </div>
 
       {/* Subtle white glow behind text */}

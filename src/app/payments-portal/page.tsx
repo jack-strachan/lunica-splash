@@ -12,74 +12,74 @@ import { FlipButtonLink } from "@/components/ui/button-link"
 import { TintedSection } from "@/components/ui/tinted-section"
 
 export const metadata: Metadata = constructMetadata({
-  title: "Online Payments",
+  title: "Payments Portal",
   description:
-    "Send payment links, accept payments online, and give customers a frictionless way to pay with Lunica Online Payments.",
+    "Give customers a single place to view invoices, make payments, and manage their account with Lunica Payments Portal.",
 })
 
 const features = [
   {
-    label: "Automatic payment links",
-    title: "Payment links generated and sent without lifting a\u00a0finger",
+    label: "Self-service invoice view",
+    title: "Let customers find and pay invoices on their\u00a0own",
     description:
-      "Lunica automatically generates a unique payment link for every invoice. With your approval, links are sent directly to customers via email or SMS. Fully hands-free, or one click to review before they go out.",
+      "No more emailing statements or fielding calls about balances. The portal gives every customer a live, branded view of their open and paid invoices, accessible anytime.",
     details: [
-      "Automatic link generation for every new invoice",
-      "Hands-free delivery via email, SMS, or both",
-      "Optional review step if your team wants control before sending",
+      "Real-time invoice list with status, amounts, and due dates",
+      "Filterable history of paid, open, and overdue invoices",
+      "Downloadable PDF copies of every invoice and receipt",
     ],
   },
   {
-    label: "Mobile-friendly checkout",
-    title: "A payment experience that works on any\u00a0device",
+    label: "One-click payments",
+    title: "Remove every obstacle between your customer and their\u00a0payment",
     description:
-      "Your customers pay from their phone, tablet, or desktop. Lunica provides a clean, responsive checkout that works everywhere without downloads or account creation.",
+      "Customers land on their portal, see what they owe, and pay in one click. No account creation, no app download, no friction. Support for credit card, ACH, and wire.",
     details: [
-      "Responsive design optimized for mobile and desktop",
-      "No account creation required for customers",
-      "Support for credit card, ACH, and wire payments",
+      "Pay individual invoices or settle multiple at once",
+      "Guest checkout with no login required",
+      "Support for credit card, ACH, and wire transfer",
     ],
   },
   {
-    label: "Branded payment experience",
-    title: "Your brand, not\u00a0ours",
+    label: "Branded experience",
+    title: "A portal that looks like yours, not\u00a0ours",
     description:
-      "Every payment page carries your logo, colors, and domain. Customers see a professional experience that feels like an extension of your business, not a third-party tool.",
+      "Every customer touchpoint carries your brand. Custom logo, colors, and domain so the portal feels like a natural extension of your business.",
     details: [
-      "Custom branding with your logo and color palette",
-      "White-label payment pages on your domain",
-      "Consistent experience across every customer touchpoint",
+      "Custom logo, colors, and favicon",
+      "White-label domain support (pay.yourcompany.com)",
+      "Consistent branding across emails and portal pages",
     ],
   },
   {
     label: "Automatic reconciliation",
-    title: "Payments land and your books\u00a0update",
+    title: "Payments land, books\u00a0update",
     description:
-      "When a customer pays, Lunica matches the payment to the invoice, updates the balance, and syncs with your accounting system. No manual entry, no mismatches.",
+      "When a customer pays through the portal, Lunica matches the payment to the invoice, closes the balance, and syncs with your accounting system. Zero manual entry.",
     details: [
       "Automatic payment-to-invoice matching",
       "Real-time sync with your ERP or accounting system",
-      "Full audit trail for every transaction",
+      "Full audit trail for every portal transaction",
     ],
   },
 ]
 
 const stats = [
-  { value: "70%", label: "Faster time to payment" },
-  { value: "3x", label: "More invoices paid on time" },
-  { value: "85%", label: "Reduction in payment follow-ups" },
-  { value: "99%", label: "Successful transaction rate" },
+  { value: "65%", label: "Fewer payment-related support tickets" },
+  { value: "4x", label: "Faster average time to payment" },
+  { value: "90%", label: "Customer portal adoption rate" },
+  { value: "50%", label: "Reduction in manual reconciliation" },
 ]
 
-export default function OnlinePaymentsPage() {
+export default function PaymentsPortalPage() {
   return (
-    <main style={{ '--primary': '#4A5E73', '--primary-hover': '#5A6E83' } as React.CSSProperties}>
+    <main style={{ '--primary': '#C97B84', '--primary-hover': '#D48B94' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
-        label="Online Payments"
-        heading={<>Make it easy for customers to&nbsp;pay</>}
-        description={<>Payment links that send themselves, a checkout your customers will actually use, and books that update on their&nbsp;own.</>}
-        gradientColors={["#7B8FA1", "#4A5E73", "#2C3E50"]}
+        label="Payments Portal"
+        heading={<>One place for customers to view and&nbsp;pay</>}
+        description={<>A branded self-service portal where customers check balances, download invoices, and pay in one click. Less back-and-forth for everyone.</>}
+        gradientColors={["#E8B4B8", "#C97B84", "#A85A6A"]}
       >
         <FlipButtonLink
           href="/contact"
@@ -153,7 +153,7 @@ export default function OnlinePaymentsPage() {
             {i === 0 && (
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
-                  <NoiseGradient colors={["#7B8FA1", "#4A5E73", "#2C3E50"]} />
+                  <NoiseGradient colors={["#E8B4B8", "#C97B84", "#A85A6A"]} />
                   <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
                     <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
                       {/* Window chrome */}
@@ -192,14 +192,14 @@ export default function OnlinePaymentsPage() {
               <SectionLabel className="block">How it works</SectionLabel>
 
               <SectionHeading size="lg">
-                Three steps to getting paid&nbsp;faster
+                Three steps to a branded payment&nbsp;portal
               </SectionHeading>
             </div>
 
             <div className="flex flex-col justify-end">
               <p className="text-lg !leading-tight text-foreground">
-                Lunica connects to your existing invoicing flow and starts accepting payments immediately.
-                No migration. No new&nbsp;processes.
+                Lunica connects to your invoicing system and generates a portal your customers can use immediately.
+                No development. No&nbsp;migration.
               </p>
             </div>
           </div>
@@ -210,19 +210,19 @@ export default function OnlinePaymentsPage() {
                 step: "01",
                 title: "Connect your invoices",
                 description:
-                  "Sync your open invoices from your ERP or accounting system. Lunica pulls in balances, terms, and customer details automatically.",
+                  "Sync open invoices from your ERP or accounting system. Lunica pulls in balances, terms, and customer details automatically.",
               },
               {
                 step: "02",
-                title: "Brand your checkout",
+                title: "Brand your portal",
                 description:
-                  "Add your logo, colors, and domain. Every payment page looks like it belongs to your business, because it does.",
+                  "Add your logo, colors, and domain. Every page your customer sees looks and feels like an extension of your business.",
               },
               {
                 step: "03",
                 title: "Share and collect",
                 description:
-                  "Send payment links to customers. They pay in minutes. Lunica reconciles the payment and updates your records in real time.",
+                  "Send portal links to customers. They view invoices, pay in one click, and your books update in real time.",
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col bg-[#E3D7CD] px-6 py-10">
@@ -243,9 +243,9 @@ export default function OnlinePaymentsPage() {
       {/* CTA */}
       <CtaSection
         label="Get started"
-        heading={<>Accept payments without the&nbsp;complexity.</>}
-        description={<>See how Lunica Online Payments can help your team get paid faster with less manual&nbsp;work.</>}
-        gradientColors={["#a8b8c8", "#7B8FA1", "#5a7088"]}
+        heading={<>Give customers the payment experience they&nbsp;expect.</>}
+        description={<>See how Lunica Payments Portal can reduce support tickets, speed up payments, and delight your&nbsp;customers.</>}
+        gradientColors={["#f0c8cc", "#E8B4B8", "#d4969e"]}
       />
 
       <Footer />

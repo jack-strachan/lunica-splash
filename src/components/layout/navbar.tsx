@@ -15,6 +15,15 @@ const navLinks = [
   { label: "About", href: "/about" },
 ]
 
+const pageAccent: Record<string, { bg: string; hover: string }> = {
+  "/collections": { bg: "#4a7a5c", hover: "#5a8a6c" },
+  "/credit": { bg: "#7D6E5C", hover: "#8D7E6C" },
+  "/online-payments": { bg: "#4A5E73", hover: "#5A6E83" },
+  "/about": { bg: "#8B7D6E", hover: "#9B8D7E" },
+  "/payments-portal": { bg: "#C97B84", hover: "#D48B94" },
+  "/customer-portal": { bg: "#B8960C", hover: "#CCAA2A" },
+}
+
 const productLinks = [
   {
     name: "Collections",
@@ -38,13 +47,13 @@ const productLinks = [
     name: "Payments Portal",
     description: "Give customers a single place to view and pay open invoices.",
     href: "/payments-portal",
-    enabled: false,
+    enabled: true,
   },
   {
     name: "Customer Portal",
     description: "Let customers manage their account, documents, and disputes.",
     href: "/customer-portal",
-    enabled: false,
+    enabled: true,
   },
 ]
 
@@ -103,7 +112,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/online-payments"
+  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/online-payments" || pathname === "/payments-portal" || pathname === "/customer-portal"
   const lightNav = heroOverlap && !scrolled
 
   // Close menus on route change
@@ -140,6 +149,7 @@ export function Navbar() {
   }, [])
 
   const isProductPage = productLinks.some((p) => p.href === pathname)
+  const accent = pageAccent[pathname]
 
   return (
     <>
@@ -168,7 +178,7 @@ export function Navbar() {
           {/* Logo */}
           <div className="w-32">
             <Link href="/" className="flex items-center">
-              <LunicaLogo hoverEnabled={pathname !== "/"} />
+              <LunicaLogo hoverEnabled={pathname !== "/"} tint={accent ? { primary: accent.bg, light: accent.hover } : undefined} />
             </Link>
           </div>
 
@@ -322,8 +332,21 @@ export function Navbar() {
                 "rounded-md px-4 py-2 text-sm font-medium transition-all duration-300",
                 lightNav
                   ? "md:bg-white md:text-foreground md:hover:bg-white/90"
-                  : "bg-primary text-primary-foreground hover:bg-primary-hover"
+                  : accent
+                    ? "text-white"
+                    : "bg-primary text-primary-foreground hover:bg-primary-hover"
               )}
+              style={
+                !lightNav && accent
+                  ? { backgroundColor: accent.bg, '--hover-bg': accent.hover } as React.CSSProperties
+                  : undefined
+              }
+              onMouseEnter={(e) => {
+                if (!lightNav && accent) (e.currentTarget.style.backgroundColor = accent.hover)
+              }}
+              onMouseLeave={(e) => {
+                if (!lightNav && accent) (e.currentTarget.style.backgroundColor = accent.bg)
+              }}
             >
               <FlipText text="Book a demo" />
             </Link>
@@ -373,7 +396,7 @@ export function Navbar() {
                 aria-label="Lunica home"
                 onClick={() => setMobileOpen(false)}
               >
-                <LunicaLogo hoverEnabled={pathname !== "/"} />
+                <LunicaLogo hoverEnabled={pathname !== "/"} tint={accent ? { primary: accent.bg, light: accent.hover } : undefined} />
               </Link>
               <button
                 type="button"
@@ -514,7 +537,11 @@ export function Navbar() {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+                  className={cn(
+                    "inline-flex rounded-md px-5 py-2.5 text-sm font-medium transition-colors",
+                    accent ? "text-white" : "bg-primary text-primary-foreground hover:bg-primary-hover"
+                  )}
+                  style={accent ? { backgroundColor: accent.bg } : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
                   <FlipText text="Book a demo" />
