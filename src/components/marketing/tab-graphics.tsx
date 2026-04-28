@@ -1,17 +1,19 @@
 "use client"
 
-import { motion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import {
   ArrowRight,
   Check,
   Clock,
-  FileCheck,
+  FileText,
   Mail,
   MessageSquare,
   Phone,
+  Shield,
+  TrendingUp,
   Zap,
 } from "lucide-react"
-import type { ComponentType } from "react"
+import { useState, useEffect, type ComponentType } from "react"
 
 /* ── Registry ─────────────────────────────────────────────── */
 
@@ -36,12 +38,6 @@ const stagger = (i: number, base = 0.25) => ({
   transition: { duration: 0.35, delay: base + i * 0.1 },
 })
 
-const headerAnim = {
-  initial: { opacity: 0, x: -12 } as const,
-  animate: { opacity: 1, x: 0 } as const,
-  transition: { duration: 0.4, delay: 0.15 },
-}
-
 function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2.5 w-full max-w-xs mx-auto select-none pointer-events-none scale-[0.7] md:scale-100 origin-center">
@@ -50,237 +46,359 @@ function Shell({ children }: { children: React.ReactNode }) {
   )
 }
 
-/* ── 1. Always-on Monitoring ──────────────────────────────── */
+/* ── 1. Always-on Monitoring — Live dashboard with mini bar chart ── */
 
-const monitoringRows = [
-  { id: "#INV-4021", name: "Apex Corp", amount: "$12,400", status: "overdue", label: "8d overdue" },
-  { id: "#INV-4018", name: "Meridian Co.", amount: "$8,750", status: "warning", label: "Due in 2d" },
-  { id: "#INV-4015", name: "Harlow Ltd", amount: "$23,100", status: "ok", label: "Due in 14d" },
-] as const
+const barData = [35, 55, 40, 70, 50, 85, 60]
+const barLabels = ["M", "T", "W", "T", "F", "S", "S"]
 
-const dotColor: Record<string, string> = { overdue: "bg-red-500", warning: "bg-amber-500", ok: "bg-emerald-500" }
-const txtColor: Record<string, string> = { overdue: "text-red-500", warning: "text-amber-500", ok: "text-black/35" }
+const kpis = [
+  { label: "Tracked", value: "142", trend: "+12%" },
+  { label: "At risk", value: "8", trend: "−3" },
+  { label: "Resolved", value: "23", trend: "today" },
+]
 
 function MonitoringGraphic() {
   return (
     <Shell>
-      <motion.div className="flex items-center justify-between" {...headerAnim}>
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-foreground/40">Live Monitoring</span>
+      {/* KPI strip */}
+      <div className="flex gap-1.5">
+        {kpis.map((kpi, i) => (
+          <motion.div
+            key={kpi.label}
+            className="flex-1 bg-white ring-1 ring-black/[0.04] rounded-lg px-2.5 py-2 flex flex-col items-center"
+            {...stagger(i, 0.1)}
+          >
+            <span className="text-[15px] font-bold text-[#171717] leading-none">{kpi.value}</span>
+            <span className="text-[8px] font-medium text-black/30 mt-0.5">{kpi.label}</span>
+            <span className="text-[7px] font-semibold text-[#01544F] mt-0.5">{kpi.trend}</span>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Mini bar chart */}
+      <motion.div
+        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.35 }}
+      >
+        <div className="flex items-center justify-between mb-2.5">
+          <div className="flex items-center gap-1.5">
+            <TrendingUp className="w-3 h-3 text-[#01544F]" />
+            <span className="text-[9px] font-semibold text-[#171717]">Collection activity</span>
+          </div>
+          <span className="text-[8px] font-medium text-black/30">This week</span>
         </div>
-        <span className="text-[10px] font-medium text-foreground/30">3 tracked</span>
+        <div className="flex items-end gap-1.5 h-16">
+          {barData.map((h, i) => (
+            <div key={i} className="flex-1 flex flex-col items-center gap-1">
+              <motion.div
+                className="w-full rounded-sm bg-[#01544F]/15"
+                initial={{ height: 0 }}
+                animate={{ height: `${h}%` }}
+                transition={{ duration: 0.5, delay: 0.5 + i * 0.06, ease: [0.25, 1, 0.5, 1] }}
+              >
+                {i === barData.length - 2 && (
+                  <motion.div
+                    className="w-full h-full rounded-sm bg-[#01544F]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.9 }}
+                  />
+                )}
+              </motion.div>
+              <span className="text-[7px] text-black/25 font-medium">{barLabels[i]}</span>
+            </div>
+          ))}
+        </div>
       </motion.div>
 
-      {monitoringRows.map((row, i) => (
-        <motion.div
-          key={row.id}
-          className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-3 py-2.5 flex items-center justify-between"
-          {...stagger(i)}
-        >
-          <div className="flex items-center gap-2.5">
-            <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${dotColor[row.status]}`} />
-            <div>
-              <span className="text-[11px] font-semibold text-[#171717] block leading-tight">{row.name}</span>
-              <span className="text-[9px] text-black/35 font-medium">{row.id}</span>
-            </div>
-          </div>
-          <div className="text-right">
-            <span className="text-[11px] font-bold text-[#171717] block leading-tight">{row.amount}</span>
-            <span className={`text-[9px] font-medium ${txtColor[row.status]}`}>{row.label}</span>
-          </div>
-        </motion.div>
-      ))}
-
-      <motion.div className="flex justify-end mt-0.5" {...stagger(3, 0.5)}>
-        <span className="text-[10px] font-semibold text-white bg-[#002B31] px-2.5 py-1.5 rounded-md inline-flex items-center gap-1.5">
-          Next action queued
-          <ArrowRight className="w-3 h-3" />
+      {/* Live pulse footer */}
+      <motion.div
+        className="flex items-center justify-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#01544F] opacity-50" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#01544F]" />
         </span>
+        <span className="text-[8px] font-medium text-black/30">Monitoring 142 invoices across 38 accounts</span>
       </motion.div>
     </Shell>
   )
 }
 
-/* ── 2. Proactive Follow-up ───────────────────────────────── */
+/* ── 2. Proactive Follow-up — Chat-thread style timeline ──── */
 
-const followUpTimeline = [
-  { icon: Mail, channel: "Email", label: "Invoice delivered", time: "Day 0", done: true },
-  { icon: MessageSquare, channel: "SMS", label: "Friendly reminder", time: "Day −3", done: true },
-  { icon: Mail, channel: "Email", label: "Due-date nudge", time: "Day −1", done: false },
-  { icon: Phone, channel: "Call", label: "Follow-up if unpaid", time: "Day +3", done: false },
+const threadMessages = [
+  { align: "right" as const, label: "Invoice #4021 sent", delay: 0.2 },
+  { align: "right" as const, label: "Friendly reminder", delay: 0.5 },
+  { align: "left" as const, label: "Thanks, processing now!", delay: 0.9 },
+  { align: "right" as const, label: "Due-date nudge", delay: 1.3 },
+  { align: "left" as const, label: "Payment sent — $12,400", delay: 1.7 },
 ]
 
 function FollowUpGraphic() {
   return (
     <Shell>
-      <motion.div className="flex items-center justify-between" {...headerAnim}>
-        <div className="flex items-center gap-2">
-          <Clock className="w-3.5 h-3.5 text-[#002B31]/60" />
-          <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-foreground/40">Scheduled Outreach</span>
+      {/* Thread header */}
+      <motion.div
+        className="flex items-center gap-2 px-1"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="w-6 h-6 rounded-full bg-[#01544F] flex items-center justify-center text-[8px] font-bold text-white">AC</div>
+        <div>
+          <span className="text-[10px] font-semibold text-[#171717] block leading-none">Apex Corp</span>
+          <span className="text-[8px] text-black/30 font-medium">INV-4021 · $12,400</span>
         </div>
-        <span className="text-[10px] font-medium text-foreground/30">INV-2094</span>
+        <span className="ml-auto text-[8px] font-medium text-[#01544F] bg-[#01544F]/5 px-1.5 py-0.5 rounded">Paid</span>
       </motion.div>
 
-      {followUpTimeline.map((step, i) => {
-        const Icon = step.icon
-        return (
+      {/* Chat bubbles */}
+      <div className="flex flex-col gap-1.5">
+        {threadMessages.map((msg, i) => (
           <motion.div
-            key={step.label}
-            className={`bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-3 py-2.5 flex items-center gap-3 ${
-              !step.done ? "opacity-50" : ""
-            }`}
-            {...stagger(i)}
+            key={i}
+            className={`flex ${msg.align === "right" ? "justify-end" : "justify-start"}`}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: msg.delay, ease: [0.25, 1, 0.5, 1] }}
           >
-            <div className="w-7 h-7 rounded-full bg-white ring-1 ring-black/[0.04] flex items-center justify-center shrink-0 relative">
-              <Icon className="w-3.5 h-3.5 text-[#171717]" />
-              {step.done && (
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#002B31] rounded-full flex items-center justify-center">
-                  <Check className="w-2 h-2 text-white" strokeWidth={3} />
-                </div>
-              )}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[#171717] leading-tight">{step.label}</span>
-                <span className="text-[9px] font-medium text-black/35 shrink-0 ml-2">{step.time}</span>
-              </div>
-              <span className="text-[9px] text-black/35 font-medium">{step.channel}</span>
+            <div className={`max-w-[80%] rounded-xl px-3 py-2.5 flex items-center ${
+              msg.align === "right"
+                ? "bg-[#01544F] text-white rounded-br-sm"
+                : "bg-white ring-1 ring-black/[0.04] rounded-bl-sm"
+            }`}>
+              <span className={`text-[10px] font-semibold ${msg.align === "right" ? "" : "text-[#171717]"}`}>
+                {msg.label}
+              </span>
             </div>
           </motion.div>
-        )
-      })}
+        ))}
+      </div>
     </Shell>
   )
 }
 
-/* ── 3. Invoice Confirmation ──────────────────────────────── */
+/* ── 3. Invoice Confirmation — Document scan with animated checks ── */
 
-const confirmationChecks = [
-  { label: "Invoice received" },
-  { label: "Details verified" },
-  { label: "No disputes raised" },
+const lineItems = [
+  { desc: "Consulting Services", qty: "40 hrs", amount: "$8,000" },
+  { desc: "Platform License", qty: "1 mo", amount: "$4,500" },
+  { desc: "Implementation Fee", qty: "1x", amount: "$1,750" },
+]
+
+const verifySteps = [
+  { label: "PO number matched", delay: 0.8 },
+  { label: "Line items verified", delay: 1.0 },
+  { label: "Amount confirmed", delay: 1.2 },
 ]
 
 function ConfirmationGraphic() {
   return (
     <Shell>
-      <motion.div className="flex items-center justify-between" {...headerAnim}>
-        <div className="flex items-center gap-2">
-          <FileCheck className="w-3.5 h-3.5 text-[#002B31]/60" />
-          <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-foreground/40">Confirmation</span>
-        </div>
-        <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Verified</span>
-      </motion.div>
-
+      {/* Invoice document */}
       <motion.div
-        className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg p-4"
-        {...stagger(0)}
+        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3.5 relative overflow-hidden"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
       >
-        <div className="flex items-center justify-between mb-3">
+        {/* Scan line effect */}
+        <motion.div
+          className="absolute left-0 right-0 h-px bg-[#01544F]/30"
+          initial={{ top: 0 }}
+          animate={{ top: "100%" }}
+          transition={{ duration: 1.5, delay: 0.3, ease: "linear" }}
+        />
+
+        <div className="flex items-start justify-between mb-2">
           <div>
-            <span className="text-[11px] font-semibold text-[#171717] block leading-tight">Vanguard Logistics</span>
-            <span className="text-[9px] text-black/35 font-medium">INV-09942 · PO-2024-089</span>
+            <span className="text-[11px] font-bold text-[#171717] block leading-tight">INV-09942</span>
+            <span className="text-[8px] text-black/30 font-medium">Vanguard Logistics · PO-2024-089</span>
           </div>
-          <span className="text-[14px] font-bold text-[#171717]">$14,250</span>
+          <div className="text-right">
+            <span className="text-[13px] font-bold text-[#171717] block leading-tight">$14,250</span>
+            <span className="text-[8px] text-black/30 font-medium">Net 30</span>
+          </div>
         </div>
 
-        <div className="h-px bg-black/[0.04] mb-3" />
+        <div className="h-px bg-black/[0.04] mb-2" />
 
-        <div className="flex flex-col gap-2">
-          {confirmationChecks.map((item, i) => (
+        {/* Line items — simplified placeholder bars */}
+        <div className="flex flex-col gap-1.5">
+          {["w-full", "w-[85%]", "w-[70%]"].map((w, i) => (
             <motion.div
-              key={item.label}
-              className="flex items-center gap-2"
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.4 + i * 0.12 }}
-            >
-              <div className="w-4 h-4 rounded-full bg-[#002B31]/10 flex items-center justify-center shrink-0">
-                <Check className="w-2.5 h-2.5 text-[#002B31]" strokeWidth={3} />
-              </div>
-              <span className="text-[11px] font-medium text-[#171717]">{item.label}</span>
-            </motion.div>
+              key={i}
+              className={`h-2 rounded-full bg-black/[0.04] ${w}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2, delay: 0.3 + i * 0.1 }}
+            />
           ))}
         </div>
       </motion.div>
 
-      <motion.p
-        className="text-[9px] text-black/30 text-center font-medium"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        Confirmed by AP department · 2h ago
-      </motion.p>
+      {/* Verification results */}
+      <div className="flex flex-col gap-1">
+        {verifySteps.map((step) => (
+          <motion.div
+            key={step.label}
+            className="flex items-center gap-2 px-3 py-1.5 bg-white ring-1 ring-[#01544F]/10 rounded-lg"
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: step.delay }}
+          >
+            <motion.div
+              className="w-4 h-4 rounded-full bg-[#01544F]/10 flex items-center justify-center shrink-0"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.2, delay: step.delay + 0.15, ease: [0.25, 1, 0.5, 1] }}
+            >
+              <Check className="w-2.5 h-2.5 text-[#01544F]" strokeWidth={3} />
+            </motion.div>
+            <span className="text-[9px] font-medium text-[#171717]">{step.label}</span>
+          </motion.div>
+        ))}
+      </div>
+
     </Shell>
   )
 }
 
-/* ── 4. Smart Escalation ──────────────────────────────────── */
+/* ── 4. Smart Escalation — Risk funnel with animated routing ── */
+
+const channels = [
+  { icon: Phone, label: "Call", preferred: true },
+  { icon: Mail, label: "Email", preferred: false },
+  { icon: MessageSquare, label: "SMS", preferred: false },
+]
+
+const aiPrompts = [
+  "Avg days-to-pay?",
+  "Open disputes?",
+  "Last contact method?",
+  "SMS response history?",
+  "Best tone?",
+]
 
 function EscalationGraphic() {
+  const [promptIdx, setPromptIdx] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setPromptIdx((i) => (i + 1) % aiPrompts.length)
+    }, 2500)
+    return () => clearInterval(t)
+  }, [])
+
   return (
     <Shell>
-      <motion.div className="flex items-center justify-between" {...headerAnim}>
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-500" />
-          </span>
-          <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-foreground/40">Auto-Escalation</span>
+      {/* Contact card */}
+      <motion.div
+        className="px-3 py-2.5 flex items-center gap-3 border-b border-black/[0.04]"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, delay: 0.1 }}
+      >
+        <div className="w-8 h-8 rounded-full bg-[#01544F] flex items-center justify-center text-[10px] font-bold text-white shrink-0">JR</div>
+        <div className="flex-1 min-w-0">
+          <span className="text-[12px] font-bold text-[#171717] block leading-tight">Jamie Rivera</span>
+          <span className="text-[9px] text-black/30 font-medium block leading-none mt-0.5">AP Manager · Meridian Supply Co.</span>
         </div>
-        <span className="text-[10px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">High Priority</span>
       </motion.div>
 
+      {/* AI prompt box — rotating questions */}
       <motion.div
-        className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg p-3.5"
-        {...stagger(0)}
+        className="px-3 py-2.5 relative -mb-1.5"
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25, duration: 0.4 }}
       >
-        <div className="flex items-center justify-between mb-2">
-          <div>
-            <span className="text-[11px] font-semibold text-[#171717] block leading-tight">Meridian Supply Co.</span>
-            <span className="text-[9px] text-black/35 font-medium">3 invoices · $24,580 outstanding</span>
+        <div className="flex items-center gap-3">
+          <div className="w-5 h-5 rounded-full bg-[#01544F]/10 flex items-center justify-center shrink-0">
+            <Zap className="w-3 h-3 text-[#01544F]" />
+          </div>
+          <span className="text-[9px] font-semibold text-[#01544F] shrink-0">Lunica is analyzing</span>
+          <div className="h-[14px] relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={promptIdx}
+                className="text-[10px] font-medium text-black/50 block"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+              >
+                {aiPrompts[promptIdx]}
+              </motion.span>
+            </AnimatePresence>
           </div>
         </div>
-        <div className="flex gap-1.5">
-          <span className="bg-red-50 text-red-600 border border-red-100/60 px-1.5 py-0.5 rounded text-[9px] font-semibold">12d overdue</span>
-          <span className="bg-amber-50 text-amber-600 border border-amber-100/60 px-1.5 py-0.5 rounded text-[9px] font-semibold">Risk: 84/100</span>
-        </div>
       </motion.div>
 
+      {/* Channel + timing row */}
       <motion.div
-        className="flex items-center justify-center gap-2 py-1"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.5 }}
+        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-2.5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
       >
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-amber-300" />
-        <Zap className="w-3.5 h-3.5 text-amber-500" />
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-amber-300" />
-      </motion.div>
-
-      <motion.div
-        className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-3.5 py-3 flex items-center gap-3"
-        {...stagger(2, 0.4)}
-      >
-        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[11px] font-bold shrink-0 ring-2 ring-white/80">
-          SJ
+        <span className="text-[8px] font-semibold text-black/25 uppercase tracking-wider block mb-2">Best channel</span>
+        <div className="flex gap-1.5 mb-2.5">
+          {channels.map((ch, i) => {
+            const Icon = ch.icon
+            return (
+              <motion.div
+                key={ch.label}
+                className={`flex-1 flex flex-col items-center gap-1 py-1.5 rounded-md ring-1 ${
+                  ch.preferred
+                    ? "bg-[#01544F] ring-[#01544F]/30"
+                    : "bg-black/[0.01] ring-black/[0.04]"
+                }`}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 + i * 0.08 }}
+              >
+                <Icon className={`w-3.5 h-3.5 ${ch.preferred ? "text-white" : "text-black/20"}`} />
+                <span className={`text-[8px] font-bold ${ch.preferred ? "text-white" : "text-black/25"}`}>{ch.label}</span>
+              </motion.div>
+            )
+          })}
         </div>
-        <div>
-          <span className="text-[11px] font-semibold text-[#171717] block leading-tight">Escalated to Sarah J.</span>
-          <span className="text-[9px] text-black/35 font-medium">Senior Collections · Auto-assigned</span>
-        </div>
-      </motion.div>
 
-      <motion.div className="flex justify-end mt-0.5" {...stagger(3, 0.6)}>
-        <span className="text-[10px] font-semibold text-white bg-[#002B31] px-2.5 py-1.5 rounded-md inline-flex items-center gap-1.5">
-          Review escalation
-          <ArrowRight className="w-3 h-3" />
-        </span>
+        <span className="text-[8px] font-semibold text-black/25 uppercase tracking-wider block mb-1.5">Best time to reach</span>
+        <div className="flex items-center gap-2">
+          <div className="flex-1 h-1.5 bg-black/[0.04] rounded-full relative">
+            {/* Step tick marks */}
+            {[0, 25, 50, 75, 100].map((pct) => (
+              <div
+                key={pct}
+                className="absolute top-1/2 -translate-y-1/2 w-px h-2 bg-black/[0.06]"
+                style={{ left: `${pct}%` }}
+              />
+            ))}
+            {/* Highlighted time window */}
+            <motion.div
+              className="absolute top-0 left-[30%] w-[25%] h-full rounded-full bg-[#01544F]/25"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.4 }}
+            />
+          </div>
+          <motion.span
+            className="text-[9px] font-semibold text-[#01544F] shrink-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            9–11am
+          </motion.span>
+        </div>
       </motion.div>
     </Shell>
   )

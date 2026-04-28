@@ -24,6 +24,7 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   const [progress, setProgress] = useState(0)
   const [displayIndex, setDisplayIndex] = useState(0)
   const [fading, setFading] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
   const active = tabs[activeIndex]
   const containerRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
@@ -47,6 +48,7 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
 
   const handleManualClick = useCallback((i: number) => {
     if (i === activeIndex) return
+    setIsPaused(true)
     switchTab(i)
   }, [activeIndex, switchTab])
 
@@ -72,12 +74,12 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   }, [])
 
   useEffect(() => {
-    // Don't spin RAF at all when off-screen
-    if (!isVisibleRef.current) return
+    // Don't spin RAF at all when off-screen or paused
+    if (!isVisibleRef.current || isPaused) return
 
     const tick = (timestamp: number) => {
-      // If we went off-screen mid-loop, bail and let cleanup handle it
-      if (!isVisibleRef.current) return
+      // If we went off-screen mid-loop or got paused, bail and let cleanup handle it
+      if (!isVisibleRef.current || isPaused) return
 
       if (startRef.current === 0) startRef.current = timestamp
       const elapsed = timestamp - startRef.current
@@ -95,7 +97,7 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
 
     rafRef.current = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(rafRef.current)
-  }, [activeIndex, duration, advanceTab])
+  }, [activeIndex, duration, advanceTab, isPaused])
 
   return (
     <div ref={containerRef} className="overflow-hidden rounded-lg bg-[#EBE7E3]">

@@ -13,7 +13,7 @@ const steps = [
   {
     title: "Configure your rules.",
     description:
-      "Set payment terms, approval logic, escalation paths, and customer preferences.",
+      "Set payment terms, approval logic, customer preferences, even tone of voice.",
     graphicId: "solution-configure",
   },
   {

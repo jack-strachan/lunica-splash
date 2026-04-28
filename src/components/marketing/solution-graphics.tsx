@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 import {
   ArrowRight,
   Check,
@@ -8,7 +8,9 @@ import {
   AlertTriangle,
   Clock,
   FileText,
+  Flag,
   Link2,
+  Loader2,
   Mail,
   RefreshCw,
   Send,
@@ -17,7 +19,7 @@ import {
   Users,
   Zap,
 } from "lucide-react"
-import type { ComponentType } from "react"
+import { useState, useRef, useEffect, type ComponentType } from "react"
 import Image from "next/image"
 
 /* ── Registry ─────────────────────────────────────────────── */
@@ -178,95 +180,210 @@ function ConnectGraphic() {
 
 /* ── 2. Configure Your Rules ──────────────────────────────── */
 
-const ruleCards = [
-  { icon: Send, label: "Follow-up timing", description: "When to send reminders", primary: true },
-  { icon: AlertTriangle, label: "Escalation triggers", description: "When to flag for review" },
-  { icon: Settings, label: "Routing rules", description: "Who handles what" },
+const dropdownOptions = [
+  { label: "Send after 3 days overdue", key: "send" },
+  { label: "Remind weekly until paid", alwaysChecked: true },
 ]
 
-const dropdownOptions = [
-  { label: "Send after 3 days overdue", active: true },
-  { label: "Remind weekly until paid", active: true },
-  { label: "Pause if dispute open", active: false },
-  { label: "Skip if <$100", active: false },
-]
+type ConfigPhase = "idle" | "dropdown" | "checking" | "slider" | "sliding" | "sliderDone" | "closing" | "reset"
 
 function ConfigureGraphic() {
+  const [phase, setPhase] = useState<ConfigPhase>("idle")
+  const [started, setStarted] = useState(false)
+  const [sliderPct, setSliderPct] = useState(20)
+  const configRef = useRef<HTMLDivElement>(null)
+
+  // Start when in view
+  useEffect(() => {
+    if (started) return
+    const el = configRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); obs.disconnect() } },
+      { threshold: 0.3 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [started])
+
+  // Phase machine
+  useEffect(() => {
+    if (!started) return
+    let t: ReturnType<typeof setTimeout>
+    switch (phase) {
+      case "idle":
+        t = setTimeout(() => setPhase("dropdown"), 600)
+        break
+      case "dropdown":
+        t = setTimeout(() => setPhase("checking"), 1500)
+        break
+      case "checking":
+        t = setTimeout(() => { setSliderPct(20); setPhase("slider") }, 600)
+        break
+      case "slider":
+        t = setTimeout(() => setPhase("sliding"), 400)
+        break
+      case "sliding":
+        t = setTimeout(() => setPhase("sliderDone"), 2800)
+        break
+      case "sliderDone":
+        t = setTimeout(() => setPhase("closing"), 1000)
+        break
+      case "closing":
+        t = setTimeout(() => setPhase("reset"), 600)
+        break
+      case "reset":
+        t = setTimeout(() => setPhase("idle"), 600)
+        break
+    }
+    return () => clearTimeout(t)
+  }, [phase, started])
+
+  // Animate slider thumb
+  useEffect(() => {
+    if (phase !== "sliding") return
+    let frame: number
+    const start = performance.now()
+    const duration = 2400
+    const from = 20
+    const to = 60
+    const tick = (now: number) => {
+      const elapsed = now - start
+      const p = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - p, 3)
+      setSliderPct(from + (to - from) * eased)
+      if (p < 1) frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frame)
+  }, [phase])
+
+  const showDropdown = phase !== "idle" && phase !== "reset" && phase !== "closing"
+  const isChecked = phase === "checking" || phase === "slider" || phase === "sliding" || phase === "sliderDone" || phase === "closing"
+  const showSlider = phase === "slider" || phase === "sliding"
+  const daysValue = Math.round((sliderPct / 100) * 14)
+  const showGreenNumber = phase === "sliderDone" || phase === "closing"
+
   return (
     <Shell>
-      <div className="flex flex-col gap-1.5 w-full">
-        {ruleCards.map((rule, i) => {
-          const Icon = rule.icon
-          const isPrimary = rule.primary
-          return (
-            <div key={rule.label} className="flex flex-col">
-              <motion.div
-                className={`rounded-lg px-3 py-2.5 flex items-center gap-2.5 ${
-                  isPrimary
-                    ? "bg-[#01544F] ring-1 ring-[#01544F]/20"
-                    : "bg-[#FAF8F6] ring-1 ring-black/[0.04]"
-                }`}
-                {...stagger(i, 0.15)}
-              >
-                <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 ${
-                  isPrimary ? "bg-white/15" : "bg-[#002B31]/5"
-                }`}>
-                  <Icon className={`w-3.5 h-3.5 ${isPrimary ? "text-white/80" : "text-[#002B31]/50"}`} />
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className={`text-[10px] font-semibold leading-none ${isPrimary ? "text-white" : "text-[#171717]"}`}>
-                    {rule.label}
-                  </span>
-                  <span className={`text-[8px] leading-none mt-0.5 ${isPrimary ? "text-white/50" : "text-black/30"}`}>
-                    {rule.description}
-                  </span>
-                </div>
-                {isPrimary && (
-                  <motion.div
-                    className="ml-auto"
-                    animate={{ rotate: 180 }}
-                    transition={{ delay: 1, duration: 0.3 }}
-                  >
-                    <ChevronDown className="w-3 h-3 text-white/50" />
-                  </motion.div>
-                )}
-              </motion.div>
+      <div ref={configRef} className="flex flex-col gap-1.5 w-full">
+        {/* Primary card header */}
+        <motion.div
+          className={`rounded-lg px-3 py-2.5 flex items-center gap-2.5 ring-1 transition-colors duration-500 ${
+            showDropdown
+              ? "bg-[#01544F] ring-[#01544F]/20"
+              : "bg-white ring-black/[0.04]"
+          }`}
+          {...stagger(0, 0.15)}
+        >
+          <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors duration-500 ${
+            showDropdown ? "bg-white/15" : "bg-[#002B31]/5"
+          }`}>
+            <Send className={`w-3.5 h-3.5 transition-colors duration-500 ${showDropdown ? "text-white/80" : "text-[#002B31]/50"}`} />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className={`text-[10px] font-semibold leading-none transition-colors duration-500 ${showDropdown ? "text-white" : "text-[#171717]"}`}>Follow-up timing</span>
+            <span className={`text-[8px] leading-none mt-0.5 transition-colors duration-500 ${showDropdown ? "text-white/50" : "text-black/30"}`}>When to send reminders</span>
+          </div>
+          <motion.div
+            className="ml-auto"
+            animate={{ rotate: showDropdown ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+          >
+            <ChevronDown className={`w-3 h-3 transition-colors duration-500 ${showDropdown ? "text-white/50" : "text-black/30"}`} />
+          </motion.div>
+        </motion.div>
 
-              {/* Animated dropdown for the primary card */}
-              {isPrimary && (
-                <motion.div
-                  className="overflow-hidden"
-                  initial={{ height: 0, opacity: 0 }}
-                  whileInView={{ height: "auto", opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <div className="mt-px rounded-lg bg-[#FAF8F6] ring-1 ring-black/[0.04] p-2 flex flex-col gap-0.5">
-                    {dropdownOptions.map((opt, j) => (
+        {/* Dropdown panel */}
+        <AnimatePresence>
+          {showDropdown && (
+            <motion.div
+              className="overflow-hidden"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+            >
+              <div className="rounded-lg bg-[#FAF8F6] ring-1 ring-black/[0.04] p-2 flex flex-col gap-0.5">
+                {dropdownOptions.map((opt, j) => {
+                  const checked = opt.key === "send" ? isChecked : !!opt.alwaysChecked
+                  return (
+                    <div key={opt.label} className="flex flex-col">
                       <motion.div
-                        key={opt.label}
-                        className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-black/[0.02]"
+                        className="flex items-center gap-2 px-2 py-1.5 rounded-md"
                         initial={{ opacity: 0, x: -6 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.25, delay: 1.15 + j * 0.08 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.25, delay: 0.1 + j * 0.06 }}
                       >
-                        <div className={`w-3.5 h-3.5 rounded flex items-center justify-center shrink-0 ${
-                          opt.active ? "bg-[#01544F]" : "ring-1 ring-black/[0.1] bg-white"
+                        <div className={`w-3.5 h-3.5 rounded flex items-center justify-center shrink-0 transition-colors duration-300 ${
+                          checked ? "bg-[#01544F]" : "ring-1 ring-black/[0.1] bg-white"
                         }`}>
-                          {opt.active && <Check className="w-2.5 h-2.5 text-white" />}
+                          {checked && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
+                            >
+                              <Check className="w-2.5 h-2.5 text-white" />
+                            </motion.div>
+                          )}
                         </div>
-                        <span className={`text-[9px] font-medium leading-none ${opt.active ? "text-[#171717]" : "text-black/35"}`}>
-                          {opt.label}
+                        <span className={`text-[9px] font-medium leading-none transition-colors duration-300 ${checked ? "text-[#171717]" : "text-black/35"}`}>
+                          {opt.key === "send"
+                            ? <>Send after <span className={`transition-colors duration-300 ${showGreenNumber ? "text-[#01544F] font-bold" : ""}`}>{isChecked ? daysValue : 3}</span> days overdue</>
+                            : opt.label}
                         </span>
                       </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          )
-        })}
+
+                      {/* Slider — inline right after the "send" checkbox */}
+                      {opt.key === "send" && (
+                        <AnimatePresence>
+                          {showSlider && (
+                            <motion.div
+                              className="overflow-hidden"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                            >
+                              <div className="ml-7.5 mr-2 mb-1 px-1 py-1.5">
+                                <div className="relative h-1.5 bg-black/[0.06] rounded-full">
+                                  <motion.div
+                                    className="absolute top-0 left-0 h-full bg-[#01544F]/20 rounded-full"
+                                    style={{ width: `${sliderPct}%` }}
+                                  />
+                                  <motion.div
+                                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#01544F] shadow-sm ring-2 ring-white"
+                                    style={{ left: `${sliderPct}%`, marginLeft: -6 }}
+                                  />
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Secondary card */}
+        <motion.div
+          className="rounded-lg px-3 py-2.5 flex items-center gap-2.5 bg-[#FAF8F6] ring-1 ring-black/[0.04]"
+          {...stagger(1, 0.15)}
+        >
+          <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 bg-[#002B31]/5">
+            <AlertTriangle className="w-3.5 h-3.5 text-[#002B31]/50" />
+          </div>
+          <span className="text-[10px] font-semibold leading-none text-[#171717]">Escalation triggers</span>
+          <div className="ml-auto flex items-center gap-1.5">
+            <span className="flex items-center justify-center w-4 h-4 rounded-full bg-[#002B31]/8 text-[8px] font-bold text-[#002B31]/50">2</span>
+            <Settings className="w-3 h-3 text-black/20" />
+          </div>
+        </motion.div>
       </div>
     </Shell>
   )
@@ -274,88 +391,210 @@ function ConfigureGraphic() {
 
 /* ── 3. Start Collecting Smarter ──────────────────────────── */
 
-const triggers = [
-  { label: "Due date\napproaching", icon: Clock },
-  { label: "No recent\npayment", icon: AlertTriangle },
-  { label: "Terms\nmismatch", icon: FileText },
+const scenarios = [
+  {
+    issue: "INV-1042 overdue by 7 days",
+    issueIcon: Clock,
+    processing: ["Reviewing account history…", "Determining best action…", "Composing reminder…"],
+    resolution: "Reminder sent to Acme Corp",
+    resolutionIcon: Mail,
+  },
+  {
+    issue: "INV-1089 terms mismatch detected",
+    issueIcon: AlertTriangle,
+    processing: ["Comparing invoice terms…", "Flagging discrepancy…", "Routing to AR team…"],
+    resolution: "Escalated to accounts receivable",
+    resolutionIcon: Flag,
+  },
+  {
+    issue: "INV-1103 payment received",
+    issueIcon: FileText,
+    processing: ["Matching to open invoice…", "Reconciling payment…", "Syncing to ERP…"],
+    resolution: "Paid · Status synced",
+    resolutionIcon: Check,
+  },
 ]
 
-const actions = [
-  { label: "Send\nreminder", icon: Mail },
-  { label: "Escalate\nto owner", icon: Users },
-  { label: "Open dispute\nworkflow", icon: Shield },
-  { label: "Sync status\nback", icon: RefreshCw },
-]
+type Phase = "idle" | "issue" | "processing" | "resolved" | "clearing"
 
 function CollectGraphic() {
+  const [phase, setPhase] = useState<Phase>("idle")
+  const [scenarioIdx, setScenarioIdx] = useState(0)
+  const [processingStep, setProcessingStep] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  const scenario = scenarios[scenarioIdx]
+
+  // Start when in view
+  useEffect(() => {
+    if (started) return
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); obs.disconnect() } },
+      { threshold: 0.4 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [started])
+
+  // Phase machine
+  useEffect(() => {
+    if (!started) return
+    let t: ReturnType<typeof setTimeout>
+
+    switch (phase) {
+      case "idle":
+        t = setTimeout(() => setPhase("issue"), 800)
+        break
+      case "issue":
+        t = setTimeout(() => { setProcessingStep(0); setPhase("processing") }, 1200)
+        break
+      case "processing":
+        if (processingStep < scenario.processing.length - 1) {
+          t = setTimeout(() => setProcessingStep((s) => s + 1), 1000)
+        } else {
+          t = setTimeout(() => setPhase("resolved"), 1000)
+        }
+        break
+      case "resolved":
+        t = setTimeout(() => setPhase("clearing"), 2000)
+        break
+      case "clearing":
+        t = setTimeout(() => {
+          setScenarioIdx((i) => (i + 1) % scenarios.length)
+          setPhase("idle")
+        }, 600)
+        break
+    }
+    return () => clearTimeout(t)
+  }, [phase, processingStep, started, scenario.processing.length])
+
+  const show = phase !== "idle" && phase !== "clearing"
+  const ResIcon = scenario.resolutionIcon
+
   return (
     <Shell>
-      {/* Trigger row */}
-      <div className="flex gap-1.5">
-        {triggers.map((t, i) => {
-          const Icon = t.icon
-          return (
-            <motion.div
-              key={t.label}
-              className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-2 py-2 flex-1 flex flex-col items-center gap-1.5"
-              {...stagger(i, 0.1)}
-            >
-              <div className="w-5 h-5 rounded-full bg-[#002B31]/5 flex items-center justify-center">
-                <Icon className="w-3 h-3 text-[#002B31]/50" />
-              </div>
-              <span className="text-[8px] font-medium text-black/40 leading-tight text-center whitespace-pre-line">{t.label}</span>
-            </motion.div>
-          )
-        })}
+      <div ref={ref} className="flex flex-col gap-3 w-full">
+        {/* Live monitoring header — always visible */}
+        <motion.div
+          className="flex items-center gap-2.5 px-3"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+        >
+          <div className="relative flex h-2 w-2 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#01544F] opacity-50" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#01544F]" />
+          </div>
+          <span className="text-[10px] font-semibold text-[#01544F] leading-none">Live monitoring</span>
+        </motion.div>
+
+        {/* Issue slot — fixed height so layout never shifts */}
+        <div className="h-[36px]">
+          <AnimatePresence mode="wait">
+            {show && (
+              <motion.div
+                key={`issue-${scenarioIdx}`}
+                className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-white ring-1 ring-amber-300/50"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+              >
+                <div className="w-5 h-5 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0">
+                  <scenario.issueIcon className="w-3 h-3 text-amber-600" strokeWidth={2.5} />
+                </div>
+                <span className="text-[9px] font-medium text-amber-700 leading-none">{scenario.issue}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Action slot — single card that transitions between processing → resolved */}
+        <div className="h-[36px]">
+          <AnimatePresence mode="wait">
+            {(phase === "processing" || phase === "resolved") && (
+              <motion.div
+                key={`action-${scenarioIdx}`}
+                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-white ring-1 transition-colors duration-500 ${
+                  phase === "resolved" ? "ring-[#01544F]/20" : "ring-black/[0.06]"
+                }`}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
+              >
+                {/* Icon — crossfade between spinner and resolved icon */}
+                <div className="w-5 h-5 flex items-center justify-center shrink-0 relative">
+                  <AnimatePresence mode="wait">
+                    {phase === "processing" ? (
+                      <motion.div
+                        key="spinner"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Loader2 className="w-4 h-4 text-[#01544F]/50 animate-spin" />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="check"
+                        className="w-5 h-5 rounded-full bg-[#01544F]/10 flex items-center justify-center"
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                      >
+                        <ResIcon className="w-3 h-3 text-[#01544F]" strokeWidth={2.5} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Text — crossfade between processing steps and resolution */}
+                <AnimatePresence mode="wait">
+                  {phase === "processing" ? (
+                    <motion.span
+                      key={`step-${processingStep}`}
+                      className="text-[9px] font-medium text-black/40 leading-none"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.2, ease: [0.25, 1, 0.5, 1] }}
+                    >
+                      {scenario.processing[processingStep]}
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="resolved"
+                      className="text-[9px] font-medium text-[#01544F] leading-none flex-1"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+                    >
+                      {scenario.resolution}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+
+                {/* Review CTA — only in resolved state */}
+                {phase === "resolved" && (
+                  <motion.span
+                    className="ml-auto text-[8px] font-semibold text-[#01544F] px-2 py-1 rounded-md bg-[#01544F]/5 shrink-0 cursor-pointer"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
+                  >
+                    Review
+                  </motion.span>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-
-      {/* Central hub */}
-      <motion.div
-        className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-3 py-2.5 flex items-center gap-2.5"
-        {...stagger(0, 0.35)}
-      >
-        <div className="relative flex h-2 w-2 shrink-0">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-        </div>
-        <div>
-          <span className="text-[10px] font-semibold text-[#171717] block leading-none mb-px">Live invoice monitoring</span>
-          <span className="text-[8px] text-black/30 font-medium leading-none">Activity monitoring</span>
-        </div>
-      </motion.div>
-
-      {/* Action row */}
-      <div className="flex gap-1.5">
-        {actions.map((a, i) => {
-          const Icon = a.icon
-          return (
-            <motion.div
-              key={a.label}
-              className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-1.5 py-2 flex-1 flex flex-col items-center gap-1.5"
-              {...stagger(i, 0.45)}
-            >
-              <div className="w-5 h-5 rounded-full bg-[#002B31]/5 flex items-center justify-center">
-                <Icon className="w-3 h-3 text-[#002B31]/50" />
-              </div>
-              <span className="text-[8px] font-medium text-black/40 leading-tight text-center whitespace-pre-line">{a.label}</span>
-            </motion.div>
-          )
-        })}
-      </div>
-
-      {/* Bottom result */}
-      <motion.div
-        className="bg-[#FAF8F6] ring-1 ring-black/[0.04] rounded-lg px-3 py-2 flex items-center gap-2.5"
-        {...stagger(0, 0.6)}
-      >
-        <div className="w-5 h-5 rounded-full bg-[#002B31]/10 flex items-center justify-center shrink-0">
-          <Check className="w-3 h-3 text-[#002B31]" strokeWidth={2.5} />
-        </div>
-        <div>
-          <span className="text-[10px] font-semibold text-[#171717] block leading-none">Paid and updated</span>
-          <span className="text-[8px] text-black/30 font-medium leading-none">Status synced across systems</span>
-        </div>
-      </motion.div>
     </Shell>
   )
 }
