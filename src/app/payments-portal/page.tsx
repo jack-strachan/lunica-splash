@@ -12,73 +12,73 @@ import { FlipButtonLink } from "@/components/ui/button-link"
 import { TintedSection } from "@/components/ui/tinted-section"
 
 export const metadata: Metadata = constructMetadata({
-  title: "Payments Portal",
+  title: "Invoice Upload",
   description:
-    "Give customers a single place to view invoices, make payments, and manage their account with Lunica Payments Portal.",
+    "Automatically upload, extract, validate, and track incoming invoices with Lunica Invoice Upload.",
 })
 
 const features = [
   {
-    label: "Self-service invoice view",
-    title: "Let customers find and pay invoices on their\u00a0own",
+    label: "Smart data extraction",
+    title: "Turn invoice documents into structured data",
     description:
-      "No more emailing statements or fielding calls about balances. The portal gives every customer a live, branded view of their open and paid invoices, accessible anytime.",
+      "Lunica reads incoming invoices and pulls out the fields your team needs — invoice numbers, dates, totals, customers, line items, and supporting details — without manual entry.",
     details: [
-      "Real-time invoice list with status, amounts, and due dates",
-      "Filterable history of paid, open, and overdue invoices",
-      "Downloadable PDF copies of every invoice and receipt",
+      "Automatic extraction for invoice numbers, due dates, totals, and customer details",
+      "Line-level capture for items, quantities, tax, freight, and supporting fields",
+      "Confidence scoring so your team knows what is ready and what needs review",
     ],
   },
   {
-    label: "One-click payments",
-    title: "Remove every obstacle between your customer and their\u00a0payment",
+    label: "Automatic invoice capture",
+    title: "Collect invoices from every source",
     description:
-      "Customers land on their portal, see what they owe, and pay in one click. No account creation, no app download, no friction. Support for credit card, ACH, and wire.",
+      "Pull invoices from email inboxes, supplier portals, shared folders, and manual uploads so every document lands in one consistent intake workflow.",
     details: [
-      "Pay individual invoices or settle multiple at once",
-      "Guest checkout with no login required",
-      "Support for credit card, ACH, and wire transfer",
+      "Email forwarding and inbox monitoring for automatic document intake",
+      "Portal and shared-folder capture for supplier documents",
+      "Manual upload support when teams need to add invoices directly",
     ],
   },
   {
-    label: "Branded experience",
-    title: "A portal that looks like yours, not\u00a0ours",
+    label: "Upload status tracking",
+    title: "Know exactly where every invoice stands",
     description:
-      "Every customer touchpoint carries your brand. Custom logo, colors, and domain so the portal feels like a natural extension of your business.",
+      "Track each invoice from received to extracted, matched, reviewed, approved, or exceptioned so nothing disappears into a queue.",
     details: [
-      "Custom logo, colors, and favicon",
-      "White-label domain support (pay.yourcompany.com)",
-      "Consistent branding across emails and portal pages",
+      "Live status views for received, processed, matched, and reviewed invoices",
+      "Searchable upload history with document-level audit trails",
+      "Clear queues for invoices waiting on validation or approval",
     ],
   },
   {
-    label: "Automatic reconciliation",
-    title: "Payments land, books\u00a0update",
+    label: "Exception routing",
+    title: "Send issues to the right person automatically",
     description:
-      "When a customer pays through the portal, Lunica matches the payment to the invoice, closes the balance, and syncs with your accounting system. Zero manual entry.",
+      "When fields are missing, duplicates appear, totals do not match, or approvals are needed, Lunica routes the invoice to the right teammate with context.",
     details: [
-      "Automatic payment-to-invoice matching",
-      "Real-time sync with your ERP or accounting system",
-      "Full audit trail for every portal transaction",
+      "Automatic detection for duplicates, missing data, and mismatched totals",
+      "Rules-based routing by vendor, amount, location, or exception type",
+      "Reviewer queues with the original document, extracted fields, and audit history",
     ],
   },
 ]
 
 const stats = [
-  { value: "65%", label: "Fewer payment-related support tickets" },
-  { value: "4x", label: "Faster average time to payment" },
-  { value: "90%", label: "Customer portal adoption rate" },
-  { value: "50%", label: "Reduction in manual reconciliation" },
+  { value: "80%", label: "Less manual invoice entry" },
+  { value: "4x", label: "Faster document processing" },
+  { value: "95%", label: "Extraction coverage" },
+  { value: "60%", label: "Fewer intake exceptions" },
 ]
 
-export default function PaymentsPortalPage() {
+export default function InvoiceUploadPage() {
   return (
     <main style={{ '--primary': '#C97B84', '--primary-hover': '#D48B94' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
-        label="Payments Portal"
-        heading={<>One place for customers to view and&nbsp;pay</>}
-        description={<>A branded self-service portal where customers check balances, download invoices, and pay in one click. Less back-and-forth for everyone.</>}
+        label="Invoice Upload"
+        heading={<>Automatically upload and track your&nbsp;invoices</>}
+        description={<>Capture incoming invoices, extract the right data, track every status, and route exceptions before they slow your team down.</>}
         gradientColors={["#E8B4B8", "#C97B84", "#A85A6A"]}
       >
         <FlipButtonLink
@@ -192,14 +192,14 @@ export default function PaymentsPortalPage() {
               <SectionLabel className="block">How it works</SectionLabel>
 
               <SectionHeading size="lg">
-                Three steps to a branded payment&nbsp;portal
+                Three steps to automated invoice&nbsp;intake
               </SectionHeading>
             </div>
 
             <div className="flex flex-col justify-end">
               <p className="text-lg !leading-tight text-foreground">
-                Lunica connects to your invoicing system and generates a portal your customers can use immediately.
-                No development. No&nbsp;migration.
+                Lunica connects to the places invoices already arrive and turns every document into a tracked, structured workflow.
+                No manual sorting. No lost&nbsp;uploads.
               </p>
             </div>
           </div>
@@ -208,21 +208,21 @@ export default function PaymentsPortalPage() {
             {[
               {
                 step: "01",
-                title: "Connect your invoices",
+                title: "Connect your sources",
                 description:
-                  "Sync open invoices from your ERP or accounting system. Lunica pulls in balances, terms, and customer details automatically.",
+                  "Connect inboxes, upload folders, supplier portals, or manual upload paths so every invoice enters one intake queue.",
               },
               {
                 step: "02",
-                title: "Brand your portal",
+                title: "Extract and validate",
                 description:
-                  "Add your logo, colors, and domain. Every page your customer sees looks and feels like an extension of your business.",
+                  "Lunica reads each invoice, extracts the key fields, checks confidence, and flags anything that needs review.",
               },
               {
                 step: "03",
-                title: "Share and collect",
+                title: "Track and route",
                 description:
-                  "Send portal links to customers. They view invoices, pay in one click, and your books update in real time.",
+                  "Approved invoices move forward automatically while missing fields, duplicates, and mismatches route to the right owner.",
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col bg-[#E3D7CD] px-6 py-10">
@@ -243,8 +243,8 @@ export default function PaymentsPortalPage() {
       {/* CTA */}
       <CtaSection
         label="Get started"
-        heading={<>Give customers the payment experience they&nbsp;expect.</>}
-        description={<>See how Lunica Payments Portal can reduce support tickets, speed up payments, and delight your&nbsp;customers.</>}
+        heading={<>Stop keying invoice data by&nbsp;hand.</>}
+        description={<>See how Lunica Invoice Upload can help your team capture documents, extract data, and resolve intake exceptions faster.</>}
         gradientColors={["#f0c8cc", "#E8B4B8", "#d4969e"]}
       />
 

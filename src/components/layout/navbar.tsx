@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { LunicaLogo } from "@/components/ui/lunica-logo"
 import { usePathname } from "next/navigation"
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"
@@ -10,18 +9,14 @@ import { motion, AnimatePresence } from "motion/react"
 import { cn } from "@/lib/utils"
 import { FlipText } from "@/components/ui/flip-text"
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-]
-
 const pageAccent: Record<string, { bg: string; hover: string }> = {
   "/collections": { bg: "#4a7a5c", hover: "#5a8a6c" },
   "/credit": { bg: "#7D6E5C", hover: "#8D7E6C" },
+  "/disputes": { bg: "#7A5C6A", hover: "#8A6C7A" },
   "/online-payments": { bg: "#4A5E73", hover: "#5A6E83" },
   "/about": { bg: "#8B7D6E", hover: "#9B8D7E" },
   "/payments-portal": { bg: "#C97B84", hover: "#D48B94" },
-  "/customer-portal": { bg: "#B8960C", hover: "#CCAA2A" },
+  "/customer-portal": { bg: "#5F746E", hover: "#6F847E" },
 }
 
 const productLinks = [
@@ -38,14 +33,20 @@ const productLinks = [
     enabled: true,
   },
   {
+    name: "Disputes",
+    description: "Resolve invoice issues with proof, collaboration, and audit trails.",
+    href: "/disputes",
+    enabled: true,
+  },
+  {
     name: "Online Payments",
     description: "Send payment links and give customers a frictionless way to pay.",
     href: "/online-payments",
     enabled: true,
   },
   {
-    name: "Payments Portal",
-    description: "Give customers a single place to view and pay open invoices.",
+    name: "Invoice Upload",
+    description: "Automatically upload, extract, and track incoming invoices.",
     href: "/payments-portal",
     enabled: true,
   },
@@ -112,14 +113,18 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/online-payments" || pathname === "/payments-portal" || pathname === "/customer-portal"
+  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/disputes" || pathname === "/online-payments" || pathname === "/payments-portal" || pathname === "/customer-portal"
   const lightNav = heroOverlap && !scrolled
 
   // Close menus on route change
   useEffect(() => {
-    setMobileOpen(false)
-    setProductsOpen(false)
-    setMobileProductsOpen(false)
+    const frame = requestAnimationFrame(() => {
+      setMobileOpen(false)
+      setProductsOpen(false)
+      setMobileProductsOpen(false)
+    })
+
+    return () => cancelAnimationFrame(frame)
   }, [pathname])
 
   // Lock body scroll when mobile menu is open
@@ -247,59 +252,62 @@ export function Navbar() {
                       className="absolute left-1/2 top-full mt-4 w-[680px] -translate-x-1/2 rounded-xl border border-foreground/[0.08] bg-background p-2 shadow-lg shadow-black/[0.04]"
                       role="menu"
                     >
-                      <div className="grid grid-cols-3 gap-0.5">
-                        {productLinks.map((product) => {
-                          const isActive = pathname === product.href
+                      <div className="flex flex-col gap-0.5">
+                        <div className="grid grid-cols-3 gap-0.5">
+                          {productLinks.map((product) => {
+                            const isActive = pathname === product.href
 
-                          if (!product.enabled) {
-                            return (
-                              <div
-                                key={product.name}
-                                className="flex cursor-default flex-col rounded-lg px-4 py-4 opacity-40"
-                                role="menuitem"
-                                aria-disabled="true"
-                              >
-                                <div className="flex items-center gap-2">
-                                  <span className="text-sm font-medium text-foreground">
-                                    {product.name}
-                                  </span>
-                                  <span className="rounded-full bg-foreground/[0.06] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-foreground/50">
-                                    Soon
-                                  </span>
+                            if (!product.enabled) {
+                              return (
+                                <div
+                                  key={product.name}
+                                  className="flex cursor-default flex-col rounded-lg px-4 py-4 opacity-40"
+                                  role="menuitem"
+                                  aria-disabled="true"
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-sm font-medium text-foreground">
+                                      {product.name}
+                                    </span>
+                                    <span className="rounded-full bg-foreground/[0.06] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-foreground/50">
+                                      Soon
+                                    </span>
+                                  </div>
+                                  <p className="mt-1 text-[13px] leading-snug text-foreground/50">
+                                    {product.description}
+                                  </p>
                                 </div>
-                                <p className="mt-1 text-[13px] leading-snug text-foreground/50">
-                                  {product.description}
-                                </p>
-                              </div>
+                              )
+                            }
+
+                            return (
+                              <ProductDropdownLink
+                                key={product.name}
+                                product={product}
+                                isActive={isActive}
+                                onNavigate={() => setProductsOpen(false)}
+                              />
                             )
-                          }
+                          })}
+                        </div>
 
-                          return (
-                            <ProductDropdownLink
-                              key={product.name}
-                              product={product}
-                              isActive={isActive}
-                              onNavigate={() => setProductsOpen(false)}
-                            />
-                          )
-                        })}
-
-                        {/* CTA cell — bottom right */}
                         <Link
                           href="/contact"
-                          className="group flex flex-col justify-between rounded-lg bg-foreground/[0.03] px-4 py-4 transition-colors hover:bg-foreground/[0.06]"
+                          className="group flex items-center justify-between rounded-lg bg-foreground/[0.03] px-4 py-4 transition-colors hover:bg-foreground/[0.06]"
                           role="menuitem"
                           onClick={() => setProductsOpen(false)}
                         >
-                          <span className="text-sm font-medium text-foreground">
-                            Need something custom?
-                          </span>
-                          <div className="mt-2 flex items-center gap-1.5 text-[13px] font-medium text-primary transition-colors group-hover:text-primary-hover">
+                          <div>
+                            <span className="text-sm font-medium text-foreground">
+                              Need something custom?
+                            </span>
+                            <p className="mt-1 text-[13px] leading-snug text-foreground/50">
+                              Custom integrations, workflows, and deployment support built around your team.
+                            </p>
+                          </div>
+                          <div className="ml-6 flex shrink-0 items-center gap-1.5 text-[13px] font-medium text-primary transition-colors group-hover:text-primary-hover">
                             Talk to us
-                            <ArrowRight
-                              className="h-3 w-3 transition-transform group-hover:translate-x-0.5"
-                              aria-hidden="true"
-                            />
+                            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                           </div>
                         </Link>
                       </div>

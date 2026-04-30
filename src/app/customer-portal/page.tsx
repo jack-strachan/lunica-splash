@@ -73,13 +73,13 @@ const stats = [
 
 export default function CustomerPortalPage() {
   return (
-    <main style={{ '--primary': '#B8960C', '--primary-hover': '#CCAA2A' } as React.CSSProperties}>
+    <main style={{ '--primary': '#5F746E', '--primary-hover': '#6F847E' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
         label="Customer Portal"
         heading={<>A better experience for every&nbsp;customer</>}
         description={<>A branded, self-service hub where customers manage their account, access documents, and resolve issues without picking up the&nbsp;phone.</>}
-        gradientColors={["#E8D48A", "#C9A832", "#A88B1A"]}
+        gradientColors={["#9AAEA8", "#5F746E", "#405650"]}
       >
         <FlipButtonLink
           href="/contact"
@@ -153,7 +153,7 @@ export default function CustomerPortalPage() {
             {i === 0 && (
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
-                  <NoiseGradient colors={["#E8D48A", "#C9A832", "#A88B1A"]} />
+                  <NoiseGradient colors={["#9AAEA8", "#5F746E", "#405650"]} />
                   <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
                     <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
                       {/* Window chrome */}
@@ -245,7 +245,7 @@ export default function CustomerPortalPage() {
         label="Get started"
         heading={<>Give your customers the experience they&nbsp;deserve.</>}
         description={<>See how Lunica Customer Portal can reduce support volume, speed up resolutions, and keep your customers&nbsp;happy.</>}
-        gradientColors={["#f0e4a8", "#E8D48A", "#d4c06a"]}
+        gradientColors={["#c0cec9", "#9AAEA8", "#78908A"]}
       />
 
       <Footer />

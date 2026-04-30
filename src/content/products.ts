@@ -43,21 +43,56 @@ export const products: ProductSectionData[] = [
         description:
           "Replace PDFs and email threads with a clean, structured credit application experience for new customers.",
         image: "/images/features/digital-credit-applications.png",
+        graphicId: "credit-applications",
       },
       {
         title: "Faster\nunderwriting",
         description:
           "Collect the right information upfront so your team can review and approve accounts more efficiently.",
+        graphicId: "credit-underwriting",
       },
       {
         title: "Automated\nrisk assessment",
         description:
           "Use rules and AI-powered signals to evaluate risk, surface concerns, and support better decisions.",
+        graphicId: "credit-risk",
       },
       {
         title: "Clear approval\nworkflows",
         description:
           "Standardize how credit decisions are reviewed, approved, and documented across your team.",
+        graphicId: "credit-approvals",
+      },
+    ],
+  },
+  {
+    name: "Disputes",
+    subtitle: "that resolves issues before they delay cash",
+    href: "/disputes",
+    tabs: [
+      {
+        title: "Resolution\ncopilot",
+        description:
+          "Move issues from triage to credit memo, approval, or customer confirmation with a clear audit trail.",
+        graphicId: "disputes-resolution",
+      },
+      {
+        title: "Proof of delivery\nupload",
+        description:
+          "Collect delivery receipts, photos, and supporting documents directly on the dispute case.",
+        graphicId: "disputes-proof",
+      },
+      {
+        title: "Team\ncollaboration",
+        description:
+          "Loop in sales, operations, credit, and AR with shared context so every issue moves forward.",
+        graphicId: "disputes-collaboration",
+      },
+      {
+        title: "Root-cause\nvisibility",
+        description:
+          "Spot recurring dispute drivers across customers, invoices, and teams so you can prevent repeat issues.",
+        graphicId: "disputes-visibility",
       },
     ],
   },
@@ -71,48 +106,56 @@ export const products: ProductSectionData[] = [
         description:
           "Send payment links through email, text, or any channel to remove friction and speed up collection.",
         image: "/images/features/online-payment-links.png",
+        graphicId: "payments-links",
       },
       {
         title: "Mobile-friendly\ncheckout",
         description:
           "Give customers a seamless payment experience that works smoothly across desktop and mobile.",
+        graphicId: "payments-checkout",
       },
       {
         title: "Secure payment\nexperience",
         description:
           "Provide a trusted, modern flow that makes it easy for customers to pay quickly and confidently.",
+        graphicId: "payments-secure",
       },
       {
         title: "Faster cash\ncollection",
         description:
           "Reduce delays between invoice delivery and payment by making the path to pay immediate.",
+        graphicId: "payments-collection",
       },
     ],
   },
   {
-    name: "Payments Portal",
-    subtitle: "that keeps every invoice in one place",
+    name: "Invoice Upload",
+    subtitle: "Automatically upload and track your invoices",
     tabs: [
       {
-        title: "Self-serve\npayments",
+        title: "Smart data\nextraction",
         description:
-          "Let customers pay on their own time without needing your team to resend links or documents.",
+          "Extract invoice numbers, due dates, totals, customers, and line-level details without manual entry.",
+        graphicId: "portal-invoices",
+      },
+      {
+        title: "Automatic invoice\ncapture",
+        description:
+          "Pull invoices from email, portals, and shared inboxes so documents land in the right workflow automatically.",
         image: "/images/features/self-serve-payments.png",
+        graphicId: "portal-self-serve",
       },
       {
-        title: "Centralized\ninvoice view",
+        title: "Upload status\ntracking",
         description:
-          "Give customers a single place to review balances, open invoices, due dates, and payment history.",
+          "See which invoices were received, processed, matched, or need review from one clear status view.",
+        graphicId: "portal-visibility",
       },
       {
-        title: "Better payment\nvisibility",
+        title: "Exception\nrouting",
         description:
-          "Make status, activity, and outstanding amounts easy to understand for both your team and customers.",
-      },
-      {
-        title: "Less manual\nchasing",
-        description:
-          "Cut down on back-and-forth by turning invoice review and payment into a simple self-serve workflow.",
+          "Route missing fields, duplicates, and mismatches to the right teammate before they slow down processing.",
+        graphicId: "portal-chasing",
       },
     ],
   },
@@ -125,21 +168,25 @@ export const products: ProductSectionData[] = [
         description:
           "Give customers a secure place to manage their account without relying on calls and email threads.",
         image: "/images/features/self-service-account-access.png",
+        graphicId: "customer-portal-access",
       },
       {
         title: "One place\nfor documents",
         description:
           "Centralize invoices, statements, account details, and payment information in one branded experience.",
+        graphicId: "customer-portal-documents",
       },
       {
-        title: "Dispute\nmanagement",
+        title: "Account activity\nhistory",
         description:
-          "Create a clear workflow for questions and disputes so issues are surfaced and resolved faster.",
+          "Show customers recent payments, document views, updates, and account changes in one transparent timeline.",
+        graphicId: "customer-portal-activity",
       },
       {
         title: "Built for\nsales-led teams",
         description:
           "Support the way your organization works with a portal designed for real customer relationships and complexity.",
+        graphicId: "customer-portal-sales",
       },
     ],
   },
