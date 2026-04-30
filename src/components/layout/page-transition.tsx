@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react"
 import { usePathname } from "next/navigation"
-import type { ReactNode } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 
 interface PageTransitionProps {
   children: ReactNode
@@ -10,6 +10,25 @@ interface PageTransitionProps {
 
 export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname()
+  const [isHistoryNavigation, setIsHistoryNavigation] = useState(false)
+
+  useEffect(() => {
+    const handlePopState = () => setIsHistoryNavigation(true)
+
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [])
+
+  useEffect(() => {
+    if (!isHistoryNavigation) return
+
+    const timeout = window.setTimeout(() => setIsHistoryNavigation(false), 0)
+    return () => window.clearTimeout(timeout)
+  }, [isHistoryNavigation, pathname])
+
+  if (isHistoryNavigation) {
+    return <>{children}</>
+  }
 
   return (
     <AnimatePresence mode="wait" initial={false}>
