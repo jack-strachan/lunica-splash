@@ -73,7 +73,7 @@ export default function AboutPage() {
             {milestones.map((milestone) => (
               <div
                 key={milestone.label}
-                className={`flex flex-col justify-center bg-[#EBE7E3] px-6 py-10${milestone.tall ? " row-span-2" : ""}`}
+                className={`flex flex-col justify-center bg-surface-1 px-6 py-10${milestone.tall ? " row-span-2" : ""}`}
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
                   {milestone.label}
@@ -110,7 +110,7 @@ export default function AboutPage() {
           {/* Values grid */}
           <div className="mt-16 grid gap-0.5 overflow-hidden rounded-lg bg-background md:grid-cols-2">
             {values.map((value) => (
-              <div key={value.title} className="flex flex-col justify-center bg-[#E3D7CD] px-8 py-10">
+              <div key={value.title} className="flex flex-col justify-center bg-surface-2 px-8 py-10">
                 <p className="text-lg font-medium text-foreground">
                   {value.title}
                 </p>

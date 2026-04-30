@@ -100,7 +100,7 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   }, [activeIndex, duration, advanceTab, isPaused])
 
   return (
-    <div ref={containerRef} className="overflow-hidden rounded-lg bg-[#EBE7E3]">
+    <div ref={containerRef} className="overflow-hidden rounded-lg bg-surface-1">
       {/* Tab bar */}
       <div className="grid gap-0.5 overflow-hidden rounded-t-md bg-background" style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}>
         {tabs.map((tab, i) => (
@@ -109,13 +109,13 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
             onMouseEnter={() => handleManualClick(i)}
             className={`flex h-20 relative items-center rounded-t-md px-6 text-left text-sm font-medium leading-tight transition-colors duration-200 ${
               i === activeIndex
-                ? "bg-[#E3D7CD] text-foreground"
-                : "bg-[#EBE7E3] text-foreground/50 hover:text-foreground/70"
+                ? "bg-surface-2 text-foreground"
+                : "bg-surface-1 text-foreground/50 hover:text-foreground/70"
             }`}
           >
             <span className="whitespace-pre-line">{tab.title}</span>
             <div
-              className="absolute bottom-0 left-0 h-0.5 bg-[#EBE7E3]"
+              className="absolute bottom-0 left-0 h-0.5 bg-surface-1"
               style={{ width: i === activeIndex ? `${progress * 100}%` : "0%" }}
             />
           </button>
@@ -123,7 +123,7 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
       </div>
 
       {/* Content area */}
-      <div className={`bg-[#E3D7CD] rounded-lg border-[#EBE7E3] ${
+      <div className={`bg-surface-2 rounded-lg border-surface-1 ${
         activeIndex === 0 ? "!rounded-tl-none" : ""
       } ${activeIndex === tabs.length - 1 ? "!rounded-tr-none" : ""}`}>
         {/* Visual — graphic component → static image → placeholder */}

@@ -162,6 +162,7 @@ export const products: ProductSectionData[] = [
   {
     name: "Customer Portal",
     subtitle: "that gives customers more control",
+    href: "/customer-portal",
     tabs: [
       {
         title: "Self-service\naccount access",

@@ -22,7 +22,7 @@ export function TintedSection({
   return (
     <section
       className={cn("relative w-full overflow-hidden", sectionClassName)}
-      style={{ background: "#EDE7DF" }}
+      style={{ background: "var(--surface-3)" }}
     >
       {watermark && <WatermarkLogo />}
 

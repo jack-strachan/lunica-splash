@@ -65,8 +65,8 @@ const integrations = [
 function LunicaIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 31 32" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <path d="M30.6437 0L8.93003 21.4307C8.93003 21.4307 8.09095 21.4307 6.98582 21.4307C0.109487 21.4307 -2.18263 15.5529 2.3402 11.089L13.5552 0H30.6232H30.6437Z" fill="#01544F"/>
-      <path d="M9.07325 21.4312H30.6232L20.5338 31.3891H9.07325C4.98019 31.3891 2.42203 27.9957 5.08252 25.3699L9.07325 21.4312Z" fill="#066D6A"/>
+      <path d="M30.6437 0L8.93003 21.4307C8.93003 21.4307 8.09095 21.4307 6.98582 21.4307C0.109487 21.4307 -2.18263 15.5529 2.3402 11.089L13.5552 0H30.6232H30.6437Z" fill="var(--brand)"/>
+      <path d="M9.07325 21.4312H30.6232L20.5338 31.3891H9.07325C4.98019 31.3891 2.42203 27.9957 5.08252 25.3699L9.07325 21.4312Z" fill="var(--primary-hover)"/>
     </svg>
   )
 }
@@ -77,7 +77,7 @@ function ConnectGraphic() {
       <div className="flex items-center gap-3 w-full">
         {/* Left: 2×2 logo grid in a container */}
         <motion.div
-          className="rounded-xl ring-1 ring-black/[0.06] bg-[#FAF8F6] p-2.5 shrink-0"
+          className="rounded-xl ring-1 ring-black/[0.06] bg-surface-soft p-2.5 shrink-0"
           {...stagger(0, 0.15)}
         >
           <div className="grid grid-cols-2 gap-2">
@@ -121,7 +121,7 @@ function ConnectGraphic() {
           <svg className="w-full h-8" viewBox="0 0 80 32" fill="none" preserveAspectRatio="none">
             <motion.path
               d="M0,16 L80,16"
-              stroke="#01544F"
+              stroke="var(--brand)"
               strokeOpacity={0.15}
               strokeWidth={1}
               strokeDasharray="4 3"
@@ -133,7 +133,7 @@ function ConnectGraphic() {
             {/* Travelling dot */}
             <motion.circle
               r={2.5}
-              fill="#01544F"
+              fill="var(--brand)"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: [0, 0.5, 0] }}
               viewport={{ once: true }}
@@ -154,7 +154,7 @@ function ConnectGraphic() {
         >
           {/* Pulsing glow */}
           <motion.div
-            className="absolute inset-0 rounded-xl bg-[#01544F]/20 blur-lg"
+            className="absolute inset-0 rounded-xl bg-brand/20 blur-lg"
             animate={{ scale: [1, 1.35, 1], opacity: [0.4, 0.15, 0.4] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -165,11 +165,11 @@ function ConnectGraphic() {
             transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
           >
             <svg viewBox="0 0 72 72" fill="none" className="w-full h-full">
-              <circle cx="36" cy="36" r="34" stroke="#01544F" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="6 8" />
+              <circle cx="36" cy="36" r="34" stroke="var(--brand)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="6 8" />
             </svg>
           </motion.div>
           {/* Card */}
-          <div className="relative rounded-xl bg-[#01544F] px-4 py-4 shadow-lg shadow-[#01544F]/20">
+          <div className="relative rounded-xl bg-brand px-4 py-4 shadow-lg shadow-brand/20">
             <LunicaIcon className="w-6 h-6 [&_path]:fill-white" />
           </div>
         </motion.div>
@@ -271,18 +271,18 @@ function ConfigureGraphic() {
         <motion.div
           className={`rounded-lg px-3 py-2.5 flex items-center gap-2.5 ring-1 transition-colors duration-500 ${
             showDropdown
-              ? "bg-[#01544F] ring-[#01544F]/20"
+              ? "bg-brand ring-brand/20"
               : "bg-white ring-black/[0.04]"
           }`}
           {...stagger(0, 0.15)}
         >
           <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors duration-500 ${
-            showDropdown ? "bg-white/15" : "bg-[#002B31]/5"
+            showDropdown ? "bg-white/15" : "bg-foreground/5"
           }`}>
-            <Send className={`w-3.5 h-3.5 transition-colors duration-500 ${showDropdown ? "text-white/80" : "text-[#002B31]/50"}`} />
+            <Send className={`w-3.5 h-3.5 transition-colors duration-500 ${showDropdown ? "text-white/80" : "text-foreground/50"}`} />
           </div>
           <div className="flex flex-col min-w-0">
-            <span className={`text-[10px] font-semibold leading-none transition-colors duration-500 ${showDropdown ? "text-white" : "text-[#171717]"}`}>Follow-up timing</span>
+            <span className={`text-[10px] font-semibold leading-none transition-colors duration-500 ${showDropdown ? "text-white" : "text-foreground"}`}>Follow-up timing</span>
             <span className={`text-[8px] leading-none mt-0.5 transition-colors duration-500 ${showDropdown ? "text-white/50" : "text-black/30"}`}>When to send reminders</span>
           </div>
           <motion.div
@@ -304,7 +304,7 @@ function ConfigureGraphic() {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
             >
-              <div className="rounded-lg bg-[#FAF8F6] ring-1 ring-black/[0.04] p-2 flex flex-col gap-0.5">
+              <div className="rounded-lg bg-surface-soft ring-1 ring-black/[0.04] p-2 flex flex-col gap-0.5">
                 {dropdownOptions.map((opt, j) => {
                   const checked = opt.key === "send" ? isChecked : !!opt.alwaysChecked
                   return (
@@ -316,7 +316,7 @@ function ConfigureGraphic() {
                         transition={{ duration: 0.25, delay: 0.1 + j * 0.06 }}
                       >
                         <div className={`w-3.5 h-3.5 rounded flex items-center justify-center shrink-0 transition-colors duration-300 ${
-                          checked ? "bg-[#01544F]" : "ring-1 ring-black/[0.1] bg-white"
+                          checked ? "bg-brand" : "ring-1 ring-black/[0.1] bg-white"
                         }`}>
                           {checked && (
                             <motion.div
@@ -328,9 +328,9 @@ function ConfigureGraphic() {
                             </motion.div>
                           )}
                         </div>
-                        <span className={`text-[9px] font-medium leading-none transition-colors duration-300 ${checked ? "text-[#171717]" : "text-black/35"}`}>
+                        <span className={`text-[9px] font-medium leading-none transition-colors duration-300 ${checked ? "text-foreground" : "text-black/35"}`}>
                           {opt.key === "send"
-                            ? <>Send after <span className={`transition-colors duration-300 ${showGreenNumber ? "text-[#01544F] font-bold" : ""}`}>{isChecked ? daysValue : 3}</span> days overdue</>
+                            ? <>Send after <span className={`transition-colors duration-300 ${showGreenNumber ? "text-brand font-bold" : ""}`}>{isChecked ? daysValue : 3}</span> days overdue</>
                             : opt.label}
                         </span>
                       </motion.div>
@@ -349,11 +349,11 @@ function ConfigureGraphic() {
                               <div className="ml-7.5 mr-2 mb-1 px-1 py-1.5">
                                 <div className="relative h-1.5 bg-black/[0.06] rounded-full">
                                   <motion.div
-                                    className="absolute top-0 left-0 h-full bg-[#01544F]/20 rounded-full"
+                                    className="absolute top-0 left-0 h-full bg-brand/20 rounded-full"
                                     style={{ width: `${sliderPct}%` }}
                                   />
                                   <motion.div
-                                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#01544F] shadow-sm ring-2 ring-white"
+                                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-brand shadow-sm ring-2 ring-white"
                                     style={{ left: `${sliderPct}%`, marginLeft: -6 }}
                                   />
                                 </div>
@@ -372,15 +372,15 @@ function ConfigureGraphic() {
 
         {/* Secondary card */}
         <motion.div
-          className="rounded-lg px-3 py-2.5 flex items-center gap-2.5 bg-[#FAF8F6] ring-1 ring-black/[0.04]"
+          className="rounded-lg px-3 py-2.5 flex items-center gap-2.5 bg-surface-soft ring-1 ring-black/[0.04]"
           {...stagger(1, 0.15)}
         >
-          <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 bg-[#002B31]/5">
-            <AlertTriangle className="w-3.5 h-3.5 text-[#002B31]/50" />
+          <div className="w-6 h-6 rounded-md flex items-center justify-center shrink-0 bg-foreground/5">
+            <AlertTriangle className="w-3.5 h-3.5 text-foreground/50" />
           </div>
-          <span className="text-[10px] font-semibold leading-none text-[#171717]">Escalation triggers</span>
+          <span className="text-[10px] font-semibold leading-none text-foreground">Escalation triggers</span>
           <div className="ml-auto flex items-center gap-1.5">
-            <span className="flex items-center justify-center w-4 h-4 rounded-full bg-[#002B31]/8 text-[8px] font-bold text-[#002B31]/50">2</span>
+            <span className="flex items-center justify-center w-4 h-4 rounded-full bg-foreground/8 text-[8px] font-bold text-foreground/50">2</span>
             <Settings className="w-3 h-3 text-black/20" />
           </div>
         </motion.div>
@@ -485,10 +485,10 @@ function CollectGraphic() {
           transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
         >
           <div className="relative flex h-2 w-2 shrink-0">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#01544F] opacity-50" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#01544F]" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-50" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-brand" />
           </div>
-          <span className="text-[10px] font-semibold text-[#01544F] leading-none">Live monitoring</span>
+          <span className="text-[10px] font-semibold text-brand leading-none">Live monitoring</span>
         </motion.div>
 
         {/* Issue slot — fixed height so layout never shifts */}
@@ -519,7 +519,7 @@ function CollectGraphic() {
               <motion.div
                 key={`action-${scenarioIdx}`}
                 className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg bg-white ring-1 transition-colors duration-500 ${
-                  phase === "resolved" ? "ring-[#01544F]/20" : "ring-black/[0.06]"
+                  phase === "resolved" ? "ring-brand/20" : "ring-black/[0.06]"
                 }`}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -537,17 +537,17 @@ function CollectGraphic() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <Loader2 className="w-4 h-4 text-[#01544F]/50 animate-spin" />
+                        <Loader2 className="w-4 h-4 text-brand/50 animate-spin" />
                       </motion.div>
                     ) : (
                       <motion.div
                         key="check"
-                        className="w-5 h-5 rounded-full bg-[#01544F]/10 flex items-center justify-center"
+                        className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center"
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
                       >
-                        <ResIcon className="w-3 h-3 text-[#01544F]" strokeWidth={2.5} />
+                        <ResIcon className="w-3 h-3 text-brand" strokeWidth={2.5} />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -569,7 +569,7 @@ function CollectGraphic() {
                   ) : (
                     <motion.span
                       key="resolved"
-                      className="text-[9px] font-medium text-[#01544F] leading-none flex-1"
+                      className="text-[9px] font-medium text-brand leading-none flex-1"
                       initial={{ opacity: 0, y: 4 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
@@ -582,7 +582,7 @@ function CollectGraphic() {
                 {/* Review CTA — only in resolved state */}
                 {phase === "resolved" && (
                   <motion.span
-                    className="ml-auto text-[8px] font-semibold text-[#01544F] px-2 py-1 rounded-md bg-[#01544F]/5 shrink-0 cursor-pointer"
+                    className="ml-auto text-[8px] font-semibold text-brand px-2 py-1 rounded-md bg-brand/5 shrink-0 cursor-pointer"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, delay: 0.2 }}

@@ -82,7 +82,7 @@ function MobileCarousel({ problems }: { problems: { title: string; description: 
               ref={(el) => { cardRefs.current[i] = el }}
               data-index={i}
               className={`flex w-56 shrink-0 flex-col justify-center px-5 py-5 transition-colors duration-500 ${
-                i === mobileActive ? "bg-[#E3D7CD]" : "bg-[#EBE7E3]"
+                i === mobileActive ? "bg-surface-2" : "bg-surface-1"
               } ${isFirst ? "rounded-l-lg" : ""} ${isLast ? "rounded-r-lg" : ""}`}
             >
               <p className="text-base font-medium text-foreground">
@@ -138,7 +138,7 @@ export function TheProblemSection() {
               <div
                 key={problem.title}
                 className={`flex h-36 cursor-default flex-col justify-center px-6 transition-colors duration-200 ${
-                  isActive ? "bg-[#E3D7CD]" : "bg-[#EBE7E3]"
+                  isActive ? "bg-surface-2" : "bg-surface-1"
                 }`}
                 onMouseEnter={() => {
                   setActiveIndex(i)

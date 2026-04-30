@@ -29,7 +29,7 @@ export function CtaSection({
 
       {/* Subtle white glow behind text */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="h-[80%] w-[60%] rounded-full bg-[#F5F2EB]/60 blur-3xl" />
+        <div className="h-[80%] w-[60%] rounded-full bg-background/60 blur-3xl" />
       </div>
 
       <PageContainer className="relative flex flex-col items-center py-28 text-center lg:py-36">

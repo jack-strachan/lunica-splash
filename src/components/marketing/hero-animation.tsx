@@ -146,7 +146,7 @@ export function HeroAnimation() {
                 className={`w-full max-w-sm aspect-[4/3] border-2 border-dashed rounded-xl flex flex-col items-center justify-center relative z-10 shadow-sm transition-[border-color,background-color] duration-500 ${
                   isDragging || isProcessing
                     ? "border-[#002B31]/60 bg-[#f0f5f3]"
-                    : "border-[#002B31]/30 bg-[#FAF8F6]"
+                    : "border-[#002B31]/30 bg-surface-soft"
                 }`}
               >
                 {/* Center content — swaps between prompt and spinner */}
@@ -160,8 +160,8 @@ export function HeroAnimation() {
                       exit={{ opacity: 0, scale: 0.8 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <Loader2 className="w-8 h-8 text-[#002B31] animate-spin mb-3" />
-                      <p className="text-[13px] font-medium text-[#171717]">Processing invoices…</p>
+                      <Loader2 className="w-8 h-8 text-foreground animate-spin mb-3" />
+                      <p className="text-[13px] font-medium text-foreground">Processing invoices…</p>
                       <p className="text-[11px] text-black/40 mt-0.5">Extracting line items</p>
                     </motion.div>
                   ) : (
@@ -174,9 +174,9 @@ export function HeroAnimation() {
                       transition={{ duration: 0.3 }}
                     >
                       <div className="w-12 h-12 bg-white border border-black/[0.08] shadow-sm rounded-xl flex items-center justify-center mb-4">
-                        <ArrowUpCircle className="w-6 h-6 text-[#002B31]" />
+                        <ArrowUpCircle className="w-6 h-6 text-foreground" />
                       </div>
-                      <h4 className="text-[15px] font-medium text-[#171717] mb-1">
+                      <h4 className="text-[15px] font-medium text-foreground mb-1">
                         Click or drag invoices here
                       </h4>
                     </motion.div>
@@ -240,7 +240,7 @@ export function HeroAnimation() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.3, delay: 0.35 }}
                 >
-                  <Check className="w-7 h-7 text-[#002B31]" strokeWidth={2.5} />
+                  <Check className="w-7 h-7 text-foreground" strokeWidth={2.5} />
                 </motion.div>
               </motion.div>
 
@@ -271,7 +271,7 @@ export function HeroAnimation() {
                     >
                       <p
                         className={`text-[12px] font-medium transition-colors duration-200 ${
-                          isActive ? "text-[#171717]" : "text-black/40"
+                          isActive ? "text-foreground" : "text-black/40"
                         }`}
                       >
                         {step}
@@ -303,7 +303,7 @@ export function HeroAnimation() {
                 >
                   <div className="flex items-center gap-2.5">
                     <div className="w-6 h-6 rounded-full bg-white/80 flex items-center justify-center">
-                      <Check className="w-3 h-3 text-[#002B31]" />
+                      <Check className="w-3 h-3 text-foreground" />
                     </div>
                     <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-white/60">Dispute Resolved</span>
                   </div>
@@ -327,22 +327,22 @@ export function HeroAnimation() {
                   return (
                     <motion.div
                       key={step}
-                      className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center gap-2.5"
+                      className="bg-surface-soft ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center gap-2.5"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.35, delay: 0.4 + i * 0.15 }}
                     >
                       <div className="w-4 h-4 flex items-center justify-center shrink-0">
                         {showLoader ? (
-                          <Loader2 className="w-3 h-3 text-[#002B31]/40 animate-spin" />
+                          <Loader2 className="w-3 h-3 text-foreground/40 animate-spin" />
                         ) : (
-                          <div className="w-4 h-4 rounded-full bg-[#002B31]/10 flex items-center justify-center">
-                            <Check className="w-2.5 h-2.5 text-[#002B31]" />
+                          <div className="w-4 h-4 rounded-full bg-foreground/10 flex items-center justify-center">
+                            <Check className="w-2.5 h-2.5 text-foreground" />
                           </div>
                         )}
                       </div>
                       <p className={`text-[11px] font-semibold leading-tight ${
-                        showLoader ? "text-black/40" : "text-[#171717]"
+                        showLoader ? "text-black/40" : "text-foreground"
                       }`}>
                         {showLoader ? "Scheduling follow-up…" : step}
                       </p>
@@ -394,13 +394,13 @@ export function HeroAnimation() {
                 {portalInvoices.map((inv, i) => (
                   <motion.div
                     key={inv.id}
-                    className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center justify-between"
+                    className="bg-surface-soft ring-1 ring-black/[0.06] shadow-sm rounded-lg px-3 py-2.5 flex items-center justify-between"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: 0.4 + i * 0.12 }}
                   >
-                    <span className="text-[11px] font-medium text-[#171717]">{inv.id}</span>
-                    <span className="text-[11px] font-semibold text-[#171717]">{inv.amount}</span>
+                    <span className="text-[11px] font-medium text-foreground">{inv.id}</span>
+                    <span className="text-[11px] font-semibold text-foreground">{inv.amount}</span>
                   </motion.div>
                 ))}
 
@@ -411,7 +411,7 @@ export function HeroAnimation() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.9 }}
                 >
-                  <span className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg shadow-sm">
+                  <span className="text-[11px] font-semibold text-white bg-foreground px-3 py-1.5 rounded-lg shadow-sm">
                     Pay now
                   </span>
                 </motion.div>
@@ -469,14 +469,14 @@ export function HeroAnimation() {
                     return (
                       <motion.div
                         key={metric.label}
-                        className="bg-[#FAF8F6] ring-1 ring-black/[0.06] shadow-sm rounded-lg p-3"
+                        className="bg-surface-soft ring-1 ring-black/[0.06] shadow-sm rounded-lg p-3"
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.5 + i * 0.12 }}
                       >
                         <span className="text-[8px] font-semibold tracking-[0.05em] uppercase text-black/35 mb-2 block">{metric.label}</span>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[16px] font-bold text-[#171717] leading-none">{metric.value}</span>
+                          <span className="text-[16px] font-bold text-foreground leading-none">{metric.value}</span>
                           {metric.trend === "up" ? (
                             <TrendingUp className="w-3.5 h-3.5 text-[#F87171]" />
                           ) : (
@@ -496,7 +496,7 @@ export function HeroAnimation() {
                   transition={{ duration: 0.4, delay: 0.9 }}
                 >
                   <motion.span
-                    className="text-[11px] font-semibold text-white bg-[#002B31] px-3 py-1.5 rounded-lg shadow-sm inline-flex items-center gap-1.5"
+                    className="text-[11px] font-semibold text-white bg-foreground px-3 py-1.5 rounded-lg shadow-sm inline-flex items-center gap-1.5"
                     animate={
                       reviewClicked
                         ? { scale: [1, 0.93, 1], transition: { duration: 0.2 } }

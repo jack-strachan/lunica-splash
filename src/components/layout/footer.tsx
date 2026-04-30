@@ -4,11 +4,12 @@ import { PageContainer } from "@/components/ui/page-container"
 import { FooterProductLink } from "@/components/layout/footer-link"
 
 const productLinks = [
-  { label: "Collections", href: "/#collections" },
-  { label: "Credit", href: "/#credit" },
-  { label: "Online Payments", href: "/#online-payments" },
-  { label: "Payments Portal", href: "/#payments-portal" },
-  { label: "Customer Portal", href: "/#customer-portal" },
+  { label: "Collections", href: "/collections" },
+  { label: "Credit", href: "/credit" },
+  { label: "Disputes", href: "/disputes" },
+  { label: "Online Payments", href: "/online-payments" },
+  { label: "Invoice Upload", href: "/payments-portal" },
+  { label: "Customer Portal", href: "/customer-portal" },
 ]
 
 const companyLinks = [

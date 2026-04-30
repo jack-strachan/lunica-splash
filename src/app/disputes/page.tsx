@@ -93,7 +93,7 @@ export default function DisputesPage() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex flex-col justify-center bg-[#EBE7E3] px-6 py-10"
+                className="flex flex-col justify-center bg-surface-1 px-6 py-10"
               >
                 <p className="text-3xl font-medium tracking-tight text-foreground lg:text-4xl">
                   {stat.value}
@@ -113,7 +113,7 @@ export default function DisputesPage() {
           <section
             key={feature.label}
             className={`w-full ${isEven ? "bg-background" : ""}`}
-            style={!isEven ? { background: "#EDE7DF" } : undefined}
+            style={!isEven ? { background: "var(--surface-3)" } : undefined}
           >
             <div className={`mx-auto grid max-w-[1400px] gap-12 px-5 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 ${i === 0 ? "pt-20 pb-12 lg:pt-40 lg:pb-16" : "py-20 lg:py-40"}`}>
               <div className={`flex flex-col items-start justify-center ${!isEven ? "md:order-last" : ""}`}>
@@ -133,7 +133,7 @@ export default function DisputesPage() {
                   <div
                     key={detail}
                     className={`flex items-center px-6 py-8 ${
-                      isEven ? "bg-[#EBE7E3]" : "bg-[#E3D7CD]"
+                      isEven ? "bg-surface-1" : "bg-surface-2"
                     }`}
                   >
                     <p className="text-base !leading-tight text-foreground">
@@ -168,15 +168,15 @@ export default function DisputesPage() {
                         </div>
                         <div className="p-6">
                           <div className="grid gap-4 md:grid-cols-3">
-                            <div className="rounded-lg bg-[#EBE7E3] p-5">
+                            <div className="rounded-lg bg-surface-1 p-5">
                               <div className="h-3 w-20 rounded bg-black/[0.08]" />
                               <div className="mt-8 h-8 w-16 rounded bg-[#7A5C6A]/30" />
                             </div>
-                            <div className="rounded-lg bg-[#EBE7E3] p-5">
+                            <div className="rounded-lg bg-surface-1 p-5">
                               <div className="h-3 w-24 rounded bg-black/[0.08]" />
                               <div className="mt-8 h-8 w-16 rounded bg-[#7A5C6A]/30" />
                             </div>
-                            <div className="rounded-lg bg-[#EBE7E3] p-5">
+                            <div className="rounded-lg bg-surface-1 p-5">
                               <div className="h-3 w-20 rounded bg-black/[0.08]" />
                               <div className="mt-8 h-8 w-16 rounded bg-[#7A5C6A]/30" />
                             </div>
@@ -238,7 +238,7 @@ export default function DisputesPage() {
                   "Close the case with an audit trail, then use root-cause reporting to stop repeat issues.",
               },
             ].map((item) => (
-              <div key={item.step} className="flex flex-col bg-[#E3D7CD] px-6 py-10">
+              <div key={item.step} className="flex flex-col bg-surface-2 px-6 py-10">
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/40">
                   Step {item.step}
                 </span>

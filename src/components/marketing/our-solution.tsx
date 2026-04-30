@@ -51,9 +51,9 @@ export function OurSolutionSection() {
         {/* Bottom — 3-column steps with image placeholders */}
         <div className="mt-16 grid gap-0.5 overflow-hidden rounded-lg bg-background md:grid-cols-3">
           {steps.map((step) => (
-            <div key={step.title} className="flex flex-col bg-[#E3D7CD]">
+            <div key={step.title} className="flex flex-col bg-surface-2">
               {/* Step graphic */}
-              <div className="flex h-64 items-center justify-center bg-[#DDD0C4] lg:h-80">
+              <div className="flex h-64 items-center justify-center bg-surface-deep lg:h-80">
                 <SolutionGraphic id={step.graphicId} />
               </div>
 

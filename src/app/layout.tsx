@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { constructMetadata } from "@/lib/metadata";
 import { Navbar } from "@/components/layout/navbar";
+import { PageTransition } from "@/components/layout/page-transition";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -23,12 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${ibmPlexSans.variable} ${GeistMono.variable} font-sans min-h-screen bg-background text-foreground antialiased`}
       >
         <Navbar />
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );

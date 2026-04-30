@@ -9,7 +9,7 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-start justify-center rounded-lg bg-[#EDE7DF] px-8 py-16">
+      <div className="flex flex-col items-start justify-center rounded-lg bg-surface-3 px-8 py-16">
         <h3 className="text-2xl !font-normal leading-[1.08] tracking-tight text-foreground">
           Thanks for reaching out.
         </h3>
@@ -26,7 +26,7 @@ export function ContactForm() {
         e.preventDefault()
         setSubmitted(true)
       }}
-      className="flex flex-col gap-5 rounded-lg bg-[#EDE7DF] p-8"
+      className="flex flex-col gap-5 rounded-lg bg-surface-3 p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
         <FormInput
