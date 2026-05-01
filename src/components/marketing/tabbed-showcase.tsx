@@ -69,12 +69,13 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
 
   const getMobileTabStyle = (i: number) => {
     const distance = Math.abs(i - activeIndex)
+    const isEdgeActive = activeIndex === 0 || activeIndex === tabs.length - 1
     const size = distance === 0 ? "36%" : distance === 1 ? "30%" : distance === 2 ? "25%" : "22%"
     const lift = distance === 0 ? "0px" : distance === 1 ? "3px" : "6px"
 
     return {
       "--tab-size": size,
-      "--tab-overlap": i === 0 ? "0px" : "7%",
+      "--tab-overlap": i === 0 ? "0px" : isEdgeActive ? "4.333%" : "7%",
       "--tab-lift": lift,
       zIndex: tabs.length - distance,
     } as CSSProperties
