@@ -154,8 +154,8 @@ export default function CollectionsPage() {
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
                   <NoiseGradient colors={["#88b4a0", "#4a7a5c", "#3a6248"]} />
-                  <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
-                    <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
+                  <div className="absolute inset-0 flex items-start justify-start pt-7 pl-7 lg:items-end lg:justify-center lg:px-14 lg:pt-14 lg:pb-0">
+                    <div className="h-[520px] w-[980px] origin-top-left scale-[0.72] shrink-0 overflow-hidden rounded-md bg-white shadow-2xl sm:scale-[0.82] md:scale-[0.9] lg:h-full lg:w-full lg:scale-100 lg:rounded-b-none">
                       {/* Window chrome */}
                       <div className="flex h-10 items-center gap-2 border-b border-black/[0.06] px-4">
                         <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
@@ -163,18 +163,163 @@ export default function CollectionsPage() {
                         <span className="h-3 w-3 rounded-full bg-[#28C840]" />
                       </div>
                       {/* Skeleton content */}
-                      <div className="p-6">
-                        <div className="h-4 w-1/3 rounded bg-black/[0.06]" />
-                        <div className="mt-4 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-5/6 rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-2/3 rounded bg-black/[0.04]" />
-                        <div className="mt-6 grid grid-cols-3 gap-3">
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
+                      <div className="grid h-[calc(100%-2.5rem)] grid-cols-[150px_1fr_255px] bg-[#fbfaf8] text-[#2f302d]">
+                        <aside className="border-r border-black/[0.06] bg-white px-4 py-5">
+                          <div className="flex items-center gap-2">
+                            <div className="grid h-7 w-7 place-items-center rounded bg-[#4a7a5c] text-[10px] font-semibold text-white">
+                              L
+                            </div>
+                            <div className="h-3 w-20 rounded bg-black/[0.75]" />
+                          </div>
+
+                          <div className="mt-9 space-y-2">
+                            <div className="h-2 w-14 rounded bg-black/[0.18]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="h-7 rounded bg-[#eef5f1]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                          </div>
+
+                          <div className="mt-9 space-y-2">
+                            <div className="h-2 w-16 rounded bg-black/[0.18]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                          </div>
+                        </aside>
+
+                        <div className="min-w-0 px-8 py-6">
+                          <div className="flex items-start justify-between gap-8">
+                            <div>
+                              <p className="text-sm font-semibold tracking-tight">Collections Overview</p>
+                              <div className="mt-2 h-2 w-44 rounded bg-black/[0.08]" />
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="flex h-7 w-48 items-center rounded-md border border-black/[0.07] bg-white px-2.5">
+                                <svg
+                                  viewBox="0 0 16 16"
+                                  fill="none"
+                                  className="h-3 w-3 text-black/35"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M7.25 12.25a5 5 0 1 1 0-10 5 5 0 0 1 0 10ZM11 11l2.75 2.75"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                  />
+                                </svg>
+                                <div className="ml-2 h-1.5 w-28 rounded bg-black/[0.07]" />
+                              </div>
+                              <div className="h-7 w-20 rounded-full border border-black/[0.07] bg-white" />
+                              <div className="h-7 w-24 rounded-full bg-[#4a7a5c]" />
+                            </div>
+                          </div>
+
+                          <div className="mt-7 grid grid-cols-4 gap-3">
+                            <div className="rounded-md border border-black/[0.06] bg-white p-4">
+                              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-black/35">At risk</p>
+                              <p className="mt-3 text-xl font-semibold">$2.9M</p>
+                            </div>
+                            <div className="rounded-md border border-black/[0.06] bg-white p-4">
+                              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-black/35">Overdue</p>
+                              <p className="mt-3 text-xl font-semibold">45</p>
+                            </div>
+                            <div className="rounded-md border border-black/[0.06] bg-white p-4">
+                              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-black/35">Queued</p>
+                              <p className="mt-3 text-xl font-semibold">12</p>
+                            </div>
+                            <div className="rounded-md border border-black/[0.06] bg-white p-4">
+                              <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-black/35">Recovered</p>
+                              <p className="mt-3 text-xl font-semibold">$706K</p>
+                            </div>
+                          </div>
+
+                          <div className="mt-5 overflow-hidden rounded-md border border-black/[0.06] bg-white">
+                            <div className="grid grid-cols-[1.4fr_0.55fr_0.55fr_0.7fr_0.7fr_0.8fr] border-b border-black/[0.06] px-4 py-3 text-[10px] font-medium uppercase tracking-[0.16em] text-black/35">
+                              <span>Task</span>
+                              <span>Priority</span>
+                              <span>Age</span>
+                              <span>Status</span>
+                              <span>Risk</span>
+                              <span>Outstanding</span>
+                            </div>
+                            {[
+                              ["Nora Ellison", "P10", "66d", "In progress", "Critical", "$173,404"],
+                              ["Marcus Hale", "P10", "491d", "In progress", "Critical", "$2,969,927"],
+                              ["Priya Bennett", "P9", "860d", "Waiting", "High", "$706,793"],
+                              ["Caleb Monroe", "P8", "180d", "On hold", "High", "$597,645"],
+                            ].map((row) => (
+                              <div key={row[0]} className="grid grid-cols-[1.4fr_0.55fr_0.55fr_0.7fr_0.7fr_0.8fr] items-center border-b border-black/[0.05] px-4 py-3 last:border-b-0">
+                                <div>
+                                  <p className="text-xs font-medium">{row[0]}</p>
+                                  <div className="mt-1 h-1.5 w-24 rounded bg-black/[0.06]" />
+                                </div>
+                                <span className="w-fit rounded border border-[#ffd2d2] bg-[#fff3f3] px-2 py-1 text-[10px] text-[#c14242]">{row[1]}</span>
+                                <p className="text-xs text-black/45">{row[2]}</p>
+                                <span className="w-fit rounded border border-[#e8d6ae] bg-[#fff8e7] px-2 py-1 text-[10px] text-[#906c12]">{row[3]}</span>
+                                <span className="w-fit rounded border border-[#ffd2d2] bg-[#fff3f3] px-2 py-1 text-[10px] text-[#c14242]">{row[4]}</span>
+                                <p className="text-xs font-medium">{row[5]}</p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                        <div className="mt-6 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-4/5 rounded bg-black/[0.04]" />
+
+                        <aside className="border-l border-black/[0.06] bg-white px-5 py-6">
+                          <div className="flex items-center justify-between">
+                            <div className="h-2.5 w-14 rounded bg-black/[0.7]" />
+                            <div className="flex items-center gap-2">
+                              <p className="text-[10px] font-medium text-black/55">Auto-Process</p>
+                              <div className="relative h-6 w-11 rounded-full bg-[#4a7a5c]">
+                                <span className="absolute right-1 top-1 h-4 w-4 rounded-full bg-white" />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="mt-5 rounded-md border border-black/[0.07] p-4">
+                            <div className="flex gap-2">
+                              <span className="rounded border border-black/[0.08] px-2 py-1 text-[10px] text-black/55">P10</span>
+                              <span className="rounded border border-[#ffd2d2] bg-[#fff3f3] px-2 py-1 text-[10px] text-[#c14242]">Critical</span>
+                            </div>
+                            <p className="mt-4 text-sm font-semibold leading-tight">Nora Ellison — $173,404 overdue</p>
+                            <div className="mt-4 grid grid-cols-2 gap-3">
+                              <div>
+                                <div className="h-1.5 w-14 rounded bg-black/[0.08]" />
+                                <p className="mt-2 text-xs font-medium">66 days</p>
+                              </div>
+                              <div>
+                                <div className="h-1.5 w-16 rounded bg-black/[0.08]" />
+                                <p className="mt-2 text-xs font-medium">0%</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 rounded-md border border-black/[0.07] p-4">
+                            <div className="flex items-center gap-2">
+                              <span className="h-2 w-2 rounded-full bg-[#4a7a5c]" />
+                              <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#4a7a5c]">Executed</p>
+                            </div>
+                            <div className="mt-3 rounded border border-black/[0.06] bg-[#fbfaf8] p-3">
+                              <div className="flex items-center justify-between border-b border-black/[0.06] pb-2">
+                                <div>
+                                  <p className="text-[10px] font-medium text-[#4a7a5c]">Sent outreach</p>
+                                  <div className="mt-1 h-1.5 w-24 rounded bg-black/[0.08]" />
+                                </div>
+                                <span className="rounded border border-black/[0.08] bg-white px-1.5 py-0.5 text-[9px] text-black/45">EMAIL</span>
+                              </div>
+                              <div className="mt-3 space-y-2">
+                                <div className="h-2 w-32 rounded bg-black/[0.28]" />
+                                <div className="h-2 rounded bg-black/[0.08]" />
+                                <div className="h-2 rounded bg-black/[0.08]" />
+                                <div className="h-2 w-4/5 rounded bg-black/[0.08]" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 space-y-3">
+                            <div className="h-9 rounded-md border border-black/[0.07] bg-white" />
+                            <div className="h-9 rounded-md border border-black/[0.07] bg-white" />
+                            <div className="h-16 rounded-md bg-black/[0.035]" />
+                          </div>
+                        </aside>
                       </div>
                     </div>
                   </div>

@@ -154,27 +154,152 @@ export default function OnlinePaymentsPage() {
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
                   <NoiseGradient colors={["#7B8FA1", "#4A5E73", "#2C3E50"]} />
-                  <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
-                    <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
+                  <div className="absolute inset-0 flex items-start justify-start pt-7 pl-7 lg:items-end lg:justify-center lg:px-14 lg:pt-14 lg:pb-0">
+                    <div className="h-[520px] w-[980px] origin-top-left scale-[0.72] shrink-0 overflow-hidden rounded-md bg-white shadow-2xl sm:scale-[0.82] md:scale-[0.9] lg:h-full lg:w-full lg:scale-100 lg:rounded-b-none">
                       {/* Window chrome */}
                       <div className="flex h-10 items-center gap-2 border-b border-black/[0.06] px-4">
                         <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
                         <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
                         <span className="h-3 w-3 rounded-full bg-[#28C840]" />
+                        <div className="ml-4 flex h-6 flex-1 items-center rounded-full border border-black/[0.06] bg-[#fbfaf8] px-3">
+                          <span className="h-2 w-40 rounded-full bg-black/[0.05]" />
+                        </div>
                       </div>
                       {/* Skeleton content */}
-                      <div className="p-6">
-                        <div className="h-4 w-1/3 rounded bg-black/[0.06]" />
-                        <div className="mt-4 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-5/6 rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-2/3 rounded bg-black/[0.04]" />
-                        <div className="mt-6 grid grid-cols-3 gap-3">
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                        </div>
-                        <div className="mt-6 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-4/5 rounded bg-black/[0.04]" />
+                      <div className="grid h-[calc(100%-2.5rem)] grid-cols-[180px_1fr_320px] bg-[#fbfaf8]">
+                        <aside className="border-r border-black/[0.06] bg-white p-5">
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#4A5E73] text-xs font-semibold text-white">
+                              L
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-black">Lunica</p>
+                              <p className="text-xs text-black/40">Payments</p>
+                            </div>
+                          </div>
+                          <div className="mt-8 space-y-2">
+                            {["Overview", "Payment links", "Checkout", "Reconciliation"].map((item, itemIndex) => (
+                              <div
+                                key={item}
+                                className={`rounded-lg px-3 py-2 text-sm ${
+                                  itemIndex === 1
+                                    ? "bg-[#4A5E73]/10 font-medium text-[#2C3E50]"
+                                    : "text-black/45"
+                                }`}
+                              >
+                                {item}
+                              </div>
+                            ))}
+                          </div>
+                          <div className="mt-10 space-y-3">
+                            <div className="h-2 w-24 rounded-full bg-black/[0.05]" />
+                            <div className="h-2 w-28 rounded-full bg-black/[0.04]" />
+                            <div className="h-2 w-20 rounded-full bg-black/[0.04]" />
+                          </div>
+                        </aside>
+
+                        <section className="p-6">
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#4A5E73]">
+                                Automatic payment link
+                              </p>
+                              <h3 className="mt-2 text-2xl font-medium tracking-tight text-black">
+                                Review SMS before sending
+                              </h3>
+                              <p className="mt-2 max-w-md text-sm !leading-tight text-black/50">
+                                Lunica generated a secure checkout link for the latest open invoice and prepared a customer-ready SMS.
+                              </p>
+                            </div>
+                            <div className="rounded-full border border-black/[0.07] bg-white px-3 py-1.5 text-xs font-medium text-black/60">
+                              Ready to send
+                            </div>
+                          </div>
+
+                          <div className="mt-6 grid grid-cols-3 gap-3">
+                            {[
+                              ["Invoice", "INV-1048"],
+                              ["Balance due", "$8,420.00"],
+                              ["Due date", "May 14"],
+                            ].map(([label, value]) => (
+                              <div key={label} className="rounded-xl border border-black/[0.06] bg-white p-4">
+                                <p className="text-xs text-black/40">{label}</p>
+                                <p className="mt-2 text-lg font-medium tracking-tight text-black">{value}</p>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-5 rounded-xl border border-black/[0.06] bg-white p-5">
+                            <div className="flex items-center justify-between border-b border-black/[0.06] pb-4">
+                              <div>
+                                <p className="text-sm font-medium text-black">Nora Ellison</p>
+                                <p className="mt-1 text-xs text-black/45">Northstar Supply Co. · +1 (415) 555-0186</p>
+                              </div>
+                              <span className="rounded-full bg-[#4A5E73]/10 px-3 py-1 text-xs font-medium text-[#2C3E50]">
+                                SMS
+                              </span>
+                            </div>
+                            <div className="mt-4 rounded-lg bg-[#fbfaf8] p-4">
+                              <p className="text-xs font-medium uppercase tracking-[0.16em] text-black/35">
+                                Message content
+                              </p>
+                              <p className="mt-3 text-sm !leading-relaxed text-black/70">
+                                Hi Nora, Northstar Supply Co. has a balance of $8,420.00 due for INV-1048. You can pay securely here: pay.lunica.app/1048
+                              </p>
+                            </div>
+                            <div className="mt-4 grid grid-cols-[1fr_auto] gap-3">
+                              <div className="rounded-lg border border-black/[0.06] px-4 py-3">
+                                <p className="text-xs text-black/35">Delivery rule</p>
+                                <p className="mt-1 text-sm font-medium text-black">Send SMS now, email reminder in 3 days</p>
+                              </div>
+                              <button className="rounded-lg bg-[#4A5E73] px-5 text-sm font-medium text-white">
+                                Send link
+                              </button>
+                            </div>
+                          </div>
+                        </section>
+
+                        <aside className="border-l border-black/[0.06] bg-white p-6">
+                          <div className="mx-auto w-[236px] rounded-[2rem] border border-black/[0.08] bg-black p-2">
+                            <div className="overflow-hidden rounded-[1.55rem] bg-[#f5f5f5]">
+                              <div className="flex h-8 items-center justify-center bg-white">
+                                <div className="h-1.5 w-16 rounded-full bg-black/[0.15]" />
+                              </div>
+                              <div className="border-y border-black/[0.05] bg-white px-4 py-3 text-center">
+                                <p className="text-xs font-semibold text-black">Messages</p>
+                                <p className="text-[10px] text-black/35">Today 10:42 AM</p>
+                              </div>
+                              <div className="min-h-[330px] px-3 py-5">
+                                <div className="max-w-[190px] rounded-2xl rounded-tl-md bg-white px-3 py-2 shadow-sm">
+                                  <p className="text-[11px] !leading-relaxed text-black/70">
+                                    Hi Nora, Northstar Supply Co. has a balance of $8,420.00 due for INV-1048. You can pay securely here:
+                                  </p>
+                                  <div className="mt-2 rounded-xl border border-[#4A5E73]/20 bg-[#4A5E73]/10 p-2">
+                                    <p className="text-[10px] font-medium text-[#2C3E50]">pay.lunica.app/1048</p>
+                                    <p className="mt-1 text-[9px] text-black/40">Secure checkout · Card, ACH, wire</p>
+                                  </div>
+                                </div>
+                                <div className="mt-4 ml-auto max-w-[150px] rounded-2xl rounded-tr-md bg-[#4A5E73] px-3 py-2">
+                                  <p className="text-[11px] !leading-relaxed text-white">
+                                    Thanks, I’ll pay this afternoon.
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="border-t border-black/[0.05] bg-white p-3">
+                                <div className="h-8 rounded-full border border-black/[0.08] bg-[#fbfaf8]" />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="mt-5 rounded-xl border border-black/[0.06] bg-[#fbfaf8] p-4">
+                            <div className="flex items-center justify-between">
+                              <p className="text-sm font-medium text-black">Link status</p>
+                              <span className="h-2 w-2 rounded-full bg-[#28C840]" />
+                            </div>
+                            <p className="mt-2 text-xs !leading-tight text-black/45">
+                              Delivered to SMS with checkout tracking enabled.
+                            </p>
+                          </div>
+                        </aside>
                       </div>
                     </div>
                   </div>

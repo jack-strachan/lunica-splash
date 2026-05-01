@@ -154,8 +154,8 @@ export default function CreditPage() {
               <PageContainer className="pb-20 lg:pb-28">
                 <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
                   <NoiseGradient colors={["#A0937D", "#7D6E5C", "#5C5040"]} />
-                  <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
-                    <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
+                  <div className="absolute inset-0 flex items-start justify-start pt-7 pl-7 lg:items-end lg:justify-center lg:px-14 lg:pt-14 lg:pb-0">
+                    <div className="h-[520px] w-[980px] origin-top-left scale-[0.72] shrink-0 overflow-hidden rounded-md bg-white shadow-2xl sm:scale-[0.82] md:scale-[0.9] lg:h-full lg:w-full lg:scale-100 lg:rounded-b-none">
                       {/* Window chrome */}
                       <div className="flex h-10 items-center gap-2 border-b border-black/[0.06] px-4">
                         <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
@@ -163,18 +163,206 @@ export default function CreditPage() {
                         <span className="h-3 w-3 rounded-full bg-[#28C840]" />
                       </div>
                       {/* Skeleton content */}
-                      <div className="p-6">
-                        <div className="h-4 w-1/3 rounded bg-black/[0.06]" />
-                        <div className="mt-4 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-5/6 rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-2/3 rounded bg-black/[0.04]" />
-                        <div className="mt-6 grid grid-cols-3 gap-3">
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
+                      <div className="grid h-[calc(100%-2.5rem)] grid-cols-[155px_250px_1fr] bg-[#fbfaf8] text-[#2f302d]">
+                        <aside className="border-r border-black/[0.06] bg-white px-4 py-5">
+                          <div className="flex items-center gap-2">
+                            <div className="grid h-7 w-7 place-items-center rounded bg-[#7D6E5C] text-[10px] font-semibold text-white">
+                              L
+                            </div>
+                            <div className="h-3 w-20 rounded bg-black/[0.75]" />
+                          </div>
+
+                          <div className="mt-9 space-y-2">
+                            <div className="h-2 w-14 rounded bg-black/[0.18]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                          </div>
+
+                          <div className="mt-8 space-y-2">
+                            <div className="h-2 w-16 rounded bg-black/[0.18]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="flex h-7 items-center rounded bg-[#f3eee8] px-3">
+                              <div className="h-1.5 w-14 rounded bg-[#7D6E5C]" />
+                            </div>
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                          </div>
+
+                          <div className="mt-8 space-y-2">
+                            <div className="h-2 w-14 rounded bg-black/[0.18]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                            <div className="h-7 rounded bg-black/[0.035]" />
+                          </div>
+                        </aside>
+
+                        <div className="border-r border-black/[0.06] bg-white px-5 py-6">
+                          <div>
+                            <p className="text-sm font-semibold tracking-tight">Credit Overview</p>
+                            <div className="mt-2 h-2 w-32 rounded bg-black/[0.08]" />
+                          </div>
+
+                          <div className="mt-6 flex gap-5 border-b border-black/[0.06] text-[10px] font-medium">
+                            <span className="border-b border-[#7D6E5C] pb-3 text-[#7D6E5C]">Action Items</span>
+                            <span className="pb-3 text-black/35">Credit Policy</span>
+                          </div>
+
+                          <div className="mt-4 flex items-center gap-4 text-[10px] text-black/40">
+                            <span className="text-[#7D6E5C]">All</span>
+                            <span>Open</span>
+                            <span>Starred</span>
+                          </div>
+
+                          <div className="mt-4 flex h-8 items-center rounded-md border border-black/[0.07] bg-[#fbfaf8] px-3">
+                            <svg
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              className="h-3 w-3 text-black/30"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M7.25 12.25a5 5 0 1 1 0-10 5 5 0 0 1 0 10ZM11 11l2.75 2.75"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            <div className="ml-2 h-1.5 w-28 rounded bg-black/[0.07]" />
+                          </div>
+
+                          <div className="mt-4 space-y-2">
+                            {[
+                              ["Nora Ellison", "112.8% util", "High"],
+                              ["Marcus Hale", "121.4% util", "High"],
+                              ["Priya Bennett", "117.6% util", "Medium"],
+                              ["Caleb Monroe", "108.9% util", "Medium"],
+                              ["Maya Brooks", "104.2% util", "Low"],
+                            ].map((item, index) => (
+                              <div
+                                key={item[0]}
+                                className={`rounded-md border px-3 py-3 ${
+                                  index === 0
+                                    ? "border-[#d8cfc3] bg-[#faf7f2]"
+                                    : "border-black/[0.06] bg-white"
+                                }`}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <span className={`h-1.5 w-1.5 rounded-full ${
+                                    item[2] === "High" ? "bg-[#d84d4d]" : "bg-[#e0aa42]"
+                                  }`} />
+                                  <p className="text-xs font-medium">{item[0]}</p>
+                                </div>
+                                <div className="mt-2 h-1.5 w-36 rounded bg-black/[0.07]" />
+                                <div className="mt-2 flex items-center justify-between">
+                                  <span className="text-[10px] text-black/40">{item[1]}</span>
+                                  <span className="text-[10px] text-black/30">1w</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                        <div className="mt-6 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-4/5 rounded bg-black/[0.04]" />
+
+                        <div className="min-w-0 px-6 py-6">
+                          <div className="flex items-start justify-between gap-8">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <p className="text-sm font-semibold tracking-tight">Credit Review: Nora Ellison</p>
+                                <span className="rounded border border-[#e8d6ae] bg-[#fff8e7] px-2 py-1 text-[10px] text-[#906c12]">High</span>
+                              </div>
+                              <div className="mt-2 h-2 w-72 rounded bg-black/[0.08]" />
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="flex h-7 w-20 items-center justify-center rounded-full border border-black/[0.07] bg-white">
+                                <div className="h-1.5 w-9 rounded bg-black/[0.18]" />
+                              </div>
+                              <div className="flex h-7 w-20 items-center justify-center rounded-full border border-black/[0.07] bg-white">
+                                <div className="h-1.5 w-11 rounded bg-black/[0.18]" />
+                              </div>
+                              <div className="h-7 w-20 rounded-full bg-[#7D6E5C]" />
+                            </div>
+                          </div>
+
+                          <div className="mt-5 grid grid-cols-5 gap-3">
+                            {[
+                              ["Avg Days to Pay", "118 days", "Alert"],
+                              ["On-Time Payment", "1.2%", "Alert"],
+                              ["Past Due Balance", "$0.00", "Normal"],
+                              ["Sales Volume", "$0.00", "Normal"],
+                              ["Credit Utilization", "112.8%", "Normal"],
+                            ].map((item) => (
+                              <div key={item[0]} className="rounded-md border border-black/[0.06] bg-white p-4">
+                                <p className="text-[10px] font-medium text-black/35">{item[0]}</p>
+                                <p className="mt-2 text-base font-semibold">{item[1]}</p>
+                                <span className={`mt-3 inline-flex rounded border px-2 py-1 text-[10px] ${
+                                  item[2] === "Alert"
+                                    ? "border-[#e8d6ae] bg-[#fff8e7] text-[#906c12]"
+                                    : "border-[#cde5d9] bg-[#f0faf5] text-[#4a7a5c]"
+                                }`}>
+                                  {item[2]}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-5">
+                            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-black/35">Triggered factors</p>
+                            <div className="mt-2 flex gap-2">
+                              {["Payment rate drop", "Avg days increase", "Credit limit exceeded"].map((item) => (
+                                <span key={item} className="rounded border border-[#e8d6ae] bg-[#fff8e7] px-2 py-1 text-[10px] font-medium uppercase text-[#906c12]">
+                                  {item}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="mt-5 grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="rounded-md border border-black/[0.06] bg-white p-3">
+                                <p className="text-[10px] font-medium text-black/35">Total Past Due</p>
+                                <p className="mt-2 text-base font-semibold text-[#d84d4d]">$412,908.64</p>
+                                <div className="mt-2 h-1.5 w-20 rounded bg-[#ffdada]" />
+                              </div>
+                              <div className="rounded-md border border-black/[0.06] bg-white p-3">
+                                <p className="text-[10px] font-medium text-black/35">Outstanding Balance</p>
+                                <p className="mt-2 text-base font-semibold">$558,240.19</p>
+                                <div className="mt-2 h-1.5 w-20 rounded bg-black/[0.08]" />
+                              </div>
+                              <div className="rounded-md border border-black/[0.06] bg-white p-3">
+                                <p className="text-[10px] font-medium text-black/35">Last Payment</p>
+                                <p className="mt-2 text-base font-semibold">$1,842.50</p>
+                                <div className="mt-2 h-1.5 w-16 rounded bg-black/[0.08]" />
+                              </div>
+                              <div className="rounded-md border border-black/[0.06] bg-white p-3">
+                                <p className="text-[10px] font-medium text-black/35">Collection Rate</p>
+                                <p className="mt-2 text-base font-semibold">91%</p>
+                                <div className="mt-2 h-1.5 w-16 rounded bg-black/[0.08]" />
+                              </div>
+                            </div>
+                            <div className="overflow-hidden rounded-md border border-black/[0.06] bg-white p-4">
+                              <p className="text-sm font-semibold tracking-tight">Monthly Invoiced</p>
+                              <div className="mt-0 flex h-24 items-end gap-3 px-3">
+                                {[78, 51, 56, 63, 60, 53, 39, 58, 47, 28].map((height, index) => (
+                                  <div
+                                    key={index}
+                                    className="w-full rounded-t bg-[#7D6E5C]"
+                                    style={{ height: `${height}%` }}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="mt-3">
+                            <div className="overflow-hidden rounded-md border border-black/[0.06] bg-white p-4">
+                              <p className="text-sm font-semibold tracking-tight">Days Sales Outstanding</p>
+                              <div className="mt-2 h-2 w-24 rounded bg-black/[0.08]" />
+                              <svg viewBox="0 0 320 116" className="mt-3 h-28 w-full text-[#7D6E5C]" aria-hidden="true">
+                                <path d="M0 104H320M0 76H320M0 48H320M0 20H320" stroke="currentColor" strokeOpacity=".08" />
+                                <path d="M4 104C80 104 116 102 152 98C204 91 244 82 272 64C296 48 308 28 318 6V104H4Z" fill="currentColor" fillOpacity=".08" />
+                                <path d="M4 104C80 104 116 102 152 98C204 91 244 82 272 64C296 48 308 28 318 6" fill="none" stroke="currentColor" strokeWidth="2" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

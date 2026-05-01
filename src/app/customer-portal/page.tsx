@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import { NoiseGradient } from "@/components/marketing/noise-gradient"
 import { SubpageHero } from "@/components/marketing/subpage-hero"
+import { CustomerPortalMock } from "@/components/marketing/customer-portal-mock"
 import { CtaSection } from "@/components/marketing/cta-section"
 import { Footer } from "@/components/layout/footer"
 import { constructMetadata } from "@/lib/metadata"
@@ -150,37 +150,7 @@ export default function CustomerPortalPage() {
             </div>
 
             {/* UI mockup block — shown under the first feature */}
-            {i === 0 && (
-              <PageContainer className="pb-20 lg:pb-28">
-                <div className="relative h-[360px] overflow-hidden rounded-md md:h-[480px] lg:h-[560px]">
-                  <NoiseGradient colors={["#9AAEA8", "#5F746E", "#405650"]} />
-                  <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10 lg:p-14">
-                    <div className="h-full w-full overflow-hidden rounded-md bg-white shadow-2xl">
-                      {/* Window chrome */}
-                      <div className="flex h-10 items-center gap-2 border-b border-black/[0.06] px-4">
-                        <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                        <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-                        <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-                      </div>
-                      {/* Skeleton content */}
-                      <div className="p-6">
-                        <div className="h-4 w-1/3 rounded bg-black/[0.06]" />
-                        <div className="mt-4 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-5/6 rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-2/3 rounded bg-black/[0.04]" />
-                        <div className="mt-6 grid grid-cols-3 gap-3">
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                          <div className="h-20 rounded bg-black/[0.04]" />
-                        </div>
-                        <div className="mt-6 h-3 w-full rounded bg-black/[0.04]" />
-                        <div className="mt-2 h-3 w-4/5 rounded bg-black/[0.04]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </PageContainer>
-            )}
+            {i === 0 && <CustomerPortalMock />}
           </section>
         )
       })}
