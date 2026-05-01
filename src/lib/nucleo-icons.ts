@@ -1,3 +1,5 @@
+export { Loader2, MousePointer2 } from "lucide-react"
+
 export {
   IconArrowRight as ArrowRight,
   IconCheck as Check,
@@ -17,7 +19,6 @@ export {
   IconFilesContent as FileText,
   IconFlag7 as Flag,
   IconLink as Link2,
-  IconLoader2 as Loader2,
   IconMsgRefresh as RefreshCw,
   IconFilePen as Send,
   IconSquareSettings as Settings,
@@ -25,7 +26,6 @@ export {
   IconMenuBars as Menu,
   IconXmark as X,
   IconCircleArrowUp as ArrowUpCircle,
-  IconButtonCursor as MousePointer2,
   IconBell as Bell,
   IconChartBarTrendDown as TrendingDown,
   IconCreditCard as CreditCard,

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
+import type { CSSProperties } from "react"
 import Image from "next/image"
 import { TabGraphic } from "@/components/marketing/tab-graphics"
 import { NoiseGradient } from "@/components/marketing/noise-gradient"
@@ -66,6 +67,19 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
     switchTab(i)
   }, [activeIndex, switchTab])
 
+  const getMobileTabStyle = (i: number) => {
+    const distance = Math.abs(i - activeIndex)
+    const size = distance === 0 ? "36%" : distance === 1 ? "30%" : distance === 2 ? "25%" : "22%"
+    const lift = distance === 0 ? "0px" : distance === 1 ? "3px" : "6px"
+
+    return {
+      "--tab-size": size,
+      "--tab-overlap": i === 0 ? "0px" : "7%",
+      "--tab-lift": lift,
+      zIndex: tabs.length - distance,
+    } as CSSProperties
+  }
+
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
@@ -116,12 +130,14 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   return (
     <div ref={containerRef} className="overflow-hidden rounded-lg bg-surface-1">
       {/* Tab bar */}
-      <div className="grid gap-0.5 overflow-hidden rounded-t-md bg-background" style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}>
+      <div className="flex overflow-hidden rounded-t-md bg-background md:grid md:gap-0.5" style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}>
         {tabs.map((tab, i) => (
           <button
             key={tab.title}
             onMouseEnter={() => handleManualClick(i)}
-            className={`flex h-20 relative items-center rounded-t-md px-6 text-left text-sm font-medium leading-tight transition-colors duration-200 ${i === activeIndex
+            onClick={() => handleManualClick(i)}
+            style={getMobileTabStyle(i)}
+            className={`relative flex h-20 min-w-0 basis-[var(--tab-size)] translate-y-[var(--tab-lift)] items-center rounded-t-md -ml-[var(--tab-overlap)] px-4 text-left text-[12px] font-medium leading-tight shadow-sm ring-1 ring-black/[0.03] transition-all duration-300 ease-out first:ml-0 md:ml-0 md:basis-auto md:translate-y-0 md:px-6 md:text-sm md:shadow-none md:ring-0 ${i === activeIndex
                 ? "bg-surface-2 text-foreground"
                 : "bg-surface-1 text-foreground/50 hover:text-foreground/70"
               }`}
