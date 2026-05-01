@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import { TabGraphic } from "@/components/marketing/tab-graphics"
+import { NoiseGradient } from "@/components/marketing/noise-gradient"
 
 export interface TabItem {
   title: string
@@ -19,6 +20,15 @@ interface TabbedShowcaseProps {
 
 const DURATION = 6000
 
+const productGradientColors: Record<string, [string, string, string]> = {
+  collections: ["#88b4a0", "#4a7a5c", "#3a6248"],
+  credit: ["#A0937D", "#7D6E5C", "#5C5040"],
+  disputes: ["#B08A9A", "#7A5C6A", "#4C3642"],
+  payments: ["#7B8FA1", "#4A5E73", "#2C3E50"],
+  portal: ["#E8B4B8", "#C97B84", "#A85A6A"],
+  "customer-portal": ["#9AAEA8", "#5F746E", "#405650"],
+}
+
 export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -26,6 +36,10 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   const [fading, setFading] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const active = tabs[activeIndex]
+  const gradientKey = active.graphicId?.startsWith("customer-portal")
+    ? "customer-portal"
+    : active.graphicId?.split("-")[0]
+  const gradientColors = productGradientColors[gradientKey ?? "collections"] ?? productGradientColors.collections
   const containerRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
   const startRef = useRef<number>(0)
@@ -107,11 +121,10 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
           <button
             key={tab.title}
             onMouseEnter={() => handleManualClick(i)}
-            className={`flex h-20 relative items-center rounded-t-md px-6 text-left text-sm font-medium leading-tight transition-colors duration-200 ${
-              i === activeIndex
+            className={`flex h-20 relative items-center rounded-t-md px-6 text-left text-sm font-medium leading-tight transition-colors duration-200 ${i === activeIndex
                 ? "bg-surface-2 text-foreground"
                 : "bg-surface-1 text-foreground/50 hover:text-foreground/70"
-            }`}
+              }`}
           >
             <span className="whitespace-pre-line">{tab.title}</span>
             <div
@@ -123,11 +136,17 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
       </div>
 
       {/* Content area */}
-      <div className={`bg-surface-2 rounded-lg border-surface-1 ${
-        activeIndex === 0 ? "!rounded-tl-none" : ""
-      } ${activeIndex === tabs.length - 1 ? "!rounded-tr-none" : ""}`}>
+      <div className={`bg-surface-2 rounded-lg border-surface-1 relative overflow-hidden ${activeIndex === 0 ? "!rounded-tl-none" : ""
+        } ${activeIndex === tabs.length - 1 ? "!rounded-tr-none" : ""}`}>
+        {/* <div className="absolute inset-0 overflow-hidden rounded-md opacity-20">
+          <NoiseGradient colors={gradientColors} />
+          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-surface-2 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-surface-2 to-transparent" />
+        </div> */}
+
         {/* Visual — graphic component → static image → placeholder */}
-        <div className={`flex h-72 items-center justify-center lg:h-96 transition-opacity duration-250 ${fading ? "opacity-0" : "opacity-100"}`}>
+        <div className={`relative flex h-72 items-center justify-center lg:h-96 transition-opacity duration-250 ${fading ? "opacity-0" : "opacity-100"}`}>
           {active.graphicId ? (
             <TabGraphic key={activeIndex} id={active.graphicId} />
           ) : active.image ? (
@@ -149,11 +168,10 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
             {tabs.map((tab, i) => (
               <p
                 key={tab.title}
-                className={`col-start-1 row-start-1 text-lg !leading-tight text-foreground text-balance transition-all duration-250 ease-out ${
-                  i === displayIndex && !fading
+                className={`col-start-1 row-start-1 text-lg !leading-tight text-foreground text-balance transition-all duration-250 ease-out ${i === displayIndex && !fading
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-1 pointer-events-none"
-                }`}
+                  }`}
                 aria-hidden={i !== displayIndex}
               >
                 <span className="font-medium">{tab.title}.</span>{" "}

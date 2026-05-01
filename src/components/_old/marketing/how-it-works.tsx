@@ -1,4 +1,4 @@
-import { Settings, RefreshCw, BarChart3, Target } from "lucide-react"
+import { Settings, RefreshCw, BarChart3, Target } from "@/lib/nucleo-icons"
 import { HowItWorksVisual } from "@/components/_old/marketing/how-it-works-visual"
 
 import { Container } from "@/components/_old/ui/container"

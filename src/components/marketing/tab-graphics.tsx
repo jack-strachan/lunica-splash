@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "motion/react"
+import Image from "next/image"
 import {
   ArrowRight,
   Check,
@@ -15,7 +16,9 @@ import {
   Share2,
   Image as ImageIcon,
   Lock,
-} from "lucide-react"
+  Send,
+  FileText,
+} from "@/lib/nucleo-icons"
 import { useState, useEffect, type ComponentType } from "react"
 
 /* ── Registry ─────────────────────────────────────────────── */
@@ -86,7 +89,7 @@ function CreditApplicationsGraphic() {
         {view === "desktop" ? (
           <motion.div
             key="desktop-credit-application"
-            className="w-[320px] rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+            className="w-[320px] rounded-xl bg-muted p-3 "
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -10 }}
@@ -94,7 +97,7 @@ function CreditApplicationsGraphic() {
           >
             <div className="mb-3 flex items-center gap-2 border-b border-black/[0.04] pb-2.5">
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-brand">
-                <span className="h-2.5 w-2.5 rounded-sm bg-white" />
+                <span className="h-2.5 w-2.5 rounded-sm bg-muted" />
               </div>
               <div>
                 <span className="block text-[10px] font-bold leading-none text-foreground">Your brand here</span>
@@ -139,11 +142,11 @@ function CreditApplicationsGraphic() {
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
             transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
           >
-            <div className="rounded-[1rem] bg-white p-3">
+            <div className="rounded-[1rem] bg-muted p-3">
               <div className="mx-auto mb-3 h-1 w-8 rounded-full bg-black/10" />
               <div className="mb-3 flex items-center gap-2">
                 <div className="flex h-6 w-6 items-center justify-center rounded-md bg-brand">
-                  <span className="h-2.5 w-2.5 rounded-sm bg-white" />
+                  <span className="h-2.5 w-2.5 rounded-sm bg-muted" />
                 </div>
                 <div>
                   <span className="block text-[9px] font-bold leading-none text-foreground">Your brand here</span>
@@ -185,7 +188,7 @@ function CreditApplicationsGraphic() {
         </AnimatePresence>
       </div>
 
-      <div className="mt-5 flex items-center gap-1 rounded-full bg-white px-1.5 py-1 ring-1 ring-black/[0.04]">
+      <div className="mt-5 flex items-center gap-1 rounded-full bg-muted px-1.5 py-1 ">
         {["desktop", "mobile"].map((mode) => (
           <div
             key={mode}
@@ -210,7 +213,7 @@ function CreditUnderwritingGraphic() {
   return (
     <Shell>
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3"
+        className="bg-muted  rounded-lg p-3"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.1 }}
@@ -264,7 +267,7 @@ function CreditUnderwritingGraphic() {
       </motion.div>
 
       <motion.div
-        className="bg-white ring-1 ring-brand/10 rounded-lg px-3 py-2.5 flex items-center gap-2.5"
+        className="bg-muted  rounded-lg px-3 py-2.5 flex items-center gap-2.5"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 1.05 }}
@@ -290,7 +293,7 @@ function CreditRiskGraphic() {
   return (
     <Shell>
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3"
+        className="bg-muted  rounded-lg p-3"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.1 }}
@@ -325,7 +328,7 @@ function CreditRiskGraphic() {
       </motion.div>
 
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-2.5"
+        className="bg-muted  rounded-lg p-2.5"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.35 }}
@@ -361,7 +364,7 @@ function CreditApprovalsGraphic() {
   return (
     <Shell>
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3"
+        className="bg-muted  rounded-lg p-3"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.1 }}
@@ -409,11 +412,11 @@ function CreditApprovalsGraphic() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.85 }}
       >
-        <div className="bg-white ring-1 ring-black/[0.04] rounded-lg px-3 py-2">
+        <div className="bg-muted  rounded-lg px-3 py-2">
           <span className="block text-[13px] font-bold text-foreground leading-none">2h</span>
           <span className="block text-[8px] font-medium text-black/30 mt-1">avg approval</span>
         </div>
-        <div className="bg-white ring-1 ring-brand/10 rounded-lg px-3 py-2">
+        <div className="bg-muted  rounded-lg px-3 py-2">
           <span className="block text-[13px] font-bold text-brand leading-none">Ready</span>
           <span className="block text-[8px] font-medium text-black/30 mt-1">audit trail</span>
         </div>
@@ -426,64 +429,74 @@ function DisputesProofGraphic() {
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute left-7 top-[74px] w-32 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+        className="absolute left-[92px] top-[66px] w-40 rounded-xl bg-muted p-4 "
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.35, delay: 0.1 }}
       >
-        <span className="block text-[10px] font-bold text-foreground">Proof upload</span>
-        <span className="mt-1 block text-[8px] font-medium text-black/35">Delivery receipt</span>
-        <div className="mt-3 rounded-md bg-black/[0.025] p-2">
-          <div className="h-2 rounded bg-black/[0.06]" />
-          <div className="mt-1.5 h-2 w-14 rounded bg-black/[0.04]" />
+        <span className="block text-[12px] font-bold text-foreground">Proof upload</span>
+        <span className="mt-1.5 block text-[9px] font-medium text-black/35">Delivery receipt</span>
+        <div className="mt-4 rounded-lg bg-black/[0.025] p-3">
+          <div className="h-2.5 rounded bg-black/[0.06]" />
+          <div className="mt-2 h-2.5 w-20 rounded bg-black/[0.04]" />
         </div>
       </motion.div>
 
-      <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 448 240" fill="none">
-        <motion.path
-          d="M156 120 C 198 120, 206 120, 244 120"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="3 4"
-          className="text-brand/25"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.55, delay: 0.35 }}
-        />
-      </svg>
-
       <motion.div
-        className="absolute left-[244px] top-[58px] w-36 rounded-xl bg-white p-3 ring-1 ring-brand/10"
+        className="absolute left-[252px] top-[56px] w-52 p-3"
         initial={{ opacity: 0, x: 10, scale: 0.96 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.45 }}
       >
-        <div className="mb-3 flex items-center gap-2">
-          <ImageIcon className="h-4 w-4 text-brand" />
-          <span className="text-[10px] font-bold text-foreground">Attached to case</span>
+        <div className="relative h-[112px]">
+          {[
+            { label: "Receipt", type: "PDF", top: 0, rotate: -3, width: "w-[164px]", icon: Copy },
+            { label: "Dock photo", type: "JPG", top: 30, rotate: 2, width: "w-[176px]", icon: ImageIcon },
+            { label: "Signature", type: "PNG", top: 60, rotate: -1, width: "w-[156px]", icon: Send },
+          ].map((item, i) => (
+            (() => {
+              const Icon = item.icon
+              return (
+                <motion.div
+                  key={item.label}
+                  className={`absolute left-1 ${item.width} rounded-lg border border-black/[0.04] bg-background px-3 py-2.5 shadow-sm`}
+                  style={{ top: item.top, rotate: item.rotate }}
+                  initial={{ opacity: 0, y: 8, rotate: item.rotate - 4 }}
+                  animate={{ opacity: 1, y: 0, rotate: item.rotate }}
+                  transition={{ duration: 0.3, delay: 0.65 + i * 0.1 }}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex min-w-0 items-center gap-1">
+                      <Icon className="h-3 w-3 shrink-0 text-brand" />
+                      <span className="truncate text-[8px] font-bold text-foreground">{item.label}</span>
+                    </div>
+                    <span className="rounded bg-brand/10 px-1.5 py-0.5 text-[6px] font-bold text-brand">{item.type}</span>
+                  </div>
+                  <div className="mt-2 flex items-center gap-1.5">
+                    <Check className="h-3 w-3 shrink-0 text-brand" strokeWidth={3} />
+                    <div className="h-2 flex-1 rounded bg-black/[0.05]" />
+                  </div>
+                </motion.div>
+              )
+            })()
+          ))}
         </div>
-        {["Receipt", "Photo", "Signature"].map((item, i) => (
-          <motion.div
-            key={item}
-            className="mb-1.5 flex items-center justify-between rounded-md bg-brand/6 px-2 py-1.5"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, delay: 0.65 + i * 0.08 }}
-          >
-            <span className="text-[7px] font-semibold text-brand">{item}</span>
-            <Check className="h-3 w-3 text-brand" strokeWidth={3} />
-          </motion.div>
-        ))}
       </motion.div>
     </div>
   )
 }
 
+const collaboratorCursors = [
+  { name: "Maya", color: "bg-brand text-white", x: 318, y: 86, drift: [[0, 0], [8, -5], [4, 6], [-5, 2], [0, 0]] },
+  { name: "Jon", color: "bg-foreground text-white", x: 244, y: 144, drift: [[0, 0], [-7, 4], [5, 7], [9, -3], [0, 0]] },
+  { name: "Priya", color: "bg-[#7f8f8c] text-white", x: 358, y: 172, drift: [[0, 0], [6, 5], [-8, 3], [-3, -6], [0, 0]] },
+]
+
 function DisputesCollaborationGraphic() {
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute inset-x-12 top-9 rounded-xl bg-white ring-1 ring-black/[0.04] overflow-hidden"
+        className="absolute inset-x-12 top-9 rounded-xl bg-muted  overflow-hidden"
         initial={{ opacity: 0, y: 10, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
@@ -512,7 +525,7 @@ function DisputesCollaborationGraphic() {
               {["Sales added context", "Ops checked delivery", "AR ready to respond"].map((item, i) => (
                 <motion.div
                   key={item}
-                  className="rounded-md bg-black/[0.018] px-2 py-1.5 ring-1 ring-black/[0.025]"
+                  className="flex min-h-9 items-center rounded-md bg-black/[0.018] px-2 ring-1 ring-black/[0.025]"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.25, delay: 0.48 + i * 0.09 }}
@@ -524,6 +537,25 @@ function DisputesCollaborationGraphic() {
           </div>
         </div>
       </motion.div>
+      {collaboratorCursors.map((cursor, i) => (
+        <motion.div
+          key={cursor.name}
+          className={`absolute z-10 flex items-center gap-1 rounded-full px-2 py-1 text-[7px] font-bold shadow-sm ${cursor.color}`}
+          initial={{ opacity: 0, scale: 0.9, x: cursor.x, y: cursor.y }}
+          animate={{
+            opacity: 1,
+            scale: [0.96, 1, 1, 0.98, 1],
+            x: cursor.drift.map(([x]) => cursor.x + x),
+            y: cursor.drift.map(([, y]) => cursor.y + y),
+          }}
+          transition={{ duration: 4.5, delay: 0.75 + i * 0.25, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <svg className="h-2.5 w-2.5 text-current" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.1 1.15L9.9 5.75L6.45 6.55L4.85 10.05L2.1 1.15Z" fill="currentColor" />
+          </svg>
+          <span>{cursor.name}</span>
+        </motion.div>
+      ))}
     </div>
   )
 }
@@ -532,23 +564,56 @@ function DisputesVisibilityGraphic() {
   return (
     <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center flex items-center justify-center">
       <motion.div
-        className="relative h-40 w-40 rounded-full bg-white ring-1 ring-black/[0.04]"
+        className="relative h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.72)_42%,rgba(255,255,255,0)_72%)]"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.1 }}
       >
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="absolute inset-0 rounded-full border border-black/[0.04]" style={{ margin: 18 + i * 18 }} />
-        ))}
+        <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 176 176" fill="none">
+          {[62, 42, 22].map((r, i) => (
+            <motion.circle
+              key={r}
+              cx="88"
+              cy="88"
+              r={r}
+              stroke="#005b56"
+              strokeWidth="1"
+              initial={{ opacity: 0.18, scale: 0.96 }}
+              animate={{ opacity: [0.14, 0.34, 0.14], scale: [0.98, 1.02, 0.98] }}
+              transition={{ duration: 1.8, delay: i * 0.28, repeat: Infinity, ease: "easeInOut" }}
+              style={{ transformOrigin: "88px 88px" }}
+            />
+          ))}
+          {[
+            { x: 43, y: 62 },
+            { x: 138, y: 78 },
+            { x: 88, y: 144 },
+          ].map((point, i) => (
+            <motion.line
+              key={`${point.x}-${point.y}`}
+              x1="88"
+              y1="88"
+              x2={point.x}
+              y2={point.y}
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              className="text-brand/30"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 0.35, delay: 0.55 + i * 0.08 }}
+            />
+          ))}
+        </svg>
         <div className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand" />
         {[
-          ["Pricing", "left-0 top-8"],
-          ["Short ship", "right-0 top-12"],
-          ["Tax", "left-1/2 bottom-2 -translate-x-1/2"],
+          ["Pricing", "left-3 top-[50px]"],
+          ["Short ship", "right-1 top-[66px]"],
+          ["Tax", "left-1/2 bottom-5 -translate-x-1/2"],
         ].map(([label, pos], i) => (
           <motion.div
             key={label}
-            className={`absolute ${pos} rounded-lg bg-white px-2.5 py-2 ring-1 ring-black/[0.04]`}
+            className={`absolute ${pos} flex min-h-7 items-center rounded-lg bg-muted px-2.5`}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.35 + i * 0.1 }}
@@ -556,51 +621,61 @@ function DisputesVisibilityGraphic() {
             <span className="text-[8px] font-bold text-foreground">{label}</span>
           </motion.div>
         ))}
-        {[25, 145, 90].map((rotate, i) => (
-          <motion.div
-            key={rotate}
-            className="absolute left-1/2 top-1/2 h-px w-14 origin-left bg-brand/30"
-            initial={{ scaleX: 0, rotate }}
-            animate={{ scaleX: 1, rotate }}
-            transition={{ duration: 0.35, delay: 0.55 + i * 0.08 }}
-          />
-        ))}
       </motion.div>
     </div>
   )
 }
 
+const resolutionTimeline = [
+  { label: "Issue triaged", time: "9:17 AM", icon: MessageSquare },
+  { label: "Credit memo generated", time: "9:21 AM", icon: Copy },
+  { label: "Approved", time: "9:27 AM", icon: Shield },
+  { label: "Customer confirmed", time: "9:41 AM", icon: Check },
+]
+
 function DisputesResolutionGraphic() {
   return (
-    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
-      <div className="absolute left-8 top-[62px] flex flex-col gap-2">
-        {["Triage", "Approval", "Customer confirmed"].map((step, i) => (
-          <motion.div
-            key={step}
-            className="flex w-36 items-center gap-2 rounded-lg bg-white px-3 py-2 ring-1 ring-black/[0.04]"
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.28, delay: 0.15 + i * 0.12 }}
-          >
-            <div className={`h-4 w-4 rounded-full flex items-center justify-center ${i === 2 ? "bg-brand" : "bg-brand/10"}`}>
-              {i === 2 ? <Check className="h-2.5 w-2.5 text-white" strokeWidth={3} /> : <span className="text-[7px] font-bold text-brand">{i + 1}</span>}
-            </div>
-            <span className="text-[8px] font-semibold text-foreground">{step}</span>
-          </motion.div>
-        ))}
-      </div>
-
+    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center flex items-center justify-center">
       <motion.div
-        className="absolute right-8 top-[88px] w-32 rounded-xl bg-white p-3 ring-1 ring-brand/10"
-        initial={{ opacity: 0, x: 12, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{ duration: 0.35, delay: 0.65 }}
+        className="relative w-full px-5 py-5"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, delay: 0.1 }}
       >
-        <span className="block text-[10px] font-bold text-foreground">Resolved</span>
-        <span className="mt-1 block text-[8px] font-medium text-black/35">Audit trail saved</span>
-        <div className="mt-3 inline-flex items-center gap-1 rounded-full bg-brand/10 px-2 py-1">
-          <Check className="h-3 w-3 text-brand" strokeWidth={3} />
-          <span className="text-[7px] font-bold text-brand">Cash unblocked</span>
+        <div className="mb-5 pl-[calc(12.5%-1.25rem)]">
+          <div>
+            <span className="block text-[11px] font-bold leading-none text-foreground">Audit trail</span>
+            <span className="mt-1 block text-[8px] font-medium leading-none text-black/35">Resolution path recorded</span>
+          </div>
+        </div>
+
+        <div className="relative">
+          <motion.div
+            className="absolute left-[12.5%] right-[12.5%] top-5 h-px bg-brand/35"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.55, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
+          />
+          <div className="relative grid grid-cols-4 gap-2">
+            {resolutionTimeline.map((item, i) => {
+              const Icon = item.icon
+              return (
+                <motion.div
+                  key={item.label}
+                  className="flex flex-col items-center text-center"
+                  initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.35, delay: 0.4 + i * 0.12 }}
+                >
+                  <div className="relative z-10 mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white shadow-[0_0_0_5px_rgba(0,91,86,0.10)]">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <span className="text-[8px] font-bold leading-tight text-foreground">{item.label}</span>
+                  <span className="mt-1 text-[7px] font-medium leading-none text-black/35">{item.time}</span>
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
       </motion.div>
     </div>
@@ -618,7 +693,7 @@ function PaymentLinksGraphic() {
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute left-0 top-[78px] w-[155px] rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+        className="absolute left-0 top-[78px] w-[155px] rounded-xl bg-muted p-3 "
         initial={{ opacity: 0, x: -10, y: 8 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -626,7 +701,7 @@ function PaymentLinksGraphic() {
         <div className="mb-3 flex items-center">
           <span className="text-[11px] font-bold text-foreground">Payment Link</span>
         </div>
-        <div className="mb-2 flex h-7 items-center rounded-md border border-black/[0.06] bg-white">
+        <div className="mb-2 flex h-7 items-center rounded-md border border-black/[0.06] bg-muted">
           <span className="flex-1 truncate px-2 text-[8px] font-semibold text-foreground">payservice.co/pay/90234</span>
           <div className="flex h-full w-7 items-center justify-center border-l border-black/[0.06]">
             <Copy className="h-3.5 w-3.5 text-brand" />
@@ -660,7 +735,7 @@ function PaymentLinksGraphic() {
           return (
             <motion.div
               key={channel.label}
-              className="flex w-[92px] min-h-[32px] items-center gap-2 rounded-lg bg-white px-3 py-2 ring-1 ring-black/[0.04]"
+              className="flex w-[92px] min-h-[32px] items-center gap-2 rounded-lg bg-muted px-3 py-2 "
               initial={{ opacity: 0, x: 10, y: 4 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.32, delay: 0.45 + i * 0.12, ease: [0.25, 1, 0.5, 1] }}
@@ -673,7 +748,7 @@ function PaymentLinksGraphic() {
       </div>
 
       <motion.div
-        className="absolute left-[326px] top-[112px] flex w-[122px] items-center gap-2.5 rounded-xl bg-white px-3 py-3 ring-1 ring-brand/10"
+        className="absolute left-[326px] top-[112px] flex w-[122px] items-center gap-2.5 rounded-xl bg-muted px-3 py-3 "
         initial={{ opacity: 0, x: 12, scale: 0.96 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 1, ease: [0.25, 1, 0.5, 1] }}
@@ -693,59 +768,87 @@ function PaymentCheckoutGraphic() {
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute left-5 top-[70px] w-32 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+        className="absolute left-5 top-[52px] w-36 rounded-xl bg-muted p-3 "
         initial={{ opacity: 0, x: -12 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
       >
-        <span className="block text-[10px] font-bold text-foreground">Invoice ready</span>
-        <span className="mt-1 block text-[8px] font-medium text-black/35">$12,400 due</span>
-        <div className="mt-3 h-2 rounded bg-black/[0.04]" />
-        <div className="mt-1.5 h-2 w-16 rounded bg-black/[0.04]" />
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-[10px] font-bold text-foreground">Invoice ready</span>
+          <span className="rounded bg-brand/10 px-1.5 py-0.5 text-[6px] font-bold text-brand">LINK</span>
+        </div>
+        <span className="block text-[8px] font-medium text-black/35">INV-4021 · due today</span>
+        <div className="mt-3 rounded-lg bg-black/[0.025] p-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[7px] font-semibold text-black/35">Apex Corp</span>
+            <span className="text-[8px] font-bold text-foreground">$12,400</span>
+          </div>
+          <div className="mt-2 h-1.5 rounded bg-black/[0.05]" />
+          <div className="mt-1.5 h-1.5 w-16 rounded bg-black/[0.04]" />
+        </div>
       </motion.div>
 
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 448 240" fill="none">
         <motion.path
-          d="M150 124 C 195 124, 208 124, 238 124"
+          d="M164 106 H238"
           stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="3 4"
+          strokeWidth="1"
+          strokeLinecap="round"
           className="text-brand/25"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 0.65, delay: 0.35, ease: [0.25, 1, 0.5, 1] }}
         />
+        <motion.circle
+          r="2"
+          fill="currentColor"
+          className="text-brand"
+          initial={{ opacity: 0, cx: 164, cy: 106 }}
+          animate={{ opacity: [0, 1, 1, 0], cx: [164, 188, 214, 238], cy: [106, 106, 106, 106] }}
+          transition={{ duration: 1, delay: 0.65, repeat: Infinity, repeatDelay: 1.4, ease: "linear" }}
+        />
       </svg>
 
       <motion.div
-        className="absolute left-[238px] top-8 w-[118px] rounded-[1.4rem] bg-foreground p-1.5"
+        className="absolute left-[238px] top-0 w-[116px] rounded-[1.75rem] bg-foreground p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
         initial={{ opacity: 0, y: 12, scale: 0.94 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.45, ease: [0.25, 1, 0.5, 1] }}
       >
-        <div className="rounded-[1rem] bg-white p-2.5">
-          <div className="mx-auto mb-3 h-1 w-7 rounded-full bg-black/10" />
-          <span className="block text-[8px] font-bold text-foreground">Checkout</span>
-          <div className="mt-2 rounded-lg bg-brand/8 px-2 py-2">
-            <span className="block text-[15px] font-bold leading-none text-brand">$12,400</span>
+        <div className="flex min-h-[188px] flex-col rounded-[1.25rem] bg-muted p-2.5">
+          <div className="mx-auto h-1 w-7 rounded-full bg-black/10" />
+          <div className="flex flex-1 flex-col justify-center">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-[8px] font-bold text-foreground">Checkout</span>
+              <Lock className="h-2.5 w-2.5 text-brand" />
+            </div>
+            <div className="rounded-lg bg-brand/8 px-2 py-2">
+              <span className="mb-1 block text-[6px] font-bold uppercase tracking-wide text-brand/70">Amount due</span>
+              <span className="block text-[15px] font-bold leading-none text-brand">$12,400</span>
+            </div>
+            <div className="mt-2 flex items-center justify-between rounded-md bg-background px-2 py-1.5">
+              <span className="text-[7px] font-semibold text-foreground">•••• 4242</span>
+              <span className="text-[6px] font-bold text-black/30">VISA</span>
+            </div>
+            <motion.div
+              className="mt-2 flex h-6 items-center justify-center rounded-md bg-brand text-[7px] font-bold text-white"
+              initial={{ opacity: 0, y: 4, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: [1, 1.03, 1] }}
+              transition={{ duration: 0.8, delay: 0.75, repeat: Infinity, repeatDelay: 1.8 }}
+            >
+              Tap to pay
+            </motion.div>
           </div>
-          <motion.div
-            className="mt-2 flex h-6 items-center justify-center rounded-md bg-brand text-[7px] font-bold text-white"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.75 }}
-          >
-            Tap to pay
-          </motion.div>
         </div>
       </motion.div>
 
       <motion.div
-        className="absolute right-10 bottom-9 rounded-full bg-white px-3 py-1.5 ring-1 ring-brand/10"
+        className="absolute right-8 bottom-7 flex items-center gap-1.5 rounded-full bg-muted px-3 py-1.5 "
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.95 }}
       >
+        <Check className="h-3 w-3 text-brand" strokeWidth={3} />
         <span className="text-[9px] font-bold text-brand">Paid in seconds</span>
       </motion.div>
     </div>
@@ -753,68 +856,80 @@ function PaymentCheckoutGraphic() {
 }
 
 function PaymentSecureGraphic() {
+  const flipOrder = [
+    17, 4, 36, 9, 44, 1, 28, 13, 40, 22, 7, 33, 15, 47, 25, 2, 31, 11, 42, 19, 6, 38, 24, 0, 45, 16, 34, 8, 27, 48, 21, 5, 39, 12, 30, 3, 46, 18, 35, 10, 26, 43, 14, 32, 20, 41, 23, 29, 37,
+  ]
+  const [flipTick, setFlipTick] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFlipTick((current) => current + 1)
+    }, 420)
+    return () => clearInterval(t)
+  }, [])
+
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute left-4 top-[76px] w-28 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.35, delay: 0.1 }}
-      >
-        <span className="block text-[10px] font-bold text-foreground">Card data</span>
-        <div className="mt-3 h-7 rounded-md bg-black/[0.03] px-2 py-1">
-          <div className="h-1.5 w-16 rounded bg-black/[0.08]" />
-          <div className="mt-1 h-1.5 w-10 rounded bg-black/[0.05]" />
-        </div>
-        <span className="mt-2 inline-flex text-[7px] font-semibold text-black/35">Sensitive</span>
-      </motion.div>
-
-      <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 448 240" fill="none">
-        <motion.path
-          d="M128 120 C 180 120, 194 120, 232 120 C 270 120, 286 120, 330 120"
-          stroke="currentColor"
-          strokeWidth="16"
-          strokeLinecap="round"
-          className="text-brand/8"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: [0.25, 1, 0.5, 1] }}
-        />
-        <motion.path
-          d="M128 120 C 180 120, 194 120, 232 120 C 270 120, 286 120, 330 120"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="3 4"
-          className="text-brand/35"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: [0.25, 1, 0.5, 1] }}
-        />
-      </svg>
-
-      <motion.div
-        className="absolute left-[190px] top-[82px] h-20 w-20 rounded-full bg-white ring-1 ring-brand/10 flex items-center justify-center"
+        className="absolute inset-0 flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.35, delay: 0.55 }}
+        transition={{ duration: 0.35, delay: 0.15 }}
       >
-        <div className="h-12 w-12 rounded-full bg-brand/10 flex items-center justify-center">
-          <Lock className="h-5 w-5 text-brand" />
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute right-4 top-[78px] w-28 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
-        initial={{ opacity: 0, x: 10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.35, delay: 0.75 }}
-      >
-        <span className="block text-[10px] font-bold text-foreground">Payment token</span>
-        <div className="mt-3 h-7 rounded-md bg-brand/8 px-2 py-1">
-          <div className="h-1.5 w-14 rounded bg-brand/25" />
-          <div className="mt-1 h-1.5 w-8 rounded bg-brand/15" />
-        </div>
-        <span className="mt-2 inline-flex text-[7px] font-semibold text-brand">Protected</span>
+        <svg className="h-48 w-48 overflow-visible" viewBox="0 0 96 108" fill="none" aria-hidden="true">
+          <defs>
+            <clipPath id="payment-shield-clip">
+              <path d="M48 5L82 17V43C82 67 68 88 48 101C28 88 14 67 14 43V17L48 5Z" />
+            </clipPath>
+          </defs>
+          <motion.path
+            d="M48 5L82 17V43C82 67 68 88 48 101C28 88 14 67 14 43V17L48 5Z"
+            fill="white"
+            fillOpacity="0.78"
+            stroke="#005b56"
+            strokeOpacity="0.32"
+            strokeWidth="1"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 0.55, delay: 0.6 }}
+          />
+          <g clipPath="url(#payment-shield-clip)">
+            <rect x="14" y="5" width="68" height="96" fill="#005b56" fillOpacity="0.08" />
+            {[
+              ["1", "0", "1", "1", "0", "1", "0"],
+              ["0", "1", "0", "0", "1", "1", "0"],
+              ["1", "1", "0", "1", "0", "0", "1"],
+              ["0", "0", "1", "0", "1", "1", "0"],
+              ["1", "0", "1", "0", "0", "1", "1"],
+              ["0", "1", "1", "1", "0", "0", "1"],
+              ["1", "0", "0", "1", "1", "0", "0"],
+            ].map((row, i) => (
+              row.map((digit, j) => {
+                const activeIndex = flipOrder[flipTick % flipOrder.length]
+                const index = i * 7 + j
+                const isFlipping = index === activeIndex
+                return (
+                  <motion.text
+                    key={`${i}-${j}-${isFlipping ? flipTick : "static"}`}
+                    x={21 + j * 9}
+                    y={25 + i * 10}
+                    fill="#005b56"
+                    fillOpacity={isFlipping ? "0.9" : "0.58"}
+                    fontSize="7"
+                    fontWeight="700"
+                    textAnchor="middle"
+                    initial={isFlipping ? { opacity: 0.3, scale: 0.8 } : false}
+                    animate={isFlipping ? { opacity: 1, scale: 1 } : false}
+                    transition={{ duration: 0.16 }}
+                    style={{ transformOrigin: `${21 + j * 9}px ${25 + i * 10}px` }}
+                  >
+                    {isFlipping ? (Number(digit) === 1 ? 0 : 1) : digit}
+                  </motion.text>
+                )
+              })
+            ))}
+          </g>
+        </svg>
       </motion.div>
     </div>
   )
@@ -822,76 +937,64 @@ function PaymentSecureGraphic() {
 
 function PaymentCollectionGraphic() {
   return (
-    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
-      <motion.div
-        className="absolute left-6 top-[76px] w-28 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.35, delay: 0.1 }}
-      >
-        <span className="block text-[10px] font-bold text-foreground">Invoice</span>
-        <span className="mt-1 block text-[8px] font-medium text-black/35">INV-2041</span>
-        <div className="mt-3 h-2 rounded bg-black/[0.04]" />
-        <div className="mt-1.5 h-2 w-14 rounded bg-black/[0.04]" />
-      </motion.div>
+    <div className="relative flex h-60 w-full max-w-md select-none items-center justify-center mx-auto pointer-events-none scale-[0.78] md:scale-100 origin-center">
+      <div className="w-[300px]">
+        <div className="mb-4 flex items-end justify-between">
+          <div>
+            <span className="block text-[10px] font-bold text-foreground">Time to pay</span>
+            <span className="mt-1 block text-[8px] font-medium text-black/35">Invoice delivery → payment posted</span>
+          </div>
+          <motion.div
+            className="rounded-full bg-brand px-2.5 py-1 text-[8px] font-bold text-white"
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, delay: 0.7 }}
+          >
+            3.2 days faster
+          </motion.div>
+        </div>
 
-      <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 448 240" fill="none">
-        <motion.path
-          d="M132 120 C 180 120, 182 80, 224 80 C 266 80, 266 120, 316 120"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="3 4"
-          className="text-black/15"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.35, ease: [0.25, 1, 0.5, 1] }}
-        />
-        <motion.path
-          d="M132 120 C 180 120, 182 160, 224 160 C 266 160, 266 120, 316 120"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeDasharray="3 4"
-          className="text-black/15"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.45, ease: [0.25, 1, 0.5, 1] }}
-        />
-      </svg>
+        <div className="flex h-28 items-end gap-3 border-b border-black/[0.08]">
+          {[
+            { label: "Manual", value: "6.8d", height: 100 },
+            { label: "Email", value: "4.9d", height: 76 },
+            { label: "Link", value: "2.8d", height: 48 },
+            { label: "Portal", value: "1.2d", height: 26 },
+          ].map((bar, i) => (
+            <div key={bar.label} className="flex flex-1 flex-col items-center">
+              <span className="mb-1 text-[8px] font-bold text-foreground">{bar.value}</span>
+              <motion.div
+                className={`w-full rounded-t-md ${i === 3 ? "bg-brand" : "bg-brand/20"}`}
+                initial={{ height: 0 }}
+                animate={{ height: bar.height }}
+                transition={{ duration: 0.55, delay: 0.15 + i * 0.1, ease: [0.25, 1, 0.5, 1] }}
+              />
+            </div>
+          ))}
+        </div>
 
-      {[
-        ["Viewed", "left-[190px] top-[58px]"],
-        ["Paid", "left-[190px] top-[140px]"],
-      ].map(([label, pos], i) => (
-        <motion.div
-          key={label}
-          className={`absolute ${pos} rounded-full bg-white px-3 py-1.5 ring-1 ring-black/[0.04]`}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.55 + i * 0.15 }}
-        >
-          <span className="text-[8px] font-bold text-foreground">{label}</span>
-        </motion.div>
-      ))}
-
-      <motion.div
-        className="absolute right-5 top-[82px] w-28 rounded-xl bg-white p-3 ring-1 ring-brand/10"
-        initial={{ opacity: 0, x: 10, scale: 0.94 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{ duration: 0.35, delay: 0.9 }}
-      >
-        <span className="block text-[10px] font-bold text-foreground">Bank posted</span>
-        <span className="mt-2 block text-[18px] font-bold leading-none text-brand">+34%</span>
-        <span className="mt-1 block text-[8px] font-semibold leading-none text-black/40">faster cash</span>
-      </motion.div>
+        <div className="mt-2 grid grid-cols-4 gap-3">
+          {["Manual", "Email", "Link", "Checkout"].map((label) => (
+            <span key={label} className="text-center text-[7px] font-semibold text-black/35">{label}</span>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
+
+const integrationLogos = [
+  { name: "QuickBooks", logo: "/images/logos/quickbooks-logo.png" },
+  { name: "Mercury", logo: "/images/logos/mercury-logo.png" },
+  { name: "Xero", logo: "/images/logos/xero-logo.png" },
+  { name: "NetSuite", logo: "/images/logos/netsuite-logo.png" },
+]
 
 function PortalSelfServeGraphic() {
   return (
     <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute inset-x-4 top-6 rounded-xl bg-white ring-1 ring-black/[0.04] overflow-hidden"
+        className="absolute inset-x-4 top-6 rounded-xl bg-muted  overflow-hidden"
         initial={{ opacity: 0, y: 10, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -931,13 +1034,25 @@ function PortalSelfServeGraphic() {
         </div>
       </motion.div>
       <motion.div
-        className="absolute right-0 bottom-6 rounded-lg bg-white px-3 py-2 ring-1 ring-brand/10 flex items-center gap-2"
-        initial={{ opacity: 0, x: 10 }}
-        animate={{ opacity: 1, x: 0 }}
+        className="absolute right-1 bottom-8 w-28 -rotate-2 rounded-xl bg-muted p-2.5 shadow-[0_10px_24px_rgba(0,0,0,0.08)]"
+        initial={{ opacity: 0, x: 12, y: 8, rotate: 1 }}
+        animate={{ opacity: 1, x: 0, y: 0, rotate: -2 }}
         transition={{ duration: 0.35, delay: 0.75 }}
       >
-        <Clock className="h-3.5 w-3.5 text-brand" />
-        <span className="text-[9px] font-bold text-foreground">24/7 access</span>
+        <span className="mb-2 block text-[8px] font-bold text-foreground">Integrations</span>
+        <div className="grid grid-cols-2 gap-1.5">
+          {integrationLogos.map((item, i) => (
+            <motion.div
+              key={item.name}
+              className="flex h-7 items-center justify-center rounded-md bg-background"
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2, delay: 0.9 + i * 0.04 }}
+            >
+              <Image src={item.logo} alt={item.name} width={28} height={28} className="h-4 w-4 object-contain" />
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </div>
   )
@@ -949,10 +1064,10 @@ function PortalInvoicesGraphic() {
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
-          className="absolute left-1/2 top-1/2 w-52 rounded-xl bg-white ring-1 ring-black/[0.04] p-3"
+          className="absolute left-1/2 top-1/2 w-60 rounded-xl bg-muted p-4 shadow-[0_10px_28px_rgba(0,0,0,0.08)]"
           style={{ zIndex: 3 - i }}
           initial={{ opacity: 0, x: "-50%", y: "-42%", rotate: 0, scale: 0.9 }}
-          animate={{ opacity: 1, x: `calc(-50% + ${i * 14 - 14}px)`, y: `calc(-50% + ${i * 12 - 12}px)`, rotate: (i - 1) * 4, scale: 1 - i * 0.04 }}
+          animate={{ opacity: 1, x: `calc(-50% + ${i * 18 - 18}px)`, y: `calc(-50% + ${i * 14 - 14}px)`, rotate: (i - 1) * 4, scale: 1 - i * 0.035 }}
           transition={{ duration: 0.45, delay: 0.15 + i * 0.12, ease: [0.25, 1, 0.5, 1] }}
         >
           <div className="flex items-center justify-between mb-3">
@@ -970,14 +1085,6 @@ function PortalInvoicesGraphic() {
           </div>
         </motion.div>
       ))}
-      <motion.div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-brand px-3 py-1.5 text-[8px] font-bold text-white"
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.75, duration: 0.3 }}
-      >
-        One place for every invoice
-      </motion.div>
     </div>
   )
 }
@@ -986,14 +1093,47 @@ function PortalVisibilityGraphic() {
   return (
     <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center flex items-center justify-center">
       <motion.div
-        className="relative h-40 w-40 rounded-full bg-white ring-1 ring-black/[0.04]"
+        className="relative h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.72)_42%,rgba(255,255,255,0)_72%)]"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="absolute inset-0 rounded-full border border-black/[0.04]" style={{ margin: 18 + i * 18 }} />
-        ))}
+        <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 176 176" fill="none">
+          {[62, 42, 22].map((r, i) => (
+            <motion.circle
+              key={r}
+              cx="88"
+              cy="88"
+              r={r}
+              stroke="#005b56"
+              strokeWidth="1"
+              initial={{ opacity: 0.18, scale: 0.96 }}
+              animate={{ opacity: [0.14, 0.34, 0.14], scale: [0.98, 1.02, 0.98] }}
+              transition={{ duration: 1.8, delay: i * 0.28, repeat: Infinity, ease: "easeInOut" }}
+              style={{ transformOrigin: "88px 88px" }}
+            />
+          ))}
+          {[
+            { x: 43, y: 62 },
+            { x: 138, y: 72 },
+            { x: 88, y: 144 },
+          ].map((point, i) => (
+            <motion.line
+              key={`${point.x}-${point.y}`}
+              x1="88"
+              y1="88"
+              x2={point.x}
+              y2={point.y}
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              className="text-brand/30"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 0.35, delay: 0.55 + i * 0.08 }}
+            />
+          ))}
+        </svg>
         <motion.div
           className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand"
           initial={{ scale: 0 }}
@@ -1001,13 +1141,13 @@ function PortalVisibilityGraphic() {
           transition={{ delay: 0.35 }}
         />
         {[
-          ["Open", "42k", "left-1 top-8"],
-          ["Overdue", "6k", "right-0 top-10"],
-          ["Paid", "31k", "left-1/2 bottom-2 -translate-x-1/2"],
+          ["Open", "42k", "left-3 top-[50px]"],
+          ["Overdue", "6k", "right-1 top-[60px]"],
+          ["Paid", "31k", "left-1/2 bottom-5 -translate-x-1/2"],
         ].map(([label, value, pos], i) => (
           <motion.div
             key={label}
-            className={`absolute ${pos} rounded-lg bg-white px-2.5 py-2 ring-1 ring-black/[0.04] text-center`}
+            className={`absolute ${pos} flex min-h-8 flex-col items-center justify-center rounded-lg bg-muted px-2.5 text-center`}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.45 + i * 0.1 }}
@@ -1016,18 +1156,6 @@ function PortalVisibilityGraphic() {
             <span className="mt-1 block text-[7px] font-medium leading-none text-black/35">{label}</span>
           </motion.div>
         ))}
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-px w-16 origin-left bg-brand/30"
-          initial={{ scaleX: 0, rotate: -28 }}
-          animate={{ scaleX: 1, rotate: -28 }}
-          transition={{ duration: 0.45, delay: 0.55 }}
-        />
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-px w-14 origin-left bg-brand/30"
-          initial={{ scaleX: 0, rotate: 42 }}
-          animate={{ scaleX: 1, rotate: 42 }}
-          transition={{ duration: 0.45, delay: 0.65 }}
-        />
       </motion.div>
     </div>
   )
@@ -1036,21 +1164,22 @@ function PortalVisibilityGraphic() {
 function PortalChasingGraphic() {
   return (
     <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
-      <div className="absolute left-4 top-8 flex flex-col gap-2">
+      <div className="absolute left-4 top-10 flex flex-col">
         {["Can you resend?", "What's the balance?", "Is this paid?"].map((msg, i) => (
           <motion.div
             key={msg}
-            className="rounded-lg bg-white px-3 py-2 ring-1 ring-black/[0.04]"
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: i === 2 ? 0.25 : 0.55, x: 0 }}
+            className="flex min-h-10 items-center rounded-lg bg-muted px-3 py-2 shadow-[0_6px_18px_rgba(0,0,0,0.05)] ring-1 ring-black/[0.02]"
+            style={{ zIndex: 3 - i }}
+            initial={{ opacity: 0, x: -8, rotate: 0 }}
+            animate={{ opacity: i === 2 ? 0.45 : 0.72, x: i * 6, y: i * -3, rotate: [-2, 1.5, -1][i] }}
             transition={{ duration: 0.3, delay: 0.15 + i * 0.1 }}
           >
-            <span className="text-[8px] font-semibold text-black/40">{msg}</span>
+            <span className="text-[8px] font-semibold text-black/50">{msg}</span>
           </motion.div>
         ))}
       </div>
       <motion.div
-        className="absolute right-4 top-12 w-40 rounded-xl bg-white p-3 ring-1 ring-brand/10"
+        className="absolute right-4 top-12 w-40 rounded-xl bg-muted p-3 "
         initial={{ opacity: 0, x: 12, scale: 0.96 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.5 }}
@@ -1072,14 +1201,6 @@ function PortalChasingGraphic() {
           </motion.div>
         ))}
       </motion.div>
-      <motion.div
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-brand/10 px-3 py-1.5"
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.05 }}
-      >
-        <span className="text-[9px] font-bold text-brand">−64% manual chasing</span>
-      </motion.div>
     </div>
   )
 }
@@ -1087,46 +1208,14 @@ function PortalChasingGraphic() {
 function CustomerPortalAccessGraphic() {
   return (
     <div className="relative w-full max-w-lg h-72 mx-auto select-none pointer-events-none scale-[0.72] md:scale-100 origin-center">
-      <div className="absolute left-4 top-8 flex flex-col gap-7">
-        {[
-          { label: "Phone calls", icon: Phone },
-          { label: "Email threads", icon: Mail },
-          { label: "Back-and-forth messages", icon: MessageSquare },
-        ].map((item, i) => {
-          const Icon = item.icon
-          return (
-            <motion.div
-              key={item.label}
-              className="flex w-32 items-center gap-3 rounded-xl bg-white/85 p-3 ring-1 ring-black/[0.04]"
-              initial={{ opacity: 0, x: -12 }}
-              animate={{ opacity: 0.78, x: 0 }}
-              transition={{ duration: 0.35, delay: 0.12 + i * 0.12 }}
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/[0.025]">
-                <Icon className="h-4 w-4 text-brand/65" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <span className="block text-[8px] font-semibold text-foreground/55">{item.label}</span>
-                <div className="mt-2 h-1.5 rounded bg-black/[0.04]" />
-                <div className="mt-1 h-1.5 w-10 rounded bg-black/[0.035]" />
-              </div>
-            </motion.div>
-          )
-        })}
-      </div>
-
       <motion.div
-        className="absolute left-1/2 top-5 w-[260px] -translate-x-1/2 overflow-hidden rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+        className="absolute left-1/2 top-0 w-[300px] -translate-x-1/2 overflow-hidden rounded-xl bg-muted p-4 "
         initial={{ opacity: 0, y: 12, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.42, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
       >
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4">
           <span className="text-[12px] font-bold text-foreground">Account portal</span>
-          <div className="flex items-center gap-1 rounded-md bg-black/[0.025] px-2 py-1">
-            <Lock className="h-3 w-3 text-foreground/45" />
-            <span className="text-[7px] font-semibold text-foreground/55">Secure access</span>
-          </div>
         </div>
 
         <div className="mb-4 flex items-center justify-between rounded-lg bg-brand/[0.03] p-3 ring-1 ring-black/[0.025]">
@@ -1142,15 +1231,14 @@ function CustomerPortalAccessGraphic() {
         <div className="grid grid-cols-2 gap-2">
           {[
             "Account overview",
-            "Profile & settings",
             "Billing & invoices",
             "Payment methods",
             "Documents",
-            "Support & messages",
+            "Support",
           ].map((label, i) => (
             <motion.div
               key={label}
-              className="rounded-lg bg-white px-2.5 py-2 ring-1 ring-black/[0.04]"
+              className="rounded-lg bg-muted px-2.5 py-2 "
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, delay: 0.45 + i * 0.06 }}
@@ -1166,27 +1254,15 @@ function CustomerPortalAccessGraphic() {
         </div>
       </motion.div>
 
-      <div className="absolute right-3 top-10 flex flex-col gap-7">
-        {[
-          ["Got answers faster", "Find what you need instantly"],
-          ["Secure & private", "Protected and simple"],
-          ["Save time", "Manage on your schedule"],
-        ].map(([title, body], i) => (
-          <motion.div
-            key={title}
-            className="w-36 rounded-xl bg-white/90 p-3 ring-1 ring-black/[0.04]"
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.35, delay: 0.6 + i * 0.12 }}
-          >
-            <div className="mb-2 flex items-center gap-2">
-              <Check className="h-4 w-4 rounded-full bg-brand/10 p-0.5 text-brand" strokeWidth={3} />
-              <span className="text-[8px] font-bold text-foreground">{title}</span>
-            </div>
-            <span className="block text-[7px] font-medium leading-tight text-black/35">{body}</span>
-          </motion.div>
-        ))}
-      </div>
+      <motion.div
+        className="absolute right-16 top-10 flex items-center gap-2 rounded-full bg-muted px-3 py-2 shadow-[0_12px_32px_rgba(0,0,0,0.14)]"
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.65 }}
+      >
+        <Lock className="h-3.5 w-3.5 text-brand" />
+        <span className="text-[8px] font-bold text-foreground">Secure self-service</span>
+      </motion.div>
     </div>
   )
 }
@@ -1195,7 +1271,7 @@ function CustomerPortalDocumentsGraphic() {
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute left-7 top-12 w-36 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+        className="absolute left-7 top-12 z-10 w-36 rounded-xl bg-muted p-3 "
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.35, delay: 0.1 }}
@@ -1205,7 +1281,7 @@ function CustomerPortalDocumentsGraphic() {
           {["Invoice.pdf", "Statement.csv", "Terms.doc"].map((file, i) => (
             <motion.div
               key={file}
-              className="rounded-md bg-black/[0.025] px-2 py-1.5"
+              className="flex min-h-9 items-center rounded-md bg-black/[0.025] px-2"
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 0.55, y: 0 }}
               transition={{ duration: 0.25, delay: 0.25 + i * 0.08 }}
@@ -1216,11 +1292,11 @@ function CustomerPortalDocumentsGraphic() {
         </div>
       </motion.div>
 
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 448 240" fill="none">
-        {[98, 120, 142].map((y, i) => (
+      <svg className="absolute inset-0 z-0 h-full w-full" viewBox="0 0 448 240" fill="none">
+        {[98, 134, 170].map((y, i) => (
           <motion.path
             key={y}
-            d={`M164 ${y} C 200 ${y}, 212 120, 248 120`}
+            d={`M164 ${y} C 198 ${y}, 212 120, 248 120`}
             stroke="currentColor"
             strokeWidth="1.5"
             strokeDasharray="3 4"
@@ -1233,7 +1309,7 @@ function CustomerPortalDocumentsGraphic() {
       </svg>
 
       <motion.div
-        className="absolute right-8 top-8 w-44 rounded-xl bg-white p-3 ring-1 ring-brand/10"
+        className="absolute right-8 top-8 z-10 w-44 rounded-xl bg-muted p-3 "
         initial={{ opacity: 0, x: 12, scale: 0.96 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.55 }}
@@ -1242,18 +1318,29 @@ function CustomerPortalDocumentsGraphic() {
           <span className="text-[10px] font-bold text-foreground">Document center</span>
           <span className="rounded-md bg-brand/8 px-2 py-1 text-[7px] font-bold text-brand">Synced</span>
         </div>
-        {["Invoices", "Statements", "Credit docs", "Payment info"].map((folder, i) => (
-          <motion.div
-            key={folder}
-            className="mb-1.5 flex items-center justify-between rounded-md bg-brand/6 px-2 py-1.5"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, delay: 0.75 + i * 0.07 }}
-          >
-            <span className="text-[7px] font-semibold text-foreground">{folder}</span>
-            <ArrowRight className="h-2.5 w-2.5 text-brand" />
-          </motion.div>
-        ))}
+        {[
+          { label: "Invoices", icon: FileText },
+          { label: "Statements", icon: Copy },
+          { label: "Credit docs", icon: Shield },
+          { label: "Payment info", icon: Lock },
+        ].map((folder, i) => {
+          const Icon = folder.icon
+          return (
+            <motion.div
+              key={folder.label}
+              className="mb-1.5 flex items-center justify-between rounded-md bg-brand/6 px-2 py-1.5"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, delay: 0.75 + i * 0.07 }}
+            >
+              <div className="flex items-center gap-1.5">
+                <Icon className="h-2.5 w-2.5 text-brand" />
+                <span className="text-[7px] font-semibold text-foreground">{folder.label}</span>
+              </div>
+              <ArrowRight className="h-2.5 w-2.5 text-brand" />
+            </motion.div>
+          )
+        })}
       </motion.div>
     </div>
   )
@@ -1263,7 +1350,7 @@ function CustomerPortalActivityGraphic() {
   return (
     <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute inset-x-5 top-5 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
+        className="absolute inset-x-5 top-0 p-3"
         initial={{ opacity: 0, y: 10, scale: 0.96 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.1 }}
@@ -1282,12 +1369,12 @@ function CustomerPortalActivityGraphic() {
           ].map(([event, detail], i) => (
             <motion.div
               key={event}
-              className="relative mb-3 rounded-lg bg-black/[0.018] px-3 py-2 ring-1 ring-black/[0.025]"
+              className="relative mb-3 rounded-lg bg-muted px-3 py-2 ring-1 ring-black/[0.025]"
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.25, delay: 0.3 + i * 0.1 }}
             >
-              <span className="absolute -left-[20px] top-3 h-2.5 w-2.5 rounded-full bg-brand" />
+              <span className="absolute -left-[13px] top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand" />
               <span className="block text-[8px] font-bold text-foreground">{event}</span>
               <span className="mt-0.5 block text-[7px] font-medium text-black/35">{detail}</span>
             </motion.div>
@@ -1302,54 +1389,69 @@ function CustomerPortalSalesGraphic() {
   return (
     <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
       <motion.div
-        className="absolute left-5 top-16 w-36 rounded-xl bg-white p-3 ring-1 ring-black/[0.04]"
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
+        className="absolute left-12 top-14 z-10 w-44 rounded-xl bg-muted p-3"
+        initial={{ opacity: 0, y: 10, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.1 }}
       >
-        <span className="block text-[10px] font-bold text-foreground">Customer context</span>
-        <div className="mt-3 space-y-2">
-          {["Sales owner", "Account terms", "Open balance"].map((item, i) => (
-            <motion.div
-              key={item}
-              className="rounded-md bg-black/[0.025] px-2 py-1.5"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, delay: 0.25 + i * 0.08 }}
-            >
-              <span className="text-[7px] font-semibold text-foreground/55">{item}</span>
-            </motion.div>
-          ))}
+        <div className="mb-3 flex items-center justify-between">
+          <span className="text-[10px] font-bold text-foreground">Apex Corp</span>
+          <span className="rounded bg-brand/10 px-1.5 py-0.5 text-[6px] font-bold text-brand">Priority</span>
+        </div>
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between rounded-md bg-background px-2 py-1.5">
+            <span className="text-[7px] font-semibold text-black/40">Owner</span>
+            <span className="text-[7px] font-bold text-foreground">Maya</span>
+          </div>
+          <div className="flex items-center justify-between rounded-md bg-background px-2 py-1.5">
+            <span className="text-[7px] font-semibold text-black/40">Terms</span>
+            <span className="text-[7px] font-bold text-foreground">Net 45</span>
+          </div>
+          <div className="flex items-center justify-between rounded-md bg-background px-2 py-1.5">
+            <span className="text-[7px] font-semibold text-black/40">Open</span>
+            <span className="text-[7px] font-bold text-foreground">$42k</span>
+          </div>
         </div>
       </motion.div>
 
-      <motion.div
-        className="absolute left-[178px] top-9 h-36 w-36 rounded-full bg-white ring-1 ring-brand/10 flex items-center justify-center"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.35, delay: 0.45 }}
-      >
-        <div className="absolute inset-4 rounded-full border border-brand/20" />
-        <div className="absolute inset-8 rounded-full border border-brand/20" />
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand/10">
-          <Shield className="h-6 w-6 text-brand" />
-        </div>
-      </motion.div>
+      <svg className="absolute inset-0 z-0 h-full w-full overflow-visible" viewBox="0 0 448 240" fill="none">
+        {[76, 112, 148].map((y, i) => (
+          <motion.path
+            key={y}
+            d={`M220 120 C 250 120, 252 ${y}, 282 ${y}`}
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            className="text-brand/22"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.45 + i * 0.08 }}
+          />
+        ))}
+      </svg>
 
-      <div className="absolute right-5 top-12 flex flex-col gap-3">
-        {["Sales", "Credit", "AR"].map((team, i) => (
+      <div className="absolute right-9 top-[58px] z-10 flex flex-col gap-2">
+        {[
+          ["Sales", "Context added"],
+          ["Credit", "Terms checked"],
+          ["AR", "Next step ready"],
+        ].map(([team, status], i) => (
           <motion.div
             key={team}
-            className="flex w-28 items-center gap-2 rounded-lg bg-white px-3 py-2 ring-1 ring-black/[0.04]"
+            className="flex w-32 items-center gap-2 rounded-lg bg-muted px-3 py-2"
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.28, delay: 0.6 + i * 0.1 }}
+            transition={{ duration: 0.28, delay: 0.55 + i * 0.1 }}
           >
             <span className="h-2 w-2 rounded-full bg-brand" />
-            <span className="text-[8px] font-bold text-foreground">{team}</span>
+            <div>
+              <span className="block text-[8px] font-bold leading-none text-foreground">{team}</span>
+              <span className="mt-1 block text-[6px] font-semibold leading-none text-black/35">{status}</span>
+            </div>
           </motion.div>
         ))}
       </div>
+
     </div>
   )
 }
@@ -1362,7 +1464,7 @@ const barLabels = ["M", "T", "W", "T", "F", "S", "S"]
 const kpis = [
   { label: "Tracked", value: "142", trend: "+12%" },
   { label: "At risk", value: "8", trend: "−3" },
-  { label: "Resolved", value: "23", trend: "today" },
+  { label: "Resolved", value: "23", trend: "+8%" },
 ]
 
 function MonitoringGraphic() {
@@ -1373,19 +1475,21 @@ function MonitoringGraphic() {
         {kpis.map((kpi, i) => (
           <motion.div
             key={kpi.label}
-            className="flex-1 bg-white ring-1 ring-black/[0.04] rounded-lg px-2.5 py-2 flex flex-col items-center"
+            className="flex-1 bg-muted  rounded-lg px-2.5 py-2 flex flex-col items-center"
             {...stagger(i, 0.1)}
           >
-            <span className="text-[15px] font-bold text-foreground leading-none">{kpi.value}</span>
+            <div className="flex items-baseline justify-center gap-1">
+              <span className="text-[15px] font-bold text-foreground leading-none">{kpi.value}</span>
+              <span className="text-[7px] font-semibold text-brand leading-none">{kpi.trend}</span>
+            </div>
             <span className="text-[8px] font-medium text-black/30 mt-0.5">{kpi.label}</span>
-            <span className="text-[7px] font-semibold text-brand mt-0.5">{kpi.trend}</span>
           </motion.div>
         ))}
       </div>
 
       {/* Mini bar chart */}
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3"
+        className="bg-muted rounded-lg p-3"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.35 }}
@@ -1399,22 +1503,15 @@ function MonitoringGraphic() {
         </div>
         <div className="flex items-end gap-1.5 h-16">
           {barData.map((h, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-1">
-              <motion.div
-                className="w-full rounded-sm bg-brand/15"
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                transition={{ duration: 0.5, delay: 0.5 + i * 0.06, ease: [0.25, 1, 0.5, 1] }}
-              >
-                {i === barData.length - 2 && (
-                  <motion.div
-                    className="w-full h-full rounded-sm bg-brand"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.9 }}
-                  />
-                )}
-              </motion.div>
+            <div key={i} className="flex h-full flex-1 flex-col items-center gap-1">
+              <div className="relative h-full w-full overflow-hidden rounded-sm">
+                <motion.div
+                  className={`absolute bottom-0 left-0 w-full rounded-sm ${i === barData.length - 2 ? "bg-brand" : "bg-brand/15"}`}
+                  initial={{ height: 0 }}
+                  animate={{ height: `${h}%` }}
+                  transition={{ duration: 0.5, delay: 0.5 + i * 0.06, ease: [0.25, 1, 0.5, 1] }}
+                />
+              </div>
               <span className="text-[7px] text-black/25 font-medium">{barLabels[i]}</span>
             </div>
           ))}
@@ -1460,7 +1557,7 @@ function FollowUpGraphic() {
       >
         <div className="w-6 h-6 rounded-full bg-brand flex items-center justify-center text-[8px] font-bold text-white">AC</div>
         <div>
-          <span className="text-[10px] font-semibold text-foreground block leading-none">Apex Corp</span>
+          <span className="text-[10px] font-semibold text-foreground block -mb-2 leading-none">Apex Corp</span>
           <span className="text-[8px] text-black/30 font-medium">INV-4021 · $12,400</span>
         </div>
         <span className="ml-auto text-[8px] font-medium text-brand bg-brand/5 px-1.5 py-0.5 rounded">Paid</span>
@@ -1479,7 +1576,7 @@ function FollowUpGraphic() {
             <div className={`max-w-[80%] rounded-xl px-3 py-2.5 flex items-center ${
               msg.align === "right"
                 ? "bg-brand text-white rounded-br-sm"
-                : "bg-white ring-1 ring-black/[0.04] rounded-bl-sm"
+                : "bg-muted  rounded-bl-sm"
             }`}>
               <span className={`text-[10px] font-semibold ${msg.align === "right" ? "" : "text-foreground"}`}>
                 {msg.label}
@@ -1505,7 +1602,7 @@ function ConfirmationGraphic() {
     <Shell>
       {/* Invoice document */}
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-3.5 relative overflow-hidden"
+        className="bg-muted  rounded-lg p-3.5 relative overflow-hidden"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1 }}
@@ -1550,7 +1647,7 @@ function ConfirmationGraphic() {
         {verifySteps.map((step) => (
           <motion.div
             key={step.label}
-            className="flex items-center gap-2 px-3 py-1.5 bg-white ring-1 ring-brand/10 rounded-lg"
+            className="flex items-center gap-2 px-3 py-1.5 bg-muted  rounded-lg"
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: step.delay }}
@@ -1625,15 +1722,15 @@ function EscalationGraphic() {
           <div className="w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
             <Zap className="w-3 h-3 text-brand" />
           </div>
-          <span className="text-[9px] font-semibold text-brand shrink-0">Lunica is analyzing</span>
-          <div className="h-[14px] relative overflow-hidden">
+          <span className="text-[9px] font-semibold text-brand shrink-0 leading-none">Lunica is analyzing</span>
+          <div className="relative h-4 min-w-0 flex-1 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.span
                 key={promptIdx}
-                className="text-foreground font-medium text-black/50 block"
-                initial={{ opacity: 0, y: 8 }}
+                className="block truncate text-[9px] font-medium leading-4 text-foreground/45"
+                initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
+                exit={{ opacity: 0, y: -5 }}
                 transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
               >
                 {aiPrompts[promptIdx]}
@@ -1645,7 +1742,7 @@ function EscalationGraphic() {
 
       {/* Channel + timing row */}
       <motion.div
-        className="bg-white ring-1 ring-black/[0.04] rounded-lg p-2.5"
+        className="bg-muted  rounded-lg p-2.5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}

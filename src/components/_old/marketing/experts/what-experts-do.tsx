@@ -1,4 +1,4 @@
-import { TrendingUp, BookOpen, Wrench } from "lucide-react"
+import { TrendingUp, BookOpen, Wrench } from "@/lib/nucleo-icons"
 import { Container } from "@/components/_old/ui/container"
 import { Section } from "@/components/_old/ui/section"
 import { expertsContent } from "@/content/_old/experts"

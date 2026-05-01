@@ -3,7 +3,7 @@
 import { motion } from "motion/react"
 import { Container } from "@/components/_old/ui/container"
 import { Section } from "@/components/_old/ui/section"
-import { AlertCircle, Activity, Zap, CheckCircle2, Check, FileText, Database, GitMerge, MessageSquare, ShieldAlert } from "lucide-react"
+import { AlertCircle, Activity, Zap, CheckCircle2, Check, FileText, Database, GitMerge, MessageSquare, ShieldAlert } from "@/lib/nucleo-icons"
 
 const features = [
   {

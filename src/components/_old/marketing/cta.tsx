@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { Check } from "@/lib/nucleo-icons"
 
 import { Button } from "@/components/_old/ui/button"
 import { Container } from "@/components/_old/ui/container"

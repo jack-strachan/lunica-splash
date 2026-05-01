@@ -6,7 +6,7 @@ import { Container } from "@/components/_old/ui/container"
 import { Section } from "@/components/_old/ui/section"
 import Image from "next/image"
 import { PaperTexture } from "@paper-design/shaders-react"
-import { UploadCloud, FileCog, CheckCircle2, Check, FileText, ArrowUpCircle, MousePointer2, UserPlus, Database } from "lucide-react"
+import { UploadCloud, FileCog, CheckCircle2, Check, FileText, ArrowUpCircle, MousePointer2, UserPlus, Database } from "@/lib/nucleo-icons"
 
 const steps = [
   {

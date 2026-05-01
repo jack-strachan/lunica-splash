@@ -1,4 +1,4 @@
-import { Mail, MessageSquare, Globe, Send } from "lucide-react"
+import { Mail, MessageSquare, Globe, Send } from "@/lib/nucleo-icons"
 
 import { Container } from "@/components/_old/ui/container"
 import { Section } from "@/components/_old/ui/section"

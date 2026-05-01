@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Image from "next/image"
-import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown, CreditCard } from "lucide-react"
+import { ArrowUpCircle, MousePointer2, Loader2, Check, Bell, TrendingUp, TrendingDown, CreditCard } from "@/lib/nucleo-icons"
 
 type Phase = "idle" | "dragging" | "processing" | "complete" | "risk-alert" | "dispute" | "portal"
 

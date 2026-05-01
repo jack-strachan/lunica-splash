@@ -1,4 +1,4 @@
-import { Phone, CreditCard, Link2, LayoutDashboard, Users, Puzzle, MessageSquare, Shield, Smartphone, Zap, ArrowRight, CheckCircle2, FileText } from "lucide-react"
+import { Phone, CreditCard, Link2, LayoutDashboard, Users, Puzzle, MessageSquare, Shield, Smartphone, Zap, ArrowRight, CheckCircle2, FileText } from "@/lib/nucleo-icons"
 
 import { Container } from "@/components/_old/ui/container"
 import { Section } from "@/components/_old/ui/section"

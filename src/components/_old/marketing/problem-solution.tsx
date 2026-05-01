@@ -1,4 +1,4 @@
-import { Clock, FileText, Eye, AlertTriangle, Activity, CreditCard, TrendingUp } from "lucide-react"
+import { Clock, FileText, Eye, AlertTriangle, Activity, CreditCard, TrendingUp } from "@/lib/nucleo-icons"
 
 import { Container } from "@/components/_old/ui/container"
 import { Section } from "@/components/_old/ui/section"

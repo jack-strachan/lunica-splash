@@ -18,7 +18,7 @@ import {
   Shield,
   Users,
   Zap,
-} from "lucide-react"
+} from "@/lib/nucleo-icons"
 import { useState, useRef, useEffect, type ComponentType } from "react"
 import Image from "next/image"
 

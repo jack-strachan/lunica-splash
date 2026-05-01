@@ -130,7 +130,7 @@ export const products: ProductSectionData[] = [
   },
   {
     name: "Invoice Upload",
-    subtitle: "Automatically upload and track your invoices",
+    subtitle: "Automatically track your invoices",
     tabs: [
       {
         title: "Smart data\nextraction",
