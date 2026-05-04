@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Image from "next/image"
 import { Footer } from "@/components/layout/footer"
 import { ContactForm } from "@/components/marketing/contact-form"
@@ -5,6 +6,14 @@ import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { SectionDescription } from "@/components/ui/section-description"
 import { PageContainer } from "@/components/ui/page-container"
+import { constructMetadata } from "@/lib/metadata"
+
+export const metadata: Metadata = constructMetadata({
+  title: "Contact",
+  description:
+    "Contact Lunica to request a demo or learn how the platform can support your credit, collections, invoice, payment, and customer portal workflows.",
+  path: "/contact",
+})
 
 const ease = "cubic-bezier(0.16, 1, 0.3, 1)"
 

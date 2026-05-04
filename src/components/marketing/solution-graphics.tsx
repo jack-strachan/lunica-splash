@@ -2,22 +2,16 @@
 
 import { motion, AnimatePresence } from "motion/react"
 import {
-  ArrowRight,
   Check,
   ChevronDown,
   AlertTriangle,
   Clock,
   FileText,
   Flag,
-  Link2,
   Loader2,
   Mail,
-  RefreshCw,
   Send,
   Settings,
-  Shield,
-  Users,
-  Zap,
 } from "@/lib/nucleo-icons"
 import { useState, useRef, useEffect, type ComponentType } from "react"
 import Image from "next/image"

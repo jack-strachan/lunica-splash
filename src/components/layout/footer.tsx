@@ -1,14 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import { PageContainer } from "@/components/ui/page-container"
-import { FooterProductLink } from "@/components/layout/footer-link"
 
 const productLinks = [
   { label: "Collections", href: "/collections" },
   { label: "Credit", href: "/credit" },
   { label: "Disputes", href: "/disputes" },
   { label: "Online Payments", href: "/online-payments" },
-  { label: "Invoice Upload", href: "/payments-portal" },
+  { label: "Invoice Upload", href: "/invoice-upload" },
   { label: "Customer Portal", href: "/customer-portal" },
 ]
 
@@ -50,7 +49,12 @@ export function Footer() {
               <ul className="mt-4 flex flex-col gap-3">
                 {productLinks.map((link) => (
                   <li key={link.href}>
-                    <FooterProductLink href={link.href} label={link.label} />
+                    <Link
+                      href={link.href}
+                      className="text-sm text-foreground/60 transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

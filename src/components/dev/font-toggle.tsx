@@ -18,7 +18,6 @@ export function FontToggle() {
     const fallback = "ui-sans-serif, system-ui, sans-serif"
     const value = `${font}, ${fallback}`
     document.documentElement.style.setProperty("--font-family-sans", value)
-    document.body.style.fontFamily = value
   }
 
   return (

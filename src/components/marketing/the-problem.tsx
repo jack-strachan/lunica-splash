@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef } from "react"
 import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { PageContainer } from "@/components/ui/page-container"
@@ -101,7 +101,6 @@ function MobileCarousel({ problems }: { problems: { title: string; description: 
 
 export function TheProblemSection() {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isHovering, setIsHovering] = useState(false)
 
   return (
     <section className="w-full bg-background">
@@ -142,7 +141,6 @@ export function TheProblemSection() {
                 }`}
                 onMouseEnter={() => {
                   setActiveIndex(i)
-                  setIsHovering(true)
                 }}
               >
                 <p className="text-base font-medium text-foreground">

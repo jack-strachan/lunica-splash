@@ -25,8 +25,6 @@ const riskMetrics = [
   { label: "CREDIT UTIL.", value: "114%", trend: "up" as const },
 ]
 
-const triggeredFactors = ["Days to pay increase", "Credit limit exceeded"]
-
 const portalInvoices = [
   { id: "#38666", amount: "$1,004.37" },
   { id: "#36757", amount: "$52,172.90" },
@@ -93,22 +91,32 @@ export function HeroAnimation() {
 
   // Resolve last dispute step after it animates in
   useEffect(() => {
+    const resetTimeout = setTimeout(() => setLastStepResolved(false), 0)
+
     if (phase !== "dispute") {
-      setLastStepResolved(false)
-      return
+      return () => clearTimeout(resetTimeout)
     }
+
     const resolveTimeout = setTimeout(() => setLastStepResolved(true), 2400)
-    return () => clearTimeout(resolveTimeout)
+    return () => {
+      clearTimeout(resetTimeout)
+      clearTimeout(resolveTimeout)
+    }
   }, [phase])
 
   // Simulate clicking the review button during risk-alert phase
   useEffect(() => {
+    const resetTimeout = setTimeout(() => setReviewClicked(false), 0)
+
     if (phase !== "risk-alert") {
-      setReviewClicked(false)
-      return
+      return () => clearTimeout(resetTimeout)
     }
+
     const clickTimeout = setTimeout(() => setReviewClicked(true), 3800)
-    return () => clearTimeout(clickTimeout)
+    return () => {
+      clearTimeout(resetTimeout)
+      clearTimeout(clickTimeout)
+    }
   }, [phase])
 
   // Cycle through active grid items during complete phase

@@ -15,7 +15,7 @@ const pageAccent: Record<string, { bg: string; hover: string }> = {
   "/disputes": { bg: "#7A5C6A", hover: "#8A6C7A" },
   "/online-payments": { bg: "#4A5E73", hover: "#5A6E83" },
   "/about": { bg: "#8B7D6E", hover: "#9B8D7E" },
-  "/payments-portal": { bg: "#C97B84", hover: "#D48B94" },
+  "/invoice-upload": { bg: "#C97B84", hover: "#D48B94" },
   "/customer-portal": { bg: "#5F746E", hover: "#6F847E" },
 }
 
@@ -47,7 +47,7 @@ const productLinks = [
   {
     name: "Invoice Upload",
     description: "Automatically upload, extract, and track incoming invoices.",
-    href: "/payments-portal",
+    href: "/invoice-upload",
     enabled: true,
   },
   {
@@ -113,7 +113,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/disputes" || pathname === "/online-payments" || pathname === "/payments-portal" || pathname === "/customer-portal"
+  const heroOverlap = pathname === "/about" || pathname === "/collections" || pathname === "/credit" || pathname === "/disputes" || pathname === "/online-payments" || pathname === "/invoice-upload" || pathname === "/customer-portal"
   const lightNav = heroOverlap && !scrolled
 
   // Close menus on route change

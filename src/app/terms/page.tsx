@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import { LegalPageLayout, LegalLink } from "@/components/ui/legal-page-layout"
 
 export const metadata: Metadata = {
-  title: "Terms of Use — Lunica Technologies",
+  title: "Terms of Use | Lunica",
   description:
-    "Website Terms of Use for Lunica Technologies, LLC. Read the legally binding terms and conditions that govern your use of our site.",
+    "Read the terms that govern access to Lunica's website and software services.",
 }
 
 export default function TermsPage() {

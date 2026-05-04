@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Lunica",
-  description: "The ultimate toolkit for exceptional credit and collections teams. Save time, stay ahead of risk, and recover more cash with less effort.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://lunica-splash.vercel.app",
+  description: "Credit and collections automation software for teams that manage invoices, payments, disputes, credit approvals, and receivables workflows.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.lunica.com",
   ogImage: "/og-image.png",
   links: {
     twitter: "https://twitter.com/lunica",

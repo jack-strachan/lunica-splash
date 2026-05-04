@@ -32,12 +32,12 @@ export function CustomSolutionsSection() {
             <SectionLabel>Built around you</SectionLabel>
 
             <SectionHeading size="lg" className="max-w-lg">
-              Need something custom? We're problem&nbsp;solvers.
+              Need something custom? We&rsquo;re problem&nbsp;solvers.
             </SectionHeading>
 
             <SectionDescription className="max-w-md">
-              Modernizing doesn't mean starting over. We work alongside your team to
-              understand what's working, what's not, and build exactly what you need
+              Modernizing doesn&rsquo;t mean starting over. We work alongside your team to
+              understand what&rsquo;s working, what&rsquo;s not, and build exactly what you need
               to move forward.
             </SectionDescription>
 

@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { NoiseGradient } from "@/components/marketing/noise-gradient"
 import { HeroAnimation } from "@/components/marketing/hero-animation"
 import { SectionHeading } from "@/components/ui/section-heading"
@@ -53,7 +52,7 @@ export function HomeHeroSection() {
 
           <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.3s both` }}>
             <SectionDescription className="text-balance">
-              We're building the ultimate toolkit for exceptional credit and collections teams. Save time, stay ahead of risk, and recover more cash with less effort.
+              We&rsquo;re building the ultimate toolkit for exceptional credit and collections teams. Save time, stay ahead of risk, and recover more cash with less effort.
             </SectionDescription>
           </div>
 

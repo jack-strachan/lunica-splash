@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { SubpageHero } from "@/components/marketing/subpage-hero"
 import { CtaSection } from "@/components/marketing/cta-section"
 import { Footer } from "@/components/layout/footer"
@@ -5,6 +6,14 @@ import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { PageContainer } from "@/components/ui/page-container"
 import { TintedSection } from "@/components/ui/tinted-section"
+import { constructMetadata } from "@/lib/metadata"
+
+export const metadata: Metadata = constructMetadata({
+  title: "About",
+  description:
+    "Learn about Lunica, a New York-based software company building modern tools for credit, collections, receivables, and finance operations teams.",
+  path: "/about",
+})
 
 const values = [
   {

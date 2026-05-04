@@ -5,32 +5,46 @@ export function constructMetadata({
   title,
   description = siteConfig.description,
   image = siteConfig.ogImage,
+  path = "/",
   noIndex = false,
 }: {
   title?: string
   description?: string
   image?: string
+  path?: string
   noIndex?: boolean
 } = {}): Metadata {
+  const url = new URL(path, siteConfig.url).toString()
+  const resolvedTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name
+
   return {
     title: {
       default: siteConfig.name,
       template: `%s | ${siteConfig.name}`,
     },
-    ...(title && { title: `${title} | ${siteConfig.name}` }),
+    ...(title && { title: resolvedTitle }),
     description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
-      title: title ? `${title} | ${siteConfig.name}` : siteConfig.name,
+      type: "website",
+      siteName: siteConfig.name,
+      title: resolvedTitle,
       description,
+      url,
       images: [
         {
           url: image,
+          width: 1200,
+          height: 630,
+          alt: `${siteConfig.name} social preview`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: title ? `${title} | ${siteConfig.name}` : siteConfig.name,
+      title: resolvedTitle,
       description,
       images: [image],
       creator: "@lunica",
@@ -47,11 +61,14 @@ export function constructMetadata({
     },
     manifest: "/site.webmanifest",
     metadataBase: new URL(siteConfig.url),
-    ...(noIndex && {
-      robots: {
-        index: false,
-        follow: false,
-      },
-    }),
+    robots: noIndex
+      ? {
+          index: false,
+          follow: false,
+        }
+      : {
+          index: true,
+          follow: true,
+        },
   }
 }

@@ -2,46 +2,72 @@ import { MetadataRoute } from "next"
 import { siteConfig } from "@/content/site"
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date()
+
   return [
     {
       url: siteConfig.url,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${siteConfig.url}/collections`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${siteConfig.url}/credit`,
-      lastModified: new Date(),
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/disputes`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/online-payments`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/invoice-upload`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/customer-portal`,
+      lastModified,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${siteConfig.url}/about`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${siteConfig.url}/contact`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${siteConfig.url}/privacy`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${siteConfig.url}/terms`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "yearly",
       priority: 0.3,
     },

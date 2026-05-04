@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import type { CSSProperties } from "react"
 import Image from "next/image"
 import { TabGraphic } from "@/components/marketing/tab-graphics"
-import { NoiseGradient } from "@/components/marketing/noise-gradient"
 
 export interface TabItem {
   title: string
@@ -21,15 +20,6 @@ interface TabbedShowcaseProps {
 
 const DURATION = 6000
 
-const productGradientColors: Record<string, [string, string, string]> = {
-  collections: ["#88b4a0", "#4a7a5c", "#3a6248"],
-  credit: ["#A0937D", "#7D6E5C", "#5C5040"],
-  disputes: ["#B08A9A", "#7A5C6A", "#4C3642"],
-  payments: ["#7B8FA1", "#4A5E73", "#2C3E50"],
-  portal: ["#E8B4B8", "#C97B84", "#A85A6A"],
-  "customer-portal": ["#9AAEA8", "#5F746E", "#405650"],
-}
-
 export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -37,10 +27,6 @@ export function TabbedShowcase({ tabs, duration = DURATION }: TabbedShowcaseProp
   const [fading, setFading] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const active = tabs[activeIndex]
-  const gradientKey = active.graphicId?.startsWith("customer-portal")
-    ? "customer-portal"
-    : active.graphicId?.split("-")[0]
-  const gradientColors = productGradientColors[gradientKey ?? "collections"] ?? productGradientColors.collections
   const containerRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
   const startRef = useRef<number>(0)

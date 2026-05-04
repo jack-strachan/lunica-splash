@@ -427,9 +427,9 @@ function CreditApprovalsGraphic() {
 
 function DisputesProofGraphic() {
   return (
-    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
+    <div className="relative h-60 w-[360px] max-w-full mx-auto select-none pointer-events-none scale-[0.86] md:w-full md:max-w-md md:scale-100 origin-center">
       <motion.div
-        className="absolute left-[92px] top-[66px] w-40 rounded-xl bg-muted p-4 "
+        className="absolute left-[36px] top-[66px] w-40 rounded-xl bg-muted p-4 md:left-[92px]"
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.35, delay: 0.1 }}
@@ -443,16 +443,16 @@ function DisputesProofGraphic() {
       </motion.div>
 
       <motion.div
-        className="absolute left-[252px] top-[56px] w-52 p-3"
+        className="absolute left-[176px] top-[56px] w-40 p-3 md:left-[252px] md:w-52"
         initial={{ opacity: 0, x: 10, scale: 0.96 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.45 }}
       >
         <div className="relative h-[112px]">
           {[
-            { label: "Receipt", type: "PDF", top: 0, rotate: -3, width: "w-[164px]", icon: Copy },
-            { label: "Dock photo", type: "JPG", top: 30, rotate: 2, width: "w-[176px]", icon: ImageIcon },
-            { label: "Signature", type: "PNG", top: 60, rotate: -1, width: "w-[156px]", icon: Send },
+            { label: "Receipt", type: "PDF", top: 0, rotate: -3, width: "w-[124px] md:w-[164px]", icon: Copy },
+            { label: "Dock photo", type: "JPG", top: 30, rotate: 2, width: "w-[136px] md:w-[176px]", icon: ImageIcon },
+            { label: "Signature", type: "PNG", top: 60, rotate: -1, width: "w-[120px] md:w-[156px]", icon: Send },
           ].map((item, i) => (
             (() => {
               const Icon = item.icon
@@ -487,9 +487,9 @@ function DisputesProofGraphic() {
 }
 
 const collaboratorCursors = [
-  { name: "Maya", color: "bg-brand text-white", x: 318, y: 86, drift: [[0, 0], [8, -5], [4, 6], [-5, 2], [0, 0]] },
-  { name: "Jon", color: "bg-foreground text-white", x: 244, y: 144, drift: [[0, 0], [-7, 4], [5, 7], [9, -3], [0, 0]] },
-  { name: "Priya", color: "bg-[#7f8f8c] text-white", x: 358, y: 172, drift: [[0, 0], [6, 5], [-8, 3], [-3, -6], [0, 0]] },
+  { name: "Maya", color: "bg-brand text-white", x: 318, y: 86, mobileX: 286, mobileY: 82, drift: [[0, 0], [8, -5], [4, 6], [-5, 2], [0, 0]] },
+  { name: "Jon", color: "bg-foreground text-white", x: 244, y: 144, mobileX: 238, mobileY: 134, drift: [[0, 0], [-7, 4], [5, 7], [9, -3], [0, 0]] },
+  { name: "Priya", color: "bg-[#7f8f8c] text-white", x: 358, y: 172, mobileX: 300, mobileY: 168, drift: [[0, 0], [6, 5], [-8, 3], [-3, -6], [0, 0]] },
 ]
 
 function DisputesCollaborationGraphic() {
@@ -540,7 +540,26 @@ function DisputesCollaborationGraphic() {
       {collaboratorCursors.map((cursor, i) => (
         <motion.div
           key={cursor.name}
-          className={`absolute z-10 flex items-center gap-1 rounded-full px-2 py-1 text-[7px] font-bold shadow-sm ${cursor.color}`}
+          className={`absolute z-10 flex items-center gap-1 rounded-full px-2 py-1 text-[7px] font-bold shadow-sm md:hidden ${cursor.color}`}
+          initial={{ opacity: 0, scale: 0.9, x: cursor.mobileX, y: cursor.mobileY }}
+          animate={{
+            opacity: 1,
+            scale: [0.96, 1, 1, 0.98, 1],
+            x: cursor.drift.map(([x]) => cursor.mobileX + x),
+            y: cursor.drift.map(([, y]) => cursor.mobileY + y),
+          }}
+          transition={{ duration: 4.5, delay: 0.75 + i * 0.25, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <svg className="h-2.5 w-2.5 text-current" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.1 1.15L9.9 5.75L6.45 6.55L4.85 10.05L2.1 1.15Z" fill="currentColor" />
+          </svg>
+          <span>{cursor.name}</span>
+        </motion.div>
+      ))}
+      {collaboratorCursors.map((cursor, i) => (
+        <motion.div
+          key={`${cursor.name}-desktop`}
+          className={`absolute z-10 hidden items-center gap-1 rounded-full px-2 py-1 text-[7px] font-bold shadow-sm md:flex ${cursor.color}`}
           initial={{ opacity: 0, scale: 0.9, x: cursor.x, y: cursor.y }}
           animate={{
             opacity: 1,
@@ -562,7 +581,7 @@ function DisputesCollaborationGraphic() {
 
 function DisputesVisibilityGraphic() {
   return (
-    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center flex items-center justify-center">
+    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.96] md:scale-100 origin-center flex items-center justify-center">
       <motion.div
         className="relative h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.72)_42%,rgba(255,255,255,0)_72%)]"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -635,7 +654,7 @@ const resolutionTimeline = [
 
 function DisputesResolutionGraphic() {
   return (
-    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center flex items-center justify-center">
+    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.94] md:scale-100 origin-center flex items-center justify-center">
       <motion.div
         className="relative w-full px-5 py-5"
         initial={{ opacity: 0, y: 10 }}
@@ -691,9 +710,9 @@ const paymentChannels = [
 
 function PaymentLinksGraphic() {
   return (
-    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
+    <div className="relative h-60 w-[360px] max-w-full mx-auto select-none pointer-events-none scale-[0.88] md:w-full md:max-w-md md:scale-100 origin-center">
       <motion.div
-        className="absolute left-0 top-[78px] w-[155px] rounded-xl bg-muted p-3 "
+        className="absolute left-[24px] top-[78px] w-[155px] rounded-xl bg-muted p-3 md:left-0"
         initial={{ opacity: 0, x: -10, y: 8 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
@@ -713,7 +732,7 @@ function PaymentLinksGraphic() {
         </div>
       </motion.div>
 
-      <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 448 240" fill="none">
+      <svg className="absolute inset-0 hidden h-full w-full overflow-visible md:block" viewBox="0 0 448 240" fill="none">
         {paymentChannels.map((channel, i) => (
           <motion.path
             key={channel.label}
@@ -729,13 +748,13 @@ function PaymentLinksGraphic() {
         ))}
       </svg>
 
-      <div className="absolute left-[205px] top-[54px] flex flex-col gap-2">
+      <div className="absolute left-[202px] top-[54px] flex flex-col gap-2 md:left-[205px]">
         {paymentChannels.map((channel, i) => {
           const Icon = channel.icon
           return (
             <motion.div
               key={channel.label}
-              className="flex w-[92px] min-h-[32px] items-center gap-2 rounded-lg bg-muted px-3 py-2 "
+              className="flex w-[104px] min-h-[32px] items-center gap-2 rounded-lg bg-muted px-3 py-2 md:w-[92px]"
               initial={{ opacity: 0, x: 10, y: 4 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.32, delay: 0.45 + i * 0.12, ease: [0.25, 1, 0.5, 1] }}
@@ -748,7 +767,7 @@ function PaymentLinksGraphic() {
       </div>
 
       <motion.div
-        className="absolute left-[326px] top-[112px] flex w-[122px] items-center gap-2.5 rounded-xl bg-muted px-3 py-3 "
+        className="absolute left-[326px] top-[112px] hidden w-[122px] items-center gap-2.5 rounded-xl bg-muted px-3 py-3 md:flex"
         initial={{ opacity: 0, x: 12, scale: 0.96 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 1, ease: [0.25, 1, 0.5, 1] }}
@@ -788,7 +807,7 @@ function PaymentCheckoutGraphic() {
         </div>
       </motion.div>
 
-      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 448 240" fill="none">
+      <svg className="absolute inset-0 hidden h-full w-full md:block" viewBox="0 0 448 240" fill="none">
         <motion.path
           d="M164 106 H238"
           stroke="currentColor"
@@ -810,7 +829,7 @@ function PaymentCheckoutGraphic() {
       </svg>
 
       <motion.div
-        className="absolute left-[238px] top-0 w-[116px] rounded-[1.75rem] bg-foreground p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
+        className="absolute left-[202px] top-0 w-[116px] rounded-[1.75rem] bg-foreground p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.12)] md:left-[238px]"
         initial={{ opacity: 0, y: 12, scale: 0.94 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.45, ease: [0.25, 1, 0.5, 1] }}
@@ -869,14 +888,14 @@ function PaymentSecureGraphic() {
   }, [])
 
   return (
-    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
+    <div className="relative w-full max-w-md h-60 mx-auto select-none pointer-events-none scale-[0.9] md:scale-100 origin-center">
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.35, delay: 0.15 }}
       >
-        <svg className="h-48 w-48 overflow-visible" viewBox="0 0 96 108" fill="none" aria-hidden="true">
+        <svg className="h-56 w-56 overflow-visible" viewBox="0 0 96 108" fill="none" aria-hidden="true">
           <defs>
             <clipPath id="payment-shield-clip">
               <path d="M48 5L82 17V43C82 67 68 88 48 101C28 88 14 67 14 43V17L48 5Z" />
@@ -992,7 +1011,7 @@ const integrationLogos = [
 
 function PortalSelfServeGraphic() {
   return (
-    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
+    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.94] md:scale-100 origin-center">
       <motion.div
         className="absolute inset-x-4 top-6 rounded-xl bg-muted  overflow-hidden"
         initial={{ opacity: 0, y: 10, scale: 0.96 }}
@@ -1060,7 +1079,7 @@ function PortalSelfServeGraphic() {
 
 function PortalInvoicesGraphic() {
   return (
-    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
+    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.94] md:scale-100 origin-center">
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
@@ -1091,7 +1110,7 @@ function PortalInvoicesGraphic() {
 
 function PortalVisibilityGraphic() {
   return (
-    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center flex items-center justify-center">
+    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.94] md:scale-100 origin-center flex items-center justify-center">
       <motion.div
         className="relative h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.96)_0%,rgba(255,255,255,0.72)_42%,rgba(255,255,255,0)_72%)]"
         initial={{ opacity: 0, scale: 0.9 }}
@@ -1163,7 +1182,7 @@ function PortalVisibilityGraphic() {
 
 function PortalChasingGraphic() {
   return (
-    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.78] md:scale-100 origin-center">
+    <div className="relative w-full max-w-xs h-56 mx-auto select-none pointer-events-none scale-[0.94] md:scale-100 origin-center">
       <div className="absolute left-4 top-10 flex flex-col">
         {["Can you resend?", "What's the balance?", "Is this paid?"].map((msg, i) => (
           <motion.div

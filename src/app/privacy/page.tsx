@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import { LegalPageLayout, LegalLink } from "@/components/ui/legal-page-layout"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Lunica Technologies",
+  title: "Privacy Policy | Lunica",
   description:
-    "Learn how Lunica Technologies, LLC collects, uses, and safeguards your information.",
+    "Learn how Lunica Technologies, LLC collects, uses, protects, and processes information for its website and software services.",
 }
 
 export default function PrivacyPolicyPage() {
@@ -29,10 +29,11 @@ export default function PrivacyPolicyPage() {
               <LegalLink href="https://www.lunica.com">
                 https://www.lunica.com
               </LegalLink>{" "}
-              or through our mobile application, Ranch.
+              or through our software platform.
               &ldquo;Service&rdquo; refers to the Company&rsquo;s services
-              accessed via the Site, in which users can buy everyday essentials
-              for quick delivery. The terms &ldquo;we,&rdquo; &ldquo;us,&rdquo;
+              accessed via the Site and related software products for credit,
+              collections, receivables, invoice, payment, and customer account
+              workflows. The terms &ldquo;we,&rdquo; &ldquo;us,&rdquo;
               and &ldquo;our&rdquo; refer to the Company. &ldquo;You&rdquo;
               refers to you, as a user of our Site or our Service. By accessing
               our Site or our Service, you accept our Privacy Policy and{" "}
