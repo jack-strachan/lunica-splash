@@ -182,7 +182,7 @@ export function Navbar() {
         >
           {/* Logo */}
           <div className="w-32">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" aria-label="Lunica home">
               <LunicaLogo hoverEnabled={pathname !== "/"} tint={accent ? { primary: accent.bg, light: accent.hover } : undefined} />
             </Link>
           </div>

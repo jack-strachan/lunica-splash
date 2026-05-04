@@ -1,5 +1,5 @@
-import { TabbedShowcase } from "@/components/marketing/tabbed-showcase"
-import type { TabItem } from "@/components/marketing/tabbed-showcase"
+import { LazyTabbedShowcase } from "@/components/marketing/lazy-marketing-visuals"
+import type { TabItem } from "@/components/marketing/lazy-marketing-visuals"
 import { LearnMoreLink } from "@/components/marketing/learn-more-link"
 import { PageContainer } from "@/components/ui/page-container"
 
@@ -16,7 +16,7 @@ export function ProductSection({ name, subtitle, tabs, href }: ProductSectionDat
       <PageContainer className="grid gap-12 py-20 md:grid-cols-[2fr_1fr] md:items-start md:gap-16 lg:py-28">
 
         {/* Right — Tabbed showcase */}
-        <TabbedShowcase tabs={tabs} />
+        <LazyTabbedShowcase tabs={tabs} />
         {/* Left — Heading */}
         <div className="order-first md:order-last flex flex-col items-start pt-4 md:sticky md:top-24">
           <h2 className="text-[2.75rem] !font-normal leading-[1.08] tracking-tight lg:text-[3.5rem]">

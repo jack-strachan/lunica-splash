@@ -1,7 +1,7 @@
 import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { TintedSection } from "@/components/ui/tinted-section"
-import { SolutionGraphic } from "@/components/marketing/solution-graphics"
+import { LazySolutionGraphic } from "@/components/marketing/lazy-marketing-visuals"
 
 const steps = [
   {
@@ -54,7 +54,7 @@ export function OurSolutionSection() {
             <div key={step.title} className="flex flex-col bg-surface-2">
               {/* Step graphic */}
               <div className="flex h-64 items-center justify-center bg-surface-deep lg:h-80">
-                <SolutionGraphic id={step.graphicId} />
+                <LazySolutionGraphic id={step.graphicId} />
               </div>
 
               {/* Caption */}
