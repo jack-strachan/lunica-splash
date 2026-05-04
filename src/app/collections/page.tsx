@@ -64,22 +64,15 @@ const features = [
   },
 ]
 
-const stats = [
-  { value: "40%", label: "Faster collection cycles" },
-  { value: "3x", label: "More accounts managed per rep" },
-  { value: "60%", label: "Reduction in manual follow-ups" },
-  { value: "90%", label: "Invoice confirmation rate" },
-]
-
 export default function CollectionsPage() {
   return (
     <main style={{ '--primary': '#4a7a5c', '--primary-hover': '#5a8a6c' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
-        label="Collections"
         heading={<>Get cash in faster with less&nbsp;effort</>}
-        description={<>A modern collections platform that&rsquo;s simpler to run, more effective, and costs less than what you&rsquo;re using&nbsp;today.</>}
+        description={<>A modern collections platform that&rsquo;s simpler to run, more effective, and built to help your team recover cash&nbsp;faster.</>}
         gradientColors={["#88b4a0", "#4a7a5c", "#3a6248"]}
+        heightClass="md:h-[72dvh] md:min-h-[560px]"
       >
         <FlipButtonLink
           href="/contact"
@@ -87,27 +80,6 @@ export default function CollectionsPage() {
           className="mt-8 px-5 py-2.5"
         />
       </SubpageHero>
-
-      {/* Stats */}
-      <section className="w-full bg-background">
-        <PageContainer className="pt-8 pb-20 lg:pt-12 lg:pb-28">
-          <div className="grid grid-cols-2 gap-0.5 overflow-hidden rounded-lg md:grid-cols-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col justify-center bg-surface-1 px-6 py-10"
-              >
-                <p className="text-3xl font-medium tracking-tight text-foreground lg:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-foreground/50">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageContainer>
-      </section>
 
       {/* Feature deep-dives */}
       {features.map((feature, i) => {
@@ -121,8 +93,6 @@ export default function CollectionsPage() {
             <div className={`mx-auto grid max-w-[1400px] gap-12 px-5 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 ${i === 0 ? "pt-20 pb-12 lg:pt-40 lg:pb-16" : "py-20 lg:py-40"}`}>
               {/* Copy */}
               <div className={`flex flex-col items-start justify-center ${!isEven ? "md:order-last" : ""}`}>
-                <SectionLabel>{feature.label}</SectionLabel>
-
                 <SectionHeading size="md">
                   {feature.title}
                 </SectionHeading>
@@ -244,10 +214,10 @@ export default function CollectionsPage() {
                               <span>Outstanding</span>
                             </div>
                             {[
-                              ["Nora Ellison", "P10", "66d", "In progress", "Critical", "$173,404"],
-                              ["Marcus Hale", "P10", "491d", "In progress", "Critical", "$2,969,927"],
-                              ["Priya Bennett", "P9", "860d", "Waiting", "High", "$706,793"],
-                              ["Caleb Monroe", "P8", "180d", "On hold", "High", "$597,645"],
+                              ["Northstar Supply", "P10", "66d", "In progress", "Critical", "$173,404"],
+                              ["Apex Materials", "P10", "491d", "In progress", "Critical", "$2,969,927"],
+                              ["Summit Industrial", "P9", "860d", "Waiting", "High", "$706,793"],
+                              ["Beacon Contractors", "P8", "180d", "On hold", "High", "$597,645"],
                             ].map((row) => (
                               <div key={row[0]} className="grid grid-cols-[1.4fr_0.55fr_0.55fr_0.7fr_0.7fr_0.8fr] items-center border-b border-black/[0.05] px-4 py-3 last:border-b-0">
                                 <div>
@@ -279,7 +249,7 @@ export default function CollectionsPage() {
                               <span className="rounded border border-black/[0.08] px-2 py-1 text-[10px] text-black/55">P10</span>
                               <span className="rounded border border-[#ffd2d2] bg-[#fff3f3] px-2 py-1 text-[10px] text-[#c14242]">Critical</span>
                             </div>
-                            <p className="mt-4 text-sm font-semibold leading-tight">Nora Ellison — $173,404 overdue</p>
+                            <p className="mt-4 text-sm font-semibold leading-tight">Northstar Supply — $173,404 overdue</p>
                             <div className="mt-4 grid grid-cols-2 gap-3">
                               <div>
                                 <div className="h-1.5 w-14 rounded bg-black/[0.08]" />

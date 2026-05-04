@@ -1,4 +1,3 @@
-import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { TintedSection } from "@/components/ui/tinted-section"
 import { LazySolutionGraphic } from "@/components/marketing/lazy-marketing-visuals"
@@ -30,7 +29,7 @@ export function OurSolutionSection() {
         {/* Top — Heading + description row */}
         <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:gap-20">
           <div>
-            <SectionLabel className="block">Our solution</SectionLabel>
+            {/* <SectionLabel className="block">Our solution</SectionLabel> */}
 
             <SectionHeading size="lg">
               Lunica offers a suite of tools that saves you time and&nbsp;money

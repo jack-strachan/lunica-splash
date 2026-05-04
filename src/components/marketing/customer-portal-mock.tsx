@@ -16,6 +16,50 @@ const themes = [
 
 type Theme = (typeof themes)[number]
 
+function RidgelineLogo() {
+  return (
+    <svg
+      viewBox="0 0 104 30"
+      className="h-7 w-24"
+      fill="none"
+      aria-label="Ridgeline logo"
+    >
+      <path
+        d="M4 23.5L16.5 6.5L27 18.5L34.5 9.5L46 23.5"
+        stroke="var(--portal-primary)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 23.5H46"
+        stroke="var(--portal-dark)"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+      />
+      <text
+        x="55"
+        y="13"
+        fill="black"
+        fontSize="8"
+        fontWeight="700"
+        letterSpacing="-0.02em"
+      >
+        Ridgeline
+      </text>
+      <text
+        x="55"
+        y="23"
+        fill="rgba(0,0,0,0.45)"
+        fontSize="6.5"
+        fontWeight="600"
+      >
+        Supply Co.
+      </text>
+    </svg>
+  )
+}
+
 function hexToRgba(hex: string, alpha: number) {
   const value = hex.replace("#", "")
   const r = parseInt(value.slice(0, 2), 16)
@@ -69,14 +113,9 @@ export function CustomerPortalMock() {
             </div>
             <div className="grid h-[calc(100%-2.5rem)] grid-cols-[190px_1fr] bg-[#fbfaf8]">
               <aside className="flex flex-col border-r border-black/[0.06] bg-white p-4">
-                <div className="flex items-center gap-3">
-                  <div className="grid h-9 w-9 place-items-center rounded-lg bg-[var(--portal-primary)] text-base font-semibold text-white">
-                    R
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold tracking-tight text-black">Ridgeline</p>
-                    <p className="text-xs text-black/45">Customer portal</p>
-                  </div>
+                <div>
+                  <RidgelineLogo />
+                  <p className="mt-2 text-xs text-black/45">Customer portal</p>
                 </div>
 
                 <nav className="mt-7 space-y-1.5 text-sm font-medium text-black/55">

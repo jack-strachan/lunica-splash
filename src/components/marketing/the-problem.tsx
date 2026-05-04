@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { PageContainer } from "@/components/ui/page-container"
 
@@ -107,23 +106,21 @@ export function TheProblemSection() {
       <PageContainer className="grid gap-12 py-20 md:grid-cols-[5fr_6fr] md:gap-20 lg:py-40">
         {/* Left — Copy */}
         <div className="flex flex-col items-start justify-center">
-          <SectionLabel>The problem</SectionLabel>
+          {/* <SectionLabel>The problem</SectionLabel> */}
 
           <SectionHeading size="md">
             You&rsquo;re working harder where you don&rsquo;t need&nbsp;to.
           </SectionHeading>
 
           <p className="mt-6 text-lg !leading-tight text-foreground">
-            There&rsquo;s no system that knows your customers&rsquo; payment
-            terms and acts on them automatically. Every mistake costs you
-            days.
+            Lunica helps the most common pain points for AR teams looking to streamline their operations and improve cash flow.
           </p>
 
-          <p className="mt-4 text-lg !leading-tight text-foreground">
+          {/* <p className="mt-4 text-lg !leading-tight text-foreground">
             Credit applications in one tool. Invoices in another. Disputes
             handled over email. Payments tracked in a spreadsheet. Nothing talks
             to each other.
-          </p>
+          </p> */}
         </div>
 
         {/* Right — Problem grid (desktop) */}

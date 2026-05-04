@@ -7,68 +7,49 @@ import { constructMetadata } from "@/lib/metadata"
 import { SectionLabel } from "@/components/ui/section-label"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { SectionDescription } from "@/components/ui/section-description"
-import { PageContainer } from "@/components/ui/page-container"
 import { FlipButtonLink } from "@/components/ui/button-link"
 import { TintedSection } from "@/components/ui/tinted-section"
 
 export const metadata: Metadata = constructMetadata({
   title: "Customer Portal",
   description:
-    "Give customers a unified hub to manage their account, view documents, track disputes, and communicate with your team.",
+    "Give customers a portal that shows exactly what they owe, supports pay-by-job workflows, and lets your team control card fee rules.",
 })
 
 const features = [
   {
-    label: "Unified account hub",
-    title: "One place for everything your customers\u00a0need",
+    label: "Amount due visibility",
+    title: "Show customers what they actually owe",
     description:
-      "Stop scattering information across emails, spreadsheets, and phone calls. The customer portal consolidates invoices, statements, credit terms, and account details into a single, always-current view.",
+      "Give customers a clear, always-current view of their balance before they pay, including open invoices, credits, finance charges, and adjustments.",
     details: [
-      "Live account summary with balance, credit limit, and payment history",
-      "Consolidated view of invoices, credits, and open items",
-      "Secure, role-based access for multiple contacts per account",
+      "Net due balance calculated from open invoices, credits, and adjustments",
+      "Invoice-level detail so customers understand where the number comes from",
+      "Self-service payment flow that starts from the exact amount owed",
     ],
   },
   {
-    label: "Document management",
-    title: "Every document, always\u00a0accessible",
+    label: "Custom card fee rules",
+    title: "Use compliant card fee rules to protect margin",
     description:
-      "Customers can find and download invoices, statements, credit notes, and receipts without contacting your team. Automatic uploads keep everything current.",
+      "Configure card convenience fees that follow your policy and apply dynamically based on customer, invoice size, payment method, or past-due status.",
     details: [
-      "Auto-synced invoices, statements, and credit memos",
-      "Searchable document archive with filters by date and type",
-      "One-click PDF downloads and bulk export",
+      "Custom triggers for past-due balances, large invoice payments, customers, and payment methods",
+      "Transparent checkout previews that show fee treatment before payment is submitted",
+      "Controls to absorb, waive, or pass through fees without custom development",
     ],
   },
   {
-    label: "Dispute & communication",
-    title: "Resolve issues faster with structured\u00a0workflows",
+    label: "Pay by job",
+    title: "Let customers choose what work they are paying for",
     description:
-      "Customers raise disputes or ask questions directly in the portal with full context attached. Your team sees everything in one place\u2014no more hunting through email threads.",
+      "For project-based and job-based customers, make it easy to review balances by job, select the right work, and submit payments that reconcile cleanly.",
     details: [
-      "In-portal dispute submission with invoice and line-item context",
-      "Threaded conversations between your team and the customer",
-      "Status tracking so both sides know where things stand",
+      "Balances grouped by job, site, route, location, or project",
+      "Selectable job-level payment flows with clear selected totals",
+      "Cleaner reconciliation because payments map to the work customers intended to pay",
     ],
   },
-  {
-    label: "Self-service controls",
-    title: "Let customers manage their own account\u00a0details",
-    description:
-      "Reduce inbound requests by letting customers update contacts, payment methods, and communication preferences on their own. Every change syncs back to your system.",
-    details: [
-      "Editable contact info, billing addresses, and payment methods",
-      "Communication preference management (email, SMS, frequency)",
-      "Automatic sync of updates back to your ERP or CRM",
-    ],
-  },
-]
-
-const stats = [
-  { value: "70%", label: "Fewer inbound support requests" },
-  { value: "5x", label: "Faster dispute resolution" },
-  { value: "85%", label: "Customer self-service adoption" },
-  { value: "40%", label: "Reduction in manual account updates" },
 ]
 
 export default function CustomerPortalPage() {
@@ -76,10 +57,10 @@ export default function CustomerPortalPage() {
     <main style={{ '--primary': '#5F746E', '--primary-hover': '#6F847E' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
-        label="Customer Portal"
-        heading={<>A better experience for every&nbsp;customer</>}
-        description={<>A branded, self-service hub where customers manage their account, access documents, and resolve issues without picking up the&nbsp;phone.</>}
+        heading={<>Give customers a clearer way to&nbsp;pay</>}
+        description={<>A branded portal where customers see exactly what they owe, pay by job, and move through checkout with card fee rules your team controls.</>}
         gradientColors={["#9AAEA8", "#5F746E", "#405650"]}
+        heightClass="md:h-[72dvh] md:min-h-[560px]"
       >
         <FlipButtonLink
           href="/contact"
@@ -87,27 +68,6 @@ export default function CustomerPortalPage() {
           className="mt-8 px-5 py-2.5"
         />
       </SubpageHero>
-
-      {/* Stats */}
-      <section className="w-full bg-background">
-        <PageContainer className="pt-8 pb-20 lg:pt-12 lg:pb-28">
-          <div className="grid grid-cols-2 gap-0.5 overflow-hidden rounded-lg md:grid-cols-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col justify-center bg-surface-1 px-6 py-10"
-              >
-                <p className="text-3xl font-medium tracking-tight text-foreground lg:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-foreground/50">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageContainer>
-      </section>
 
       {/* Feature deep-dives */}
       {features.map((feature, i) => {
@@ -121,8 +81,6 @@ export default function CustomerPortalPage() {
             <div className={`mx-auto grid max-w-[1400px] gap-12 px-5 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 ${i === 0 ? "pt-20 pb-12 lg:pt-40 lg:pb-16" : "py-20 lg:py-40"}`}>
               {/* Copy */}
               <div className={`flex flex-col items-start justify-center ${!isEven ? "md:order-last" : ""}`}>
-                <SectionLabel>{feature.label}</SectionLabel>
-
                 <SectionHeading size="md">
                   {feature.title}
                 </SectionHeading>
@@ -155,6 +113,71 @@ export default function CustomerPortalPage() {
         )
       })}
 
+      <section className="w-full bg-background">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-[7fr_4fr] md:gap-20 lg:px-20 lg:py-32">
+          <div className="flex flex-col justify-center md:order-last">
+            <SectionHeading size="md">
+              Put your sales team front and center
+            </SectionHeading>
+
+            <SectionDescription>
+              Give every customer a portal experience that feels connected to the salesperson they already know. Show their rep’s face, direct contact details, expertise, and account context right where customers review invoices and pay.
+            </SectionDescription>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-surface-1 p-5">
+            <div className="rounded-xl bg-white p-6 shadow-[0_24px_80px_rgba(0,0,0,0.08)]">
+              <div className="flex items-start gap-5">
+                <div className="h-24 w-24 shrink-0 rounded-full bg-[linear-gradient(135deg,#d7c7b6,#5F746E)] p-1">
+                  <div
+                    className="h-full w-full rounded-full bg-cover bg-center"
+                    style={{
+                      backgroundImage:
+                        "url('https://images.unsplash.com/photo-1686063165043-45243dab25ab?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGhlYWRzaG90fGVufDB8fDB8fHww')",
+                    }}
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-2xl font-semibold tracking-tight text-foreground">Miles Chen</p>
+                      <p className="mt-1 text-sm font-medium text-[#5F746E]">Senior account executive</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 grid gap-2 sm:grid-cols-2">
+                    {[
+                      ["Direct line", "(415) 555-0184"],
+                      ["Email", "miles@ridgeline.co"],
+                      ["Territory", "West region"],
+                      ["Expertise", "Terms, jobs, heavy materials"],
+                    ].map(([label, value]) => (
+                      <div key={label} className="rounded-lg bg-[#fbfaf8] px-4 py-3">
+                        <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground/35">{label}</p>
+                        <p className="mt-1 text-sm font-semibold text-foreground">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 grid gap-3 border-t border-black/[0.06] pt-6 md:grid-cols-3">
+                {[
+                  ["Account guidance", "Questions route to the right rep with customer context attached."],
+                  ["Sales staff support", "Assign portal profiles across your full sales team."],
+                  ["Payment context", "Keep relationship details visible beside invoices and payments."],
+                ].map(([title, description]) => (
+                  <div key={title} className="rounded-lg border border-black/[0.06] p-4">
+                    <p className="text-sm font-semibold text-foreground">{title}</p>
+                    <p className="mt-2 text-xs !leading-tight text-foreground/45">{description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How it works */}
       <TintedSection watermark>
           <div className="grid gap-12 md:grid-cols-[7fr_4fr] md:gap-20">
@@ -162,14 +185,14 @@ export default function CustomerPortalPage() {
               <SectionLabel className="block">How it works</SectionLabel>
 
               <SectionHeading size="lg">
-                Three steps to a self-service customer&nbsp;portal
+                Three steps to a customer portal built around payment&nbsp;clarity
               </SectionHeading>
             </div>
 
             <div className="flex flex-col justify-end">
               <p className="text-lg !leading-tight text-foreground">
-                Lunica connects to your existing systems and generates a portal your customers can use immediately.
-                No development work. No long&nbsp;rollouts.
+                Lunica connects to your existing systems, applies your payment rules, and gives customers a portal that explains what they owe before they pay.
+                No unclear balances. No one-size-fits-all checkout.
               </p>
             </div>
           </div>
@@ -178,21 +201,21 @@ export default function CustomerPortalPage() {
             {[
               {
                 step: "01",
-                title: "Connect your systems",
+                title: "Sync balances and open work",
                 description:
-                  "Sync customer accounts, invoices, and documents from your ERP or accounting platform. Lunica keeps everything current automatically.",
+                  "Sync customers, invoices, credits, jobs, and open balances from your ERP or accounting platform.",
               },
               {
                 step: "02",
-                title: "Configure & brand",
+                title: "Configure payment rules",
                 description:
-                  "Set up access rules, enable the features you need, and apply your branding. The portal matches your business from day one.",
+                  "Set card fee handling, ACH options, customer-specific exceptions, branding, and access rules.",
               },
               {
                 step: "03",
-                title: "Invite your customers",
+                title: "Let customers pay clearly",
                 description:
-                  "Send portal invitations. Customers log in, view their account, and start self-serving. Your team handles fewer tickets immediately.",
+                  "Customers log in, see exactly what they owe, select invoices or jobs, and pay through a flow your team controls.",
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col bg-surface-2 px-6 py-10">
@@ -213,8 +236,8 @@ export default function CustomerPortalPage() {
       {/* CTA */}
       <CtaSection
         label="Get started"
-        heading={<>Give your customers the experience they&nbsp;deserve.</>}
-        description={<>See how Lunica Customer Portal can reduce support volume, speed up resolutions, and keep your customers&nbsp;happy.</>}
+        heading={<>Give customers a better way to understand and pay what they&nbsp;owe.</>}
+        description={<>See how Lunica Customer Portal can support exact-balance payments, pay-by-job workflows, and configurable card fee rules.</>}
         gradientColors={["#c0cec9", "#9AAEA8", "#78908A"]}
       />
 

@@ -14,24 +14,24 @@ import { TintedSection } from "@/components/ui/tinted-section"
 export const metadata: Metadata = constructMetadata({
   title: "Online Payments",
   description:
-    "Send payment links, accept payments online, and give customers a frictionless way to pay with Lunica Online Payments.",
+    "Send payment links through your existing payment provider and give customers a frictionless way to pay with Lunica Online Payments.",
 })
 
 const features = [
   {
     label: "Automatic payment links",
-    title: "Payment links generated and sent without lifting a\u00a0finger",
+    title: "Payment links generated and sent without lifting a finger",
     description:
-      "Lunica automatically generates a unique payment link for every invoice. With your approval, links are sent directly to customers via email or SMS. Fully hands-free, or one click to review before they go out.",
+      "Lunica automatically generates and sends payment links using your existing payment provider, so customers can pay through the rails you already trust.",
     details: [
-      "Automatic link generation for every new invoice",
+      "Automatic link generation for every new invoice through your existing provider",
       "Hands-free delivery via email, SMS, or both",
       "Optional review step if your team wants control before sending",
     ],
   },
   {
     label: "Mobile-friendly checkout",
-    title: "A payment experience that works on any\u00a0device",
+    title: "A payment experience that works on any device",
     description:
       "Your customers pay from their phone, tablet, or desktop. Lunica provides a clean, responsive checkout that works everywhere without downloads or account creation.",
     details: [
@@ -42,7 +42,7 @@ const features = [
   },
   {
     label: "Branded payment experience",
-    title: "Your brand, not\u00a0ours",
+    title: "Your brand, not ours",
     description:
       "Every payment page carries your logo, colors, and domain. Customers see a professional experience that feels like an extension of your business, not a third-party tool.",
     details: [
@@ -52,10 +52,10 @@ const features = [
     ],
   },
   {
-    label: "Automatic reconciliation",
-    title: "Payments land and your books\u00a0update",
+    label: "Cash application",
+    title: "Payments land and cash application follows",
     description:
-      "When a customer pays, Lunica matches the payment to the invoice, updates the balance, and syncs with your accounting system. No manual entry, no mismatches.",
+      "When a customer pays, Lunica matches the payment to the right invoice, updates the open balance, and supports clean cash application back into your accounting system.",
     details: [
       "Automatic payment-to-invoice matching",
       "Real-time sync with your ERP or accounting system",
@@ -64,22 +64,15 @@ const features = [
   },
 ]
 
-const stats = [
-  { value: "70%", label: "Faster time to payment" },
-  { value: "3x", label: "More invoices paid on time" },
-  { value: "85%", label: "Reduction in payment follow-ups" },
-  { value: "99%", label: "Successful transaction rate" },
-]
-
 export default function OnlinePaymentsPage() {
   return (
     <main style={{ '--primary': '#4A5E73', '--primary-hover': '#5A6E83' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
-        label="Online Payments"
         heading={<>Make it easy for customers to&nbsp;pay</>}
-        description={<>Payment links that send themselves, a checkout your customers will actually use, and books that update on their&nbsp;own.</>}
+        description={<>Payment links that send themselves through your existing payment provider, with a checkout your customers will actually use.</>}
         gradientColors={["#7B8FA1", "#4A5E73", "#2C3E50"]}
+        heightClass="md:h-[72dvh] md:min-h-[560px]"
       >
         <FlipButtonLink
           href="/contact"
@@ -87,27 +80,6 @@ export default function OnlinePaymentsPage() {
           className="mt-8 px-5 py-2.5"
         />
       </SubpageHero>
-
-      {/* Stats */}
-      <section className="w-full bg-background">
-        <PageContainer className="pt-8 pb-20 lg:pt-12 lg:pb-28">
-          <div className="grid grid-cols-2 gap-0.5 overflow-hidden rounded-lg md:grid-cols-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col justify-center bg-surface-1 px-6 py-10"
-              >
-                <p className="text-3xl font-medium tracking-tight text-foreground lg:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-foreground/50">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageContainer>
-      </section>
 
       {/* Feature deep-dives */}
       {features.map((feature, i) => {
@@ -121,8 +93,6 @@ export default function OnlinePaymentsPage() {
             <div className={`mx-auto grid max-w-[1400px] gap-12 px-5 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 ${i === 0 ? "pt-20 pb-12 lg:pt-40 lg:pb-16" : "py-20 lg:py-40"}`}>
               {/* Copy */}
               <div className={`flex flex-col items-start justify-center ${!isEven ? "md:order-last" : ""}`}>
-                <SectionLabel>{feature.label}</SectionLabel>
-
                 <SectionHeading size="md">
                   {feature.title}
                 </SectionHeading>

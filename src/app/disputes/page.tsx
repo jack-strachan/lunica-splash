@@ -42,7 +42,7 @@ const features = [
   },
   {
     label: "Team collaboration",
-    title: "Bring sales, operations, credit, and AR into one thread",
+    title: "Bring sales, operations, and AR into one thread",
     description:
       "Disputes often stall because context lives across teams. Lunica gives everyone a shared workspace so updates, decisions, and handoffs stay visible.",
     details: [
@@ -64,21 +64,14 @@ const features = [
   },
 ]
 
-const stats = [
-  { value: "45%", label: "Faster issue resolution" },
-  { value: "2x", label: "More cases closed per rep" },
-  { value: "60%", label: "Less time chasing evidence" },
-  { value: "100%", label: "Audit trail coverage" },
-]
-
 export default function DisputesPage() {
   return (
     <main style={{ '--primary': '#7A5C6A', '--primary-hover': '#8A6C7A' } as React.CSSProperties}>
       <SubpageHero
-        label="Disputes"
         heading={<>Resolve invoice issues before they delay&nbsp;cash</>}
         description={<>Structured dispute workflows for proof, collaboration, resolution, and prevention without the inbox chaos.</>}
         gradientColors={["#B08A9A", "#7A5C6A", "#4C3642"]}
+        heightClass="md:h-[72dvh] md:min-h-[560px]"
       >
         <FlipButtonLink
           href="/contact"
@@ -86,26 +79,6 @@ export default function DisputesPage() {
           className="mt-8 px-5 py-2.5"
         />
       </SubpageHero>
-
-      <section className="w-full bg-background">
-        <PageContainer className="pt-8 pb-20 lg:pt-12 lg:pb-28">
-          <div className="grid grid-cols-2 gap-0.5 overflow-hidden rounded-lg md:grid-cols-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col justify-center bg-surface-1 px-6 py-10"
-              >
-                <p className="text-3xl font-medium tracking-tight text-foreground lg:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-foreground/50">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageContainer>
-      </section>
 
       {features.map((feature, i) => {
         const isEven = i % 2 === 0
@@ -117,8 +90,6 @@ export default function DisputesPage() {
           >
             <div className={`mx-auto grid max-w-[1400px] gap-12 px-5 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 ${i === 0 ? "pt-20 pb-12 lg:pt-40 lg:pb-16" : "py-20 lg:py-40"}`}>
               <div className={`flex flex-col items-start justify-center ${!isEven ? "md:order-last" : ""}`}>
-                <SectionLabel>{feature.label}</SectionLabel>
-
                 <SectionHeading size="md">
                   {feature.title}
                 </SectionHeading>

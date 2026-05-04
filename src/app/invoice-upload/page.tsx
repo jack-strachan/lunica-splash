@@ -14,61 +14,54 @@ import { TintedSection } from "@/components/ui/tinted-section"
 export const metadata: Metadata = constructMetadata({
   title: "Invoice Upload",
   description:
-    "Automatically upload, extract, validate, and track incoming invoices with Lunica Invoice Upload.",
+    "Upload AR invoices from your ERP into customer payment portals like Coupa and SAP Ariba, monitor status, and triage disputes before they delay cash.",
 })
 
 const features = [
   {
-    label: "Smart data extraction",
-    title: "Turn invoice documents into structured data",
+    label: "Automatic portal upload",
+    title: "Upload AR invoices into customer payment portals",
     description:
-      "Lunica reads incoming invoices and pulls out the fields your team needs — invoice numbers, dates, totals, customers, line items, and supporting details — without manual entry.",
+      "Lunica takes approved receivables invoices from your ERP or a manual upload and submits them into Coupa, SAP Ariba, Oracle, Tungsten, and the other customer portals required to get paid.",
     details: [
-      "Automatic extraction for invoice numbers, due dates, totals, and customer details",
-      "Line-level capture for items, quantities, tax, freight, and supporting fields",
-      "Confidence scoring so your team knows what is ready and what needs review",
+      "Automated submission for AR invoices, PO details, attachments, and required portal fields",
+      "AI-guided portal workflows that adapt when customer portal screens, labels, or steps change",
+      "Submission receipts and audit trails for every customer portal upload",
     ],
   },
   {
-    label: "Automatic invoice capture",
-    title: "Collect invoices from every source",
+    label: "Secure credential handling",
+    title: "Connect portals without storing credentials in Lunica",
     description:
-      "Pull invoices from email inboxes, supplier portals, shared folders, and manual uploads so every document lands in one consistent intake workflow.",
+      "Portal access is handled through secure customer-controlled sessions, so Lunica can submit and monitor invoices without keeping usernames or passwords inside Lunica systems.",
     details: [
-      "Email forwarding and inbox monitoring for automatic document intake",
-      "Portal and shared-folder capture for supplier documents",
-      "Manual upload support when teams need to add invoices directly",
+      "No portal passwords stored in Lunica systems",
+      "Short-lived access sessions for customer-required payment portals",
+      "Controlled connection flows for Coupa, SAP Ariba, Oracle, and long-tail portals",
     ],
   },
   {
-    label: "Upload status tracking",
-    title: "Know exactly where every invoice stands",
+    label: "Portal status tracking",
+    title: "Track every external portal from one Lunica inbox",
     description:
-      "Track each invoice from received to extracted, matched, reviewed, approved, or exceptioned so nothing disappears into a queue.",
+      "Reps get one Lunica inbox for every invoice sitting across Coupa, SAP Ariba, Oracle, Tungsten, and long-tail portals, with periodic checks for acceptance, disputes, rejections, and update requests.",
     details: [
-      "Live status views for received, processed, matched, and reviewed invoices",
-      "Searchable upload history with document-level audit trails",
-      "Clear queues for invoices waiting on validation or approval",
+      "Periodic portal checks for submitted, accepted, disputed, rejected, and update-needed invoices",
+      "Portal-specific exception reasons surfaced the moment they appear",
+      "Centralized visibility across customer payment portals instead of checking each portal manually",
     ],
   },
   {
-    label: "Exception routing",
-    title: "Send issues to the right person automatically",
+    label: "Exception resolution",
+    title: "Fix portal issues automatically or route them immediately",
     description:
-      "When fields are missing, duplicates appear, totals do not match, or approvals are needed, Lunica routes the invoice to the right teammate with context.",
+      "When a customer portal flags a missing PO, field mismatch, disputed invoice, or required attachment, Lunica fixes what it can and routes the rest to the right rep before cash is delayed.",
     details: [
-      "Automatic detection for duplicates, missing data, and mismatched totals",
-      "Rules-based routing by vendor, amount, location, or exception type",
-      "Reviewer queues with the original document, extracted fields, and audit history",
+      "Automatic correction for portal issues that can be resolved safely",
+      "Immediate routing for disputes, missing customer data, and approval-required updates",
+      "Fewer payment delays caused by invoices sitting unseen inside portals",
     ],
   },
-]
-
-const stats = [
-  { value: "80%", label: "Less manual invoice entry" },
-  { value: "4x", label: "Faster document processing" },
-  { value: "95%", label: "Extraction coverage" },
-  { value: "60%", label: "Fewer intake exceptions" },
 ]
 
 export default function InvoiceUploadPage() {
@@ -76,10 +69,10 @@ export default function InvoiceUploadPage() {
     <main style={{ '--primary': '#C97B84', '--primary-hover': '#D48B94' } as React.CSSProperties}>
       {/* Hero */}
       <SubpageHero
-        label="Invoice Upload"
-        heading={<>Automatically upload and track your&nbsp;invoices</>}
-        description={<>Capture incoming invoices, extract the right data, track every status, and route exceptions before they slow your team down.</>}
+        heading={<>Keep customer portals from delaying&nbsp;cash</>}
+        description={<>Lunica uploads AR invoices from your ERP into customer payment portals, periodically checks status, and gives reps one inbox for disputes, rejections, and update requests.</>}
         gradientColors={["#E8B4B8", "#C97B84", "#A85A6A"]}
+        heightClass="md:h-[72dvh] md:min-h-[560px]"
       >
         <FlipButtonLink
           href="/contact"
@@ -87,27 +80,6 @@ export default function InvoiceUploadPage() {
           className="mt-8 px-5 py-2.5"
         />
       </SubpageHero>
-
-      {/* Stats */}
-      <section className="w-full bg-background">
-        <PageContainer className="pt-8 pb-20 lg:pt-12 lg:pb-28">
-          <div className="grid grid-cols-2 gap-0.5 overflow-hidden rounded-lg md:grid-cols-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col justify-center bg-surface-1 px-6 py-10"
-              >
-                <p className="text-3xl font-medium tracking-tight text-foreground lg:text-4xl">
-                  {stat.value}
-                </p>
-                <p className="mt-2 text-sm text-foreground/50">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </PageContainer>
-      </section>
 
       {/* Feature deep-dives */}
       {features.map((feature, i) => {
@@ -121,8 +93,6 @@ export default function InvoiceUploadPage() {
             <div className={`mx-auto grid max-w-[1400px] gap-12 px-5 md:grid-cols-[5fr_6fr] md:gap-20 lg:px-20 ${i === 0 ? "pt-20 pb-12 lg:pt-40 lg:pb-16" : "py-20 lg:py-40"}`}>
               {/* Copy */}
               <div className={`flex flex-col items-start justify-center ${!isEven ? "md:order-last" : ""}`}>
-                <SectionLabel>{feature.label}</SectionLabel>
-
                 <SectionHeading size="md">
                   {feature.title}
                 </SectionHeading>
@@ -195,8 +165,8 @@ export default function InvoiceUploadPage() {
                         <div className="border-r border-black/[0.06] bg-white p-5">
                           <div className="flex items-center justify-between gap-4">
                             <div>
-                              <p className="text-sm font-semibold tracking-tight text-black">Upload Queue</p>
-                              <p className="mt-1 text-[11px] text-black/45">Email, folder, and portal intake</p>
+                              <p className="text-sm font-semibold tracking-tight text-black">Lunica Inbox</p>
+                              <p className="mt-1 text-[11px] text-black/45">Invoices across customer portals</p>
                             </div>
                             <div className="rounded-full bg-[#C97B84] px-3 py-1 text-[11px] font-semibold text-white">
                               Live
@@ -212,13 +182,13 @@ export default function InvoiceUploadPage() {
 
                           <div className="mt-5 space-y-2">
                             {[
-                              ["Northstar Supply", "$18,420.00", "Extracted", "99%"],
-                              ["Arbor Freight", "$7,895.40", "Review", "94%"],
-                              ["Blue Ridge Paper", "$42,110.15", "Matched", "99%"],
-                              ["Cedarline Foods", "$3,284.76", "Duplicate", "91%"],
-                            ].map(([vendor, amount, status, confidence], itemIndex) => (
+                              ["Northstar Supply", "$18,420.00", "Coupa", "Uploaded"],
+                              ["Arbor Freight", "$7,895.40", "SAP Ariba", "Needs update"],
+                              ["Blue Ridge Paper", "$42,110.15", "Oracle", "Accepted"],
+                              ["Cedarline Foods", "$3,284.76", "Tungsten", "Disputed"],
+                            ].map(([customer, amount, portal, status], itemIndex) => (
                               <div
-                                key={vendor}
+                                key={customer}
                                 className={`rounded-xl border p-3 ${
                                   itemIndex === 0
                                     ? "border-[#C97B84]/35 bg-[#C97B84]/[0.06]"
@@ -227,20 +197,20 @@ export default function InvoiceUploadPage() {
                               >
                                 <div className="flex items-start justify-between gap-3">
                                   <div>
-                                    <p className="text-[13px] font-semibold text-black">{vendor}</p>
-                                    <p className="mt-1 text-[11px] text-black/45">PDF invoice received</p>
+                                    <p className="text-[13px] font-semibold text-black">{customer}</p>
+                                    <p className="mt-1 text-[11px] text-black/45">AR invoice in {portal}</p>
                                   </div>
                                   <p className="text-[12px] font-semibold text-black">{amount}</p>
                                 </div>
                                 <div className="mt-3 flex items-center justify-between">
                                   <span className={`rounded-full px-2 py-1 text-[10px] font-semibold ${
-                                    itemIndex === 3
+                                    itemIndex === 1 || itemIndex === 3
                                       ? "bg-[#f6e8ea] text-[#A85A6A]"
                                       : "bg-black/[0.04] text-black/55"
                                   }`}>
                                     {status}
                                   </span>
-                                  <span className="text-[10px] font-medium text-black/40">{confidence} confidence</span>
+                                  <span className="text-[10px] font-medium text-black/40">Live status</span>
                                 </div>
                               </div>
                             ))}
@@ -250,18 +220,14 @@ export default function InvoiceUploadPage() {
                         <div className="min-w-0 px-7 py-6">
                           <div className="flex items-start justify-between gap-6">
                             <div>
-                              <p className="text-lg font-semibold tracking-tight text-black">Invoice Extraction</p>
-                              <p className="mt-1 text-[12px] text-black/45">Northstar Supply · INV-10482</p>
-                            </div>
-                            <div className="rounded-lg border border-[#C97B84]/30 bg-white px-3 py-2 text-right">
-                              <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#A85A6A]">Ready</p>
-                              <p className="mt-1 text-[12px] font-semibold text-black">AP review</p>
+                              <p className="text-lg font-semibold tracking-tight text-black">Coupa submission</p>
+                              <p className="mt-1 text-[12px] text-black/45">Northstar Supply · AR invoice INV-10482</p>
                             </div>
                           </div>
 
                           <div className="mt-5 grid grid-cols-2 gap-3">
                             {[
-                              ["Invoice total", "$18,420.00"],
+                              ["Portal", "Coupa"],
                               ["Due date", "May 28"],
                             ].map(([label, value]) => (
                               <div key={label} className="rounded-xl border border-black/[0.06] bg-white p-3">
@@ -274,16 +240,16 @@ export default function InvoiceUploadPage() {
                           <div className="mt-5 grid grid-cols-[1fr_180px] gap-4">
                             <div className="rounded-xl border border-black/[0.06] bg-white p-3">
                               <div className="flex items-center justify-between gap-3">
-                                <p className="whitespace-nowrap text-sm font-semibold text-black">Fields</p>
-                                <p className="whitespace-nowrap text-[11px] font-medium text-[#A85A6A]">12/13 valid</p>
+                                <p className="whitespace-nowrap text-sm font-semibold text-black">Portal requirements</p>
+                                <p className="whitespace-nowrap text-[11px] font-medium text-[#A85A6A]">12/13 complete</p>
                               </div>
                               <div className="mt-4 space-y-3">
                                 {[
-                                  ["Vendor", "Northstar", "99%"],
+                                  ["Customer", "Northstar", "Set"],
                                   ["Inv.", "INV-10482", "98%"],
-                                  ["PO", "PO-88214", "97%"],
-                                  ["Tax", "$1.2k", "96%"],
-                                  ["Frt.", "$340", "Check"],
+                                  ["PO", "PO-88214", "Set"],
+                                  ["File", "Invoice.pdf", "Set"],
+                                  ["Tax ID", "Missing", "Fix"],
                                 ].map(([label, value, score], itemIndex) => (
                                   <div key={label} className="grid grid-cols-[58px_minmax(72px,1fr)_40px] items-center gap-2 text-[12px]">
                                     <p className="whitespace-nowrap text-black/42">{label}</p>
@@ -299,7 +265,7 @@ export default function InvoiceUploadPage() {
                             </div>
 
                             <div className="rounded-xl border border-black/[0.06] bg-white p-4">
-                              <p className="text-sm font-semibold text-black">Document</p>
+                              <p className="text-sm font-semibold text-black">External portal</p>
                               <div className="mt-4 rounded-lg border border-black/[0.07] bg-[#fbfaf8] p-3">
                                 <div className="h-3 w-24 rounded bg-black/[0.18]" />
                                 <div className="mt-5 space-y-2">
@@ -321,14 +287,14 @@ export default function InvoiceUploadPage() {
                         </div>
 
                         <aside className="border-l border-black/[0.06] bg-white p-5">
-                          <p className="text-sm font-semibold tracking-tight text-black">Validation</p>
-                          <p className="mt-1 text-[11px] text-black/45">Rules and routing</p>
+                          <p className="text-sm font-semibold tracking-tight text-black">Portal status</p>
+                          <p className="mt-1 text-[11px] text-black/45">Periodic checks and routing</p>
 
                           <div className="mt-5 space-y-3">
                             {[
-                              ["PO match", "Passed"],
-                              ["Duplicate check", "Clear"],
-                              ["Amount variance", "Review"],
+                              ["Coupa upload", "Accepted"],
+                              ["SAP Ariba", "Disputed"],
+                              ["Oracle", "Needs update"],
                             ].map(([label, status], itemIndex) => (
                               <div key={label} className="rounded-xl border border-black/[0.06] bg-[#fbfaf8] p-3">
                                 <div className="flex items-center justify-between">
@@ -342,9 +308,9 @@ export default function InvoiceUploadPage() {
 
                           <div className="mt-5 rounded-xl border border-[#C97B84]/30 bg-[#C97B84]/[0.07] p-4">
                             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#A85A6A]">Next action</p>
-                            <p className="mt-2 text-sm font-semibold leading-tight text-black">Route freight variance to Priya Bennett</p>
+                            <p className="mt-2 text-sm font-semibold leading-tight text-black">Attach missing PO and resubmit automatically</p>
                             <button className="mt-4 w-full rounded-lg bg-[#C97B84] px-3 py-2 text-[12px] font-semibold text-white">
-                              Send to review
+                              Resolve portal issue
                             </button>
                           </div>
 
@@ -371,14 +337,14 @@ export default function InvoiceUploadPage() {
               <SectionLabel className="block">How it works</SectionLabel>
 
               <SectionHeading size="lg">
-                Three steps to automated invoice&nbsp;intake
+                Three steps to portal upload&nbsp;automation
               </SectionHeading>
             </div>
 
             <div className="flex flex-col justify-end">
               <p className="text-lg !leading-tight text-foreground">
-                Lunica connects to the places invoices already arrive and turns every document into a tracked, structured workflow.
-                No manual sorting. No lost&nbsp;uploads.
+                Lunica logs into the portals your customers require, submits invoices correctly, and watches for disputes or updates.
+                No portal chasing. No hidden payment&nbsp;delays.
               </p>
             </div>
           </div>
@@ -387,21 +353,21 @@ export default function InvoiceUploadPage() {
             {[
               {
                 step: "01",
-                title: "Connect your sources",
+                title: "Connect required portals",
                 description:
-                  "Connect inboxes, upload folders, supplier portals, or manual upload paths so every invoice enters one intake queue.",
+                  "Set up Coupa, SAP Ariba, Oracle, Tungsten, and long-tail customer portals through secure credential handoff.",
               },
               {
                 step: "02",
-                title: "Extract and validate",
+                title: "Upload automatically",
                 description:
-                  "Lunica reads each invoice, extracts the key fields, checks confidence, and flags anything that needs review.",
+                  "Lunica submits invoices, attachments, PO details, and required fields while AI adapts if a portal changes.",
               },
               {
                 step: "03",
-                title: "Track and route",
+                title: "Monitor and resolve",
                 description:
-                  "Approved invoices move forward automatically while missing fields, duplicates, and mismatches route to the right owner.",
+                  "Portal disputes, update requests, and missing-field issues are fixed automatically when possible or routed immediately.",
               },
             ].map((item) => (
               <div key={item.step} className="flex flex-col bg-surface-2 px-6 py-10">
@@ -422,8 +388,8 @@ export default function InvoiceUploadPage() {
       {/* CTA */}
       <CtaSection
         label="Get started"
-        heading={<>Stop keying invoice data by&nbsp;hand.</>}
-        description={<>See how Lunica Invoice Upload can help your team capture documents, extract data, and resolve intake exceptions faster.</>}
+        heading={<>Stop uploading invoices into portals by&nbsp;hand.</>}
+        description={<>See how Lunica Invoice Upload can keep customer portals updated, catch disputes instantly, and prevent portal-driven payment delays.</>}
         gradientColors={["#f0c8cc", "#E8B4B8", "#d4969e"]}
       />
 

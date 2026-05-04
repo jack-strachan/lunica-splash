@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 const ease = "cubic-bezier(0.16, 1, 0.3, 1)"
 
 interface SubpageHeroProps {
-  label: string
+  label?: string
   heading: ReactNode
   description: ReactNode
   gradientColors: [string, string, string]
@@ -40,10 +40,12 @@ export function SubpageHero({
         <NoiseGradient colors={gradientColors} />
       </div>
 
-      <PageContainer className="pt-10 pb-24 md:absolute md:inset-x-0 md:bottom-0 md:pb-16 lg:pb-20">
-        <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.1s both` }}>
-          <SectionLabel>{label}</SectionLabel>
-        </div>
+      <PageContainer className="pt-10 pb-24 md:absolute md:inset-x-0 md:-bottom-16 md:pb-16 lg:pb-20">
+        {label && (
+          <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.1s both` }}>
+            <SectionLabel>{label}</SectionLabel>
+          </div>
+        )}
 
         <div style={{ animation: `hero-fade-up 0.8s ${ease} 0.2s both` }}>
           <SectionHeading as="h1" size="xl" className="max-w-3xl text-balance">

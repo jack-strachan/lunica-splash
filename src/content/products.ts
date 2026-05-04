@@ -7,11 +7,10 @@ export const products: ProductSectionData[] = [
     href: "/collections",
     tabs: [
       {
-        title: "Always-on\nmonitoring",
+        title: "Invoice\nconfirmation",
         description:
-          "Track open receivables continuously and trigger the next best action based on invoice status and behavior.",
-        image: "/images/features/always-on-monitoring.png",
-        graphicId: "collections-monitoring",
+          "Verify invoices before they are sent to customers to reduce avoidable delays, confusion, and last-minute disputes.",
+        graphicId: "collections-confirmation",
       },
       {
         title: "Proactive\nfollow-up",
@@ -20,10 +19,11 @@ export const products: ProductSectionData[] = [
         graphicId: "collections-followup",
       },
       {
-        title: "Invoice\nconfirmation",
+        title: "Always-on\nmonitoring",
         description:
-          "Verify receipt and correctness early to reduce avoidable delays, confusion, and last-minute disputes.",
-        graphicId: "collections-confirmation",
+          "Track open receivables continuously and trigger the next best action based on invoice status and behavior.",
+        image: "/images/features/always-on-monitoring.png",
+        graphicId: "collections-monitoring",
       },
       {
         title: "Smart\nescalation",
@@ -60,7 +60,7 @@ export const products: ProductSectionData[] = [
       {
         title: "Clear approval\nworkflows",
         description:
-          "Standardize how credit decisions are reviewed, approved, and documented across your team.",
+          "Standardize how credit decisions are handled across your team, with instant approval you control.",
         graphicId: "credit-approvals",
       },
     ],
@@ -130,31 +130,31 @@ export const products: ProductSectionData[] = [
   },
   {
     name: "Invoice Upload",
-    subtitle: "Automatically track your invoices",
+    subtitle: "that keeps portals from delaying cash",
+    href: "/invoice-upload",
     tabs: [
       {
-        title: "Smart data\nextraction",
+        title: "Automatic portal\nupload",
         description:
-          "Extract invoice numbers, due dates, totals, customers, and line-level details without manual entry.",
+          "Upload invoices into Coupa, SAP Ariba, and other portals automatically, with AI that adapts when portals change.",
         graphicId: "portal-invoices",
       },
       {
-        title: "Automatic invoice\ncapture",
+        title: "Secure credential\nhandling",
         description:
-          "Pull invoices from email, portals, and shared inboxes so documents land in the right workflow automatically.",
-        image: "/images/features/self-serve-payments.png",
+          "Connect the portals your customers require without storing credentials inside Lunica systems.",
         graphicId: "portal-self-serve",
       },
       {
-        title: "Upload status\ntracking",
+        title: "Portal status\ntracking",
         description:
-          "See which invoices were received, processed, matched, or need review from one clear status view.",
+          "Track every portal submission and instantly know when an invoice is accepted, disputed, or needs an update.",
         graphicId: "portal-visibility",
       },
       {
-        title: "Exception\nrouting",
+        title: "Exception\nresolution",
         description:
-          "Route missing fields, duplicates, and mismatches to the right teammate before they slow down processing.",
+          "Fix portal issues automatically when possible and route anything that needs your team before payment is delayed.",
         graphicId: "portal-chasing",
       },
     ],
@@ -165,28 +165,27 @@ export const products: ProductSectionData[] = [
     href: "/customer-portal",
     tabs: [
       {
-        title: "Self-service\naccount access",
+        title: "What customers\nactually owe",
         description:
-          "Give customers a secure place to manage their account without relying on calls and email threads.",
-        image: "/images/features/self-service-account-access.png",
+          "Show customers their current balance, open invoices, credits, and the exact amount due before they pay.",
         graphicId: "customer-portal-access",
       },
       {
-        title: "One place\nfor documents",
+        title: "Customizable\ncard fees",
         description:
-          "Centralize invoices, statements, account details, and payment information in one branded experience.",
+          "Configure compliant card convenience fees with triggers for past-due balances, large invoices, customers, or payment methods.",
         graphicId: "customer-portal-documents",
       },
       {
-        title: "Account activity\nhistory",
+        title: "Pay by\njob",
         description:
-          "Show customers recent payments, document views, updates, and account changes in one transparent timeline.",
+          "Let customers review balances by job, select the work they want to pay for, and reconcile payments faster.",
         graphicId: "customer-portal-activity",
       },
       {
         title: "Built for\nsales-led teams",
         description:
-          "Support the way your organization works with a portal designed for real customer relationships and complexity.",
+          "Put each customer’s salesperson, photo, expertise, and contact details front and center inside the portal.",
         graphicId: "customer-portal-sales",
       },
     ],
